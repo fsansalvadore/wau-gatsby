@@ -11,41 +11,41 @@ const ClientLink = styled.a`
 
 // eslint-disable-next-line import/no-default-export
 export default ({ lang, ...otherProps }) => {
-  const data = useStaticQuery(graphql`
-    query ClientsQuery {
-      wordpress {
-        clients(first: 100, where: { status: PUBLISH }) {
-          nodes {
-            title
-            featuredImage {
-              node {
-                altText
-                link
-                sourceUrl
-                imageFile {
-                  childImageSharp {
-                    fixed(width: 500, quality: 90) {
-                      ...GatsbyImageSharpFixed
-                    }
-                  }
-                }
-              }
-            }
-            clientACF {
-              link
-            }
-          }
-        }
-      }
-    }
-  `);
+  // const data = useStaticQuery(graphql`
+  //   query ClientsQuery {
+  //     wordpress {
+  //       clients(first: 100, where: { status: PUBLISH }) {
+  //         nodes {
+  //           title
+  //           featuredImage {
+  //             node {
+  //               altText
+  //               link
+  //               sourceUrl
+  //               imageFile {
+  //                 childImageSharp {
+  //                   fixed(width: 500, quality: 90) {
+  //                     ...GatsbyImageSharpFixed
+  //                   }
+  //                 }
+  //               }
+  //             }
+  //           }
+  //           clientACF {
+  //             link
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // `);
   const [clients, setClients] = useState([]);
 
-  useEffect(() => {
-    if (!!data && !!data.wordpress.clients) {
-      setClients(data.wordpress.clients.nodes);
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (!!data && !!data.wordpress.clients) {
+  //     setClients(data.wordpress.clients.nodes);
+  //   }
+  // }, [data]);
 
   return (
     <StyledClientsSection {...otherProps}>

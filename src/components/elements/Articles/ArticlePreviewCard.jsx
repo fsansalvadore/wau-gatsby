@@ -9,7 +9,7 @@ import Img from "gatsby-image";
 import WAUFallback from "../../../assets/WAUFallback.svg";
 import { months } from "../../../helpers/utils";
 
-const MotionLink = motion.custom(Link);
+const MotionLink = motion.a(Link);
 
 const ArticlePreviewCard = ({ article, ...otherProps }) => {
   const [date, setDate] = useState(new Date(article.date));

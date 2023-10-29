@@ -1,28 +1,28 @@
 import styled from "styled-components";
 import tw from "twin.macro";
-import { Canvas } from "react-three-fiber";
-import { animated } from "react-spring/three";
+// import { Canvas } from "react-three-fiber";
+// import { animated } from "react-spring/three";
 
-export const AnimatedCanvas = animated(Canvas);
+// export const AnimatedCanvas = animated(Canvas);
 
-export const StyledIntroCanvas = styled(AnimatedCanvas)`
-  z-index: -3;
-  width: 100% !important;
-  height: 100vh !important;
-  min-height: 650px !important;
-  position: fixed !important;
-`;
-export const StyledVisionSectionCanvas = styled(AnimatedCanvas)`
-  height: 100% !important;
-  position: absolute !important;
-  left: 0 !important;
-  top: 0 !important;
-  width: 100%;
+// export const StyledIntroCanvas = styled(AnimatedCanvas)`
+//   z-index: -3;
+//   width: 100% !important;
+//   height: 100vh !important;
+//   min-height: 650px !important;
+//   position: fixed !important;
+// `;
+// export const StyledVisionSectionCanvas = styled(AnimatedCanvas)`
+//   height: 100% !important;
+//   position: absolute !important;
+//   left: 0 !important;
+//   top: 0 !important;
+//   width: 100%;
 
-  @media (min-width: 768px) {
-    width: 57% !important;
-  }
-`;
+//   @media (min-width: 768px) {
+//     width: 57% !important;
+//   }
+// `;
 
 export const StyledIntroContainer = styled.div`
   width: 100%;

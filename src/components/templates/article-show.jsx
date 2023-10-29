@@ -30,29 +30,29 @@ const ArticleShowPage = (props) => {
     featuredImage,
   } = props.pageContext;
 
-  const data = useStaticQuery(graphql`
-    query ArticlesMediaQuery {
-      wordpress {
-        articles(first: 100, where: { status: PUBLISH }) {
-          nodes {
-            title
-            featuredImage {
-              node {
-                sourceUrl(size: LARGE)
-                imageFile {
-                  childImageSharp {
-                    fixed(width: 1500, quality: 90) {
-                      ...GatsbyImageSharpFixed
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  `);
+  // const data = useStaticQuery(graphql`
+  //   query ArticlesMediaQuery {
+  //     wordpress {
+  //       articles(first: 100, where: { status: PUBLISH }) {
+  //         nodes {
+  //           title
+  //           featuredImage {
+  //             node {
+  //               sourceUrl(size: LARGE)
+  //               imageFile {
+  //                 childImageSharp {
+  //                   fixed(width: 1500, quality: 90) {
+  //                     ...GatsbyImageSharpFixed
+  //                   }
+  //                 }
+  //               }
+  //             }
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // `);
 
   const [aDate, setADate] = useState(new Date(date));
   const [articleDate, setArticleDate] = useState(null);
@@ -205,7 +205,7 @@ const ArticleShowPage = (props) => {
                 )}
               </div>
             </Heading>
-            {featuredImage ? (
+            {/* {featuredImage ? (
               <figure
                 className="cover-image cover-image-fullscreen"
                 tw="col-span-12 mb-10 md:mb-16 xl:mb-32"
@@ -231,7 +231,7 @@ const ArticleShowPage = (props) => {
               </figure>
             ) : (
               <hr tw="my-8 md:my-16 w-full col-span-full opacity-50" />
-            )}
+            )} */}
           </GridMaxWidthContainer>
         </div>
         <article tw="w-full flex justify-center">

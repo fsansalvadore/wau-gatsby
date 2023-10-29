@@ -25,57 +25,57 @@ const ProjectPage = (props) => {
     // project,
   } = props.pageContext;
 
-  const data = useStaticQuery(graphql`
-    query PrevNextQuery {
-      wordpress {
-        projects(first: 100, where: { status: PUBLISH }) {
-          nodes {
-            id
-            title
-            date
-            slug
-            language {
-              code
-            }
-            tags {
-              nodes {
-                name
-              }
-            }
-            ProjectAFC {
-              projectdate
-              location
-            }
-            featuredImage {
-              node {
-                altText
-                link
-                sourceUrl
-                imageFile {
-                  childImageSharp {
-                    fixed(width: 1500, quality: 90) {
-                      ...GatsbyImageSharpFixed
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  `);
+  // const data = useStaticQuery(graphql`
+  //   query PrevNextQuery {
+  //     wordpress {
+  //       projects(first: 100, where: { status: PUBLISH }) {
+  //         nodes {
+  //           id
+  //           title
+  //           date
+  //           slug
+  //           language {
+  //             code
+  //           }
+  //           tags {
+  //             nodes {
+  //               name
+  //             }
+  //           }
+  //           ProjectAFC {
+  //             projectdate
+  //             location
+  //           }
+  //           featuredImage {
+  //             node {
+  //               altText
+  //               link
+  //               sourceUrl
+  //               imageFile {
+  //                 childImageSharp {
+  //                   fixed(width: 1500, quality: 90) {
+  //                     ...GatsbyImageSharpFixed
+  //                   }
+  //                 }
+  //               }
+  //             }
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // `);
 
   // const [prevPost, setPrevPost] = useState(null)
   // const [nextPost, setNextPost] = useState(null)
-  const proj = data.wordpress.projects.nodes.find(
-    (project) => project.title === title
-  );
-  const sortedProjects = data.wordpress.projects.nodes.sort((a, b) =>
-    a.date < b.date ? 1 : a.date === b.date ? (a.title > b.title ? 1 : -1) : -1
-  );
+  // const proj = data.wordpress.projects.nodes.find(
+  //   (project) => project.title === title
+  // );
+  // const sortedProjects = data.wordpress.projects.nodes.sort((a, b) =>
+  //   a.date < b.date ? 1 : a.date === b.date ? (a.title > b.title ? 1 : -1) : -1
+  // );
   const pdfRef = useRef(null);
-  const postLength = sortedProjects.length;
+  // const postLength = sortedProjects.length;
 
   // useEffect(() => {
   //   if(sortedProjects) {
@@ -184,6 +184,7 @@ const ProjectPage = (props) => {
         />
       </Helmet>
       <ProjectContainer ref={pdfRef}>
+      {/* <ProjectContainer ref={pdfRef}> */}
         <Heading tw="flex flex-col lg:flex-row">
           <div tw="w-full md:w-3/4">
             <p className="breadcrumbs mono">
@@ -236,7 +237,7 @@ const ProjectPage = (props) => {
             )}
           </aside>
         </Heading>
-        {proj.featuredImage && (
+        {/* {proj.featuredImage && (
           <figure className="project-coverImage" tw="mb-10 md:mb-16 xl:mb-24">
             {proj.featuredImage.node.imageFile ? (
               <Img
@@ -251,7 +252,7 @@ const ProjectPage = (props) => {
               />
             )}
           </figure>
-        )}
+        )} */}
         <article tw="w-full flex justify-center">
           <GridMaxWidthContainer
             className="project-content"
@@ -272,7 +273,7 @@ const ProjectContainer = styled.div`
         width: 100% !important;
         height: 50vw !important;
     }
-  }
+  
   .project-aside-info {
     p, li {
       ${tw`inline-block font-light`}

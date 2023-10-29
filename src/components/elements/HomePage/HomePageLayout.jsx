@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import { gsap, Power1 } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Link } from "gatsby";
-import TextLoop from "react-text-loop-next";
+// import TextLoop from "react-text-loop-next";
 import "twin.macro";
 import WauLogo from "../../../assets/WAU-Logo.svg";
 import WauVideoMp4 from "../../../assets/Wau-Architetti-cut.mp4";
@@ -17,12 +17,12 @@ import Button from "../Atoms/Button";
 import PageLoader from "../Atoms/PageLoader";
 import { StyledIntroContainer } from "./HomePageLayout.styled";
 
-import {
-  IntroCanvas,
-  VisionSectionCanvas,
-  ScrollProgressToggleOut,
-  ScrollProgressToggleIn,
-} from "./HomePageLayout.components";
+// import {
+//   IntroCanvas,
+//   VisionSectionCanvas,
+//   ScrollProgressToggleOut,
+//   ScrollProgressToggleIn,
+// } from "./HomePageLayout.components";
 
 const HomePageLayout = ({ lang, data, ...otherProps }) => {
   const indexRef = useRef(null);
@@ -40,113 +40,113 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
   const [acf, setAcf] = useState(null);
   const [expertises, setExpertises] = useState(null);
 
-  useEffect(() => {
-    if (data && data.wordpress.articles) {
-      setArticles(data.wordpress.articles.nodes);
-    }
-    if (data && data.wordpress.expertises) {
-      setExpertises(data.wordpress.expertises.nodes);
-    }
-    if (data && data.wordpress.page && data.wordpress.page.homePageACF) {
-      setAcf(data.wordpress.page.homePageACF);
-    }
-  }, [setAcf, setArticles, setExpertises, data]);
+  // useEffect(() => {
+  //   if (data && data.wordpress.articles) {
+  //     setArticles(data.wordpress.articles.nodes);
+  //   }
+  //   if (data && data.wordpress.expertises) {
+  //     setExpertises(data.wordpress.expertises.nodes);
+  //   }
+  //   if (data && data.wordpress.page && data.wordpress.page.homePageACF) {
+  //     setAcf(data.wordpress.page.homePageACF);
+  //   }
+  // }, [setAcf, setArticles, setExpertises, data]);
 
-  // Words animation
-  useEffect(() => {
-    if (!!acf && !!acf.introWords) {
-      setIntroWords(acf.introWords.split(","));
-    }
-  }, [setIntroWords, acf]);
+  // // Words animation
+  // useEffect(() => {
+  //   if (!!acf && !!acf.introWords) {
+  //     setIntroWords(acf.introWords.split(","));
+  //   }
+  // }, [setIntroWords, acf]);
 
   // Force play video
-  useEffect(() => {
-    if (!videoRef || !videoRef.current) return;
+  // useEffect(() => {
+  //   if (!videoRef || !videoRef.current) return;
 
-    //open bug since 2017 that you cannot set muted in video element https://github.com/facebook/react/issues/10389
-    videoRef.current.defaultMuted = true;
-    videoRef.current.muted = true;
+  //   //open bug since 2017 that you cannot set muted in video element https://github.com/facebook/react/issues/10389
+  //   videoRef.current.defaultMuted = true;
+  //   videoRef.current.muted = true;
 
-    if (!!videoRef && !!videoRef.current) {
-      const promise = videoRef.current.play();
-      videoRef.current.play();
-      if (promise !== undefined) {
-        promise
-          .catch((error) => {
-            // Auto-play was prevented
-            // Show a UI element to let the user manually start playback
-          })
-          .then(() => {
-            // Auto-play started
-            videoRef.current.play();
-          });
-      }
-    }
-  }, [videoRef]);
+  //   if (!!videoRef && !!videoRef.current) {
+  //     const promise = videoRef.current.play();
+  //     videoRef.current.play();
+  //     if (promise !== undefined) {
+  //       promise
+  //         .catch((error) => {
+  //           // Auto-play was prevented
+  //           // Show a UI element to let the user manually start playback
+  //         })
+  //         .then(() => {
+  //           // Auto-play started
+  //           videoRef.current.play();
+  //         });
+  //     }
+  //   }
+  // }, [videoRef]);
 
-  let introTextTL;
-  // Intro Text scroll animation
-  useEffect(() => {
-    if (!indexRef || !indexRef.current) return;
-    if (
-      typeof window !== `undefined` &&
-      typeof document !== `undefined` &&
-      !!acf
-    ) {
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      introTextTL = gsap.timeline({
-        scrollTrigger: {
-          trigger: indexRef.current,
-          start: "200px 10%",
-          end: "center 20%",
-          scrub: 2,
-          onUpdate: ({ progress }) => [
-            progress > 0.3
-              ? ScrollProgressToggleOut()
-              : ScrollProgressToggleIn(),
-          ],
-        },
-      });
+  // let introTextTL;
+  // // Intro Text scroll animation
+  // useEffect(() => {
+  //   if (!indexRef || !indexRef.current) return;
+  //   if (
+  //     typeof window !== `undefined` &&
+  //     typeof document !== `undefined` &&
+  //     !!acf
+  //   ) {
+  //     // eslint-disable-next-line react-hooks/exhaustive-deps
+  //     introTextTL = gsap.timeline({
+  //       scrollTrigger: {
+  //         trigger: indexRef.current,
+  //         start: "200px 10%",
+  //         end: "center 20%",
+  //         scrub: 2,
+  //         onUpdate: ({ progress }) => [
+  //           progress > 0.3
+  //             ? ScrollProgressToggleOut()
+  //             : ScrollProgressToggleIn(),
+  //         ],
+  //       },
+  //     });
 
-      ScrollTrigger.defaults({
-        immediateRender: false,
-        ease: Power1.inOut,
-      });
+  //     ScrollTrigger.defaults({
+  //       immediateRender: false,
+  //       ease: Power1.inOut,
+  //     });
 
-      introTextTL
-        .to(
-          introTextRef.current,
-          {
-            duration: 3,
-            scale: 2,
-          },
-          indexRef.current
-        )
-        .to(
-          introTextRef.current,
-          {
-            opacity: 1,
-          },
-          0.6
-        )
-        .to(
-          introTextRef.current,
-          {
-            duration: 0.5,
-            opacity: 0,
-          },
-          "1.4"
-        )
-        .to(
-          videoContainerRef.current,
-          {
-            duration: 1,
-            opacity: 1,
-          },
-          "1.5"
-        );
-    }
-  }, [indexRef, videoContainerRef, acf]);
+  //     introTextTL
+  //       .to(
+  //         introTextRef.current,
+  //         {
+  //           duration: 3,
+  //           scale: 2,
+  //         },
+  //         indexRef.current
+  //       )
+  //       .to(
+  //         introTextRef.current,
+  //         {
+  //           opacity: 1,
+  //         },
+  //         0.6
+  //       )
+  //       .to(
+  //         introTextRef.current,
+  //         {
+  //           duration: 0.5,
+  //           opacity: 0,
+  //         },
+  //         "1.4"
+  //       )
+  //       .to(
+  //         videoContainerRef.current,
+  //         {
+  //           duration: 1,
+  //           opacity: 1,
+  //         },
+  //         "1.5"
+  //       );
+  //   }
+  // }, [indexRef, videoContainerRef, acf]);
 
   const hideVideo = () => {
     if (!videoRef) return;
@@ -159,9 +159,9 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
       videoRef.current.style.display = "flex";
   };
 
-  useEffect(() => {
-    console.log("data", data);
-  }, [data]);
+  // useEffect(() => {
+  //   console.log("data", data);
+  // }, [data]);
 
   let visionTL;
   useEffect(() => {
@@ -322,7 +322,7 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
                   Your browser does not support the video tag.
                 </video>
               </div>
-              <IntroCanvas className="canvas" indexRef={indexRef} />
+              {/* <IntroCanvas className="canvas" indexRef={indexRef} /> */}
               <div
                 className="intro-text"
                 tw="fixed w-screen h-screen flex flex-col md:flex-row items-center justify-center"
@@ -333,13 +333,13 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
                   tw="absolute uppercase flex flex-col md:flex-row items-center justify-center lg:justify-start"
                 >
                   <span tw="md:mr-4">{lang === "it" ? "è" : "is"}</span>
-                  {introWords && (
+                  {/* {introWords && (
                     <TextLoop
                       children={introWords ? introWords : []}
                       interval={1500}
                       mask
                     />
-                  )}
+                  )} */}
                 </h1>
               </div>
             </StyledIntroContainer>
@@ -395,11 +395,11 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
                 className="vision-section lightGradientBg"
                 ref={visionSectionRef}
               >
-                <VisionSectionCanvas
+                {/* <VisionSectionCanvas
                   className="canvas"
                   visionSectionRef={visionSectionRef}
                   tw="absolute w-1/4 left-0 top-0 h-full"
-                />
+                /> */}
                 <GridMaxWidthContainer>
                   <SectionTextBlock
                     label={acf.sezioneVision.titoletto || ""}

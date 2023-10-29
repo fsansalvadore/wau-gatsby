@@ -36,15 +36,15 @@ const FixedNavbar = styled(motion.div)(() => [
   `,
 ]);
 
-const WCampLink = motion.custom(Link);
+// const WCampLink = motion.custom(Link);
 
-// const WCampLink = styled(Link)`
-//     opacity: 0.8;
-//     &:hover {
-//         cursor: pointer !important;
-//         opacity: 1;
-//     }
-// `
+const WCampLink = styled(Link)`
+    opacity: 0.8;
+    &:hover {
+        cursor: pointer !important;
+        opacity: 1;
+    }
+`
 
 const MenuBtn = styled.button`
   position: relative;

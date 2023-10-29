@@ -8,43 +8,43 @@ import GridMaxWidthContainer from "./GridMaxWidthContainer";
 
 // eslint-disable-next-line import/no-default-export
 export default ({ lang }) => {
-  const data = useStaticQuery(graphql`
-    query GET_FOOTERMENU_BY_NAME {
-      wordpress {
-        menus {
-          nodes {
-            count
-            name
-            menuItems {
-              nodes {
-                id
-                databaseId
-                title
-                url
-                cssClasses
-                description
-                label
-                linkRelationship
-                target
-                parentId
-                path
-              }
-            }
-          }
-        }
-      }
-    }
-  `);
+  // const data = useStaticQuery(graphql`
+  //   query GET_FOOTERMENU_BY_NAME {
+  //     wordpress {
+  //       menus {
+  //         nodes {
+  //           count
+  //           name
+  //           menuItems {
+  //             nodes {
+  //               id
+  //               databaseId
+  //               title
+  //               url
+  //               cssClasses
+  //               description
+  //               label
+  //               linkRelationship
+  //               target
+  //               parentId
+  //               path
+  //             }
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // `);
 
   const [socialMenu, setSocialMenu] = useState(null);
 
-  useEffect(() => {
-    if (typeof window !== `undefined`) {
-      setSocialMenu(
-        data.wordpress.menus.nodes.find((node) => node.name === "Social")
-      );
-    }
-  }, [data.wordpress.menus.nodes]);
+  // useEffect(() => {
+  //   if (typeof window !== `undefined`) {
+  //     setSocialMenu(
+  //       data.wordpress.menus.nodes.find((node) => node.name === "Social")
+  //     );
+  //   }
+  // }, [data.wordpress.menus.nodes]);
 
   return (
     <StyledFooter>
@@ -67,7 +67,7 @@ export default ({ lang }) => {
         </div>
         <div className="footer-list">
           <h5>{lang === "it" ? "Naviga" : "Explore"}</h5>
-          <ul>
+          {/* <ul>
             {lang === "it"
               ? data.wordpress.menus.nodes
                   .find((node) => node.name === "Menu ita")
@@ -87,7 +87,7 @@ export default ({ lang }) => {
                       </Link>
                     </li>
                   ))}
-          </ul>
+          </ul> */}
         </div>
         <div
           className="footer-list"

@@ -110,7 +110,8 @@ const IndexIta = () => {
   // }, [lang]);
 
   // return <HomePageLayout lang={lang} data={data} />;
-  return <h1>WAU</h1>
+  return <HomePageLayout lang="it" data={{}} />;
+  // return <h1>WAU</h1>
 };
 
 // eslint-disable-next-line import/no-default-export

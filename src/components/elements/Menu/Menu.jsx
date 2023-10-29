@@ -156,33 +156,33 @@ export const menuDim = {
 };
 
 const Menu = ({ lang, isOpen }) => {
-  const data = useStaticQuery(graphql`
-    query GET_MENU_BY_NAME {
-      wordpress {
-        menus {
-          nodes {
-            count
-            name
-            menuItems {
-              nodes {
-                id
-                databaseId
-                title
-                url
-                cssClasses
-                description
-                label
-                linkRelationship
-                target
-                parentId
-                path
-              }
-            }
-          }
-        }
-      }
-    }
-  `);
+  // const data = useStaticQuery(graphql`
+  //   query GET_MENU_BY_NAME {
+  //     wordpress {
+  //       menus {
+  //         nodes {
+  //           count
+  //           name
+  //           menuItems {
+  //             nodes {
+  //               id
+  //               databaseId
+  //               title
+  //               url
+  //               cssClasses
+  //               description
+  //               label
+  //               linkRelationship
+  //               target
+  //               parentId
+  //               path
+  //             }
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // `);
 
   const [location, setLocation] = useState("");
   const [socialMenu, setSocialMenu] = useState(null);
@@ -193,13 +193,13 @@ const Menu = ({ lang, isOpen }) => {
     }
   }, [setLocation]);
 
-  useEffect(() => {
-    if (typeof window !== `undefined`) {
-      setSocialMenu(
-        data.wordpress.menus.nodes.find((node) => node.name === "Social")
-      );
-    }
-  }, [data.wordpress.menus.nodes]);
+  // useEffect(() => {
+  //   if (typeof window !== `undefined`) {
+  //     setSocialMenu(
+  //       data.wordpress.menus.nodes.find((node) => node.name === "Social")
+  //     );
+  //   }
+  // }, [data.wordpress.menus.nodes]);
 
   return (
     <MenuContainer
@@ -216,7 +216,7 @@ const Menu = ({ lang, isOpen }) => {
         transition={{ ...transition, duration: 0.4 }}
       >
         <div className="menu-top">
-          <ul>
+          {/* <ul>
             {lang === "it"
               ? data.wordpress.menus.nodes
                   .find((node) => node.name === "Menu ita")
@@ -252,7 +252,7 @@ const Menu = ({ lang, isOpen }) => {
                       </Link>
                     </li>
                   ))}
-          </ul>
+          </ul> */}
         </div>
         <div className="menu-bottom">
           <div className="menu-bottom-info">

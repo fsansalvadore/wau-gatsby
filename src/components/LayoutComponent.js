@@ -27,37 +27,37 @@ const Layout = ({ isMenuLight, hasNoContactsCta, children }) => {
     }
   }, [lang]);
 
-  const data = useStaticQuery(graphql`
-    query ContactsCtaQuery {
-      wordpress {
-        pages(where: { title: "HOME PAGE" }) {
-          nodes {
-            language {
-              name
-              code
-            }
-            homePageACF {
-              sezioneContatti {
-                paragrafo
-                tasto {
-                  link
-                  testo
-                }
-                titolo
-              }
-            }
-          }
-        }
-      }
-    }
-  `);
+  // const data = useStaticQuery(graphql`
+  //   query ContactsCtaQuery {
+  //     wordpress {
+  //       pages(where: { title: "HOME PAGE" }) {
+  //         nodes {
+  //           language {
+  //             name
+  //             code
+  //           }
+  //           homePageACF {
+  //             sezioneContatti {
+  //               paragrafo
+  //               tasto {
+  //                 link
+  //                 testo
+  //               }
+  //               titolo
+  //             }
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // `);
 
   return (
     <>
       <GenericMetadata lang={lang} />
       <MainNav lang={lang} isMenuLight={isMenuLight} />
       {children}
-      {!hasNoContactsCta && <CtaSection lang={lang} data={data} />}
+      {/* {!hasNoContactsCta && <CtaSection lang={lang} data={data} />} */}
       <Footer lang={lang} />
       <script
         type="text/javascript"
