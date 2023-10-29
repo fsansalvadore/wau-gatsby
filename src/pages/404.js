@@ -1,49 +1,52 @@
-import * as React from "react"
+import React, { useEffect, useState } from "react"
+import MainNav from '../components/elements/MainNav/MainNav'
+import "../styles/global.css"
+import Footer from '../components/elements/Atoms/Footer'
 import { Link } from "gatsby"
+import tw from 'twin.macro'
+import styled from 'styled-components'
+import GridMaxWidthContainer from "../components/elements/Atoms/GridMaxWidthContainer"
+import Button from '../components/elements/Atoms/Button'
 
-const pageStyles = {
-  color: "#232129",
-  padding: "96px",
-  fontFamily: "-apple-system, Roboto, sans-serif, serif",
-}
-const headingStyles = {
-  marginTop: 0,
-  marginBottom: 64,
-  maxWidth: 320,
-}
+const ErrorPage = () => {
+  let location
+  const [lang, setLang] = useState("it")
 
-const paragraphStyles = {
-  marginBottom: 48,
-}
-const codeStyles = {
-  color: "#8A6534",
-  padding: 4,
-  backgroundColor: "#FFF4DB",
-  fontSize: "1.25rem",
-  borderRadius: 4,
-}
+  useEffect(() => {
+    if (typeof window !== `undefined`) {
+        location = window.location.href
+        if(location.includes("00/en") || location.includes("app/en") || location.includes("com/en")) {
+          setLang("en")
+        }
+    }
+  }, [lang])
 
-const NotFoundPage = () => {
   return (
-    <main style={pageStyles}>
-      <h1 style={headingStyles}>Page not found</h1>
-      <p style={paragraphStyles}>
-        Sorry 😔, we couldn’t find what you were looking for.
-        <br />
-        {process.env.NODE_ENV === "development" ? (
-          <>
-            <br />
-            Try creating a page in <code style={codeStyles}>src/pages/</code>.
-            <br />
-          </>
-        ) : null}
-        <br />
-        <Link to="/">Go home</Link>.
-      </p>
-    </main>
+    <>
+      {/* <GlobalStyles /> */}
+      <MainNav lang={lang} />
+        <StyledErrorPage>
+            <GridMaxWidthContainer>
+                <div tw="col-span-full leading-9 text-center">
+                    {
+                        lang === "it" ?
+                        <h1>Errore 404.<br/>Pagina non trovata.</h1> :
+                        <h1>Error 404.<br/>Page not found.</h1>
+                    }
+                    <div tw="mt-8">
+                        <Button as={Link} to="/">{lang === "it" ? "Torna alla Home Page" : "Go to Home Page"}</Button>
+                    </div>
+                </div>
+            </GridMaxWidthContainer>
+        </StyledErrorPage>
+      <Footer lang={lang} />
+    </>
   )
 }
 
-export default NotFoundPage
+const StyledErrorPage = styled.div`
+    min-height: 75vh;
+    ${tw`p-8 flex flex-col justify-center items-center`}
+`
 
-export const Head = () => <title>Not found</title>
+export default ErrorPage

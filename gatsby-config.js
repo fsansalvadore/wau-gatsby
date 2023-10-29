@@ -4,12 +4,14 @@
 module.exports = {
   siteMetadata: {
     title: `wau-gatsby`,
-    siteUrl: `https://www.yourdomain.tld`
+    siteUrl: `https://www.wauarchitetti.com/`
   },
   plugins: [{
     resolve: 'gatsby-source-wordpress',
     options: {
-      "url": "https://wp.wauarchitetti.com/graphql"
+      "url": "https://wp.wauarchitetti.com/graphql",
+      typeName: "WPGraphQL",
+      fieldName: "wpgraphql",
     }
   }, "gatsby-plugin-image", "gatsby-plugin-sharp", "gatsby-transformer-sharp", "gatsby-plugin-postcss", {
     resolve: 'gatsby-source-filesystem',
