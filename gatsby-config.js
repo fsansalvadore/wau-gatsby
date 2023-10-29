@@ -12,6 +12,7 @@ module.exports = {
       "url": "https://wp.wauarchitetti.com/graphql",
       typeName: "WPGraphQL",
       fieldName: "wpgraphql",
+      useACF: true,
     }
   }, "gatsby-plugin-image", "gatsby-plugin-sharp", "gatsby-transformer-sharp", "gatsby-plugin-postcss", {
     resolve: 'gatsby-source-filesystem',
