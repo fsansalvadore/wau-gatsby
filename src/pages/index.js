@@ -95,7 +95,7 @@ const IndexIta = () => {
   // `);
   const data = useStaticQuery(graphql`
     query HomePageItaQuery {
-      wpPage(id: { eq: "cG9zdDo4NDk=" }) {
+      page: wpPage(id: { eq: "cG9zdDo4NDk=" }) {
         id
         title
         language {
@@ -146,7 +146,7 @@ const IndexIta = () => {
           }
         }
       }
-      allWpExpertise(
+      expertises: allWpExpertise(
         limit: 40
         filter: { status: { eq: "PUBLISH" }, language: { slug: { eq: "IT" } } }
       ) {
@@ -166,7 +166,7 @@ const IndexIta = () => {
           }
         }
       }
-      allWpArticle(
+      articles: allWpArticle(
         limit: 3
         filter: { status: { eq: "PUBLISH" }, language: { slug: { eq: "IT" } } }
       ) {

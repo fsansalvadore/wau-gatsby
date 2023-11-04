@@ -1,15 +1,15 @@
-import React, { useRef, useState, Suspense, useEffect } from "react";
+import React, { useRef, useState, Suspense, useEffect } from 'react';
 // import * as THREE from "three";
 // import { Canvas, useLoader } from "react-three-fiber";
 // import { softShadows, MeshDistortMaterial } from "drei";
 // import { useSpring, animated } from "react-spring/three";
-import styled from "styled-components";
-import { gsap, Power1 } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import "twin.macro";
-import WauGradient from "../../../assets/wau-sphere-texture-sp1.svg";
-import GridMaxWidthContainer from "../../../components/elements/Atoms/GridMaxWidthContainer";
-import ContactsTextBlock from "../../../components/elements/Atoms/ContactsTextBlock";
+import styled from 'styled-components';
+import { gsap, Power1 } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import 'twin.macro';
+import WauGradient from '../../../assets/wau-sphere-texture-sp1.svg';
+import GridMaxWidthContainer from '../../../components/elements/Atoms/GridMaxWidthContainer';
+import ContactsTextBlock from '../../../components/elements/Atoms/ContactsTextBlock';
 
 // softShadows();
 
@@ -89,7 +89,7 @@ import ContactsTextBlock from "../../../components/elements/Atoms/ContactsTextBl
 //       ref={contactsCtaSphereRef}
 //     >
 //       {/* geomtery */}
-//       <sphereBufferGeometry attach="geometry" args={[1, 150, 150]} />
+//       <sphereGeometry attach="geometry" args={[1, 150, 150]} />
 //       {/* meterial */}
 //       {/* https://github.com/pmndrs/drei#shaders */}
 //       <AnimatedMeshDistortMaterial
@@ -158,7 +158,7 @@ import ContactsTextBlock from "../../../components/elements/Atoms/ContactsTextBl
 //           rotation={[-Math.PI / 2, 0, 0]}
 //           position={[0, -1.5, 0]}
 //         >
-//           <planeBufferGeometry attach="geometry" args={[100, 100]} />
+//           <planeGeometry attach="geometry" args={[100, 100]} />
 
 //           <shadowMaterial attach="material" opacity={0.1} />
 //         </animated.mesh>

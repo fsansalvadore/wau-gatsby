@@ -1,28 +1,28 @@
-import React, { useRef, useState, useEffect } from "react";
-import { Helmet } from "react-helmet";
-import { gsap, Power1 } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Link } from "gatsby";
-// import TextLoop from "react-text-loop-next";
-import "twin.macro";
-import WauLogo from "../../../assets/WAU-Logo.svg";
-import WauVideoMp4 from "../../../assets/Wau-Architetti-cut.mp4";
-import WauVideoWebM from "../../../assets/Wau-Architetti-cut.webm";
-import WauVideoPoster from "../../../assets/Wau-Architetti-cut.gif";
-import Layout from "../../LayoutComponent";
-import GridMaxWidthContainer from "../Atoms/GridMaxWidthContainer";
-import SectionTextBlock from "../Atoms/SectionTextBlock";
-import Accordion from "../Atoms/Accordion";
-import Button from "../Atoms/Button";
-import PageLoader from "../Atoms/PageLoader";
-import { StyledIntroContainer } from "./HomePageLayout.styled";
+import React, { useRef, useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet';
+import { gsap, Power1 } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Link } from 'gatsby';
+import TextLoop from 'react-text-loop-next-18';
+import 'twin.macro';
+import WauLogo from '../../../assets/WAU-Logo.svg';
+import WauVideoMp4 from '../../../assets/Wau-Architetti-cut.mp4';
+import WauVideoWebM from '../../../assets/Wau-Architetti-cut.webm';
+import WauVideoPoster from '../../../assets/Wau-Architetti-cut.gif';
+import Layout from '../../LayoutComponent';
+import GridMaxWidthContainer from '../Atoms/GridMaxWidthContainer';
+import SectionTextBlock from '../Atoms/SectionTextBlock';
+import Accordion from '../Atoms/Accordion';
+import Button from '../Atoms/Button';
+import PageLoader from '../Atoms/PageLoader';
+import { StyledIntroContainer } from './HomePageLayout.styled';
 
-// import {
-//   IntroCanvas,
-//   VisionSectionCanvas,
-//   ScrollProgressToggleOut,
-//   ScrollProgressToggleIn,
-// } from "./HomePageLayout.components";
+import {
+  IntroCanvas,
+  VisionSectionCanvas,
+  ScrollProgressToggleOut,
+  ScrollProgressToggleIn,
+} from './HomePageLayout.components';
 
 const HomePageLayout = ({ lang, data, ...otherProps }) => {
   const indexRef = useRef(null);
@@ -30,138 +30,134 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
   const videoRef = useRef(null);
   const visionSectionRef = useRef(null);
   const introTextRef = useRef([
-    "architettura",
-    "design",
-    "passione",
-    "creatività",
+    'architettura',
+    'design',
+    'passione',
+    'creatività',
   ]);
   const [introWords, setIntroWords] = useState(null);
   const [articles, setArticles] = useState(null);
   const [acf, setAcf] = useState(null);
   const [expertises, setExpertises] = useState(null);
 
-  // useEffect(() => {
-  //   if (data && data.wordpress.articles) {
-  //     setArticles(data.wordpress.articles.nodes);
-  //   }
-  //   if (data && data.wordpress.expertises) {
-  //     setExpertises(data.wordpress.expertises.nodes);
-  //   }
-  //   if (data && data.wordpress.page && data.wordpress.page.homePageACF) {
-  //     setAcf(data.wordpress.page.homePageACF);
-  //   }
-  // }, [setAcf, setArticles, setExpertises, data]);
+  useEffect(() => {
+    if (data && data.articles) {
+      setArticles(data.articles.nodes);
+    }
+    if (data && data.expertises) {
+      setExpertises(data.expertises.nodes);
+    }
+    if (data && data.page && data.page.homePageACF) {
+      setAcf(data.page.homePageACF);
+    }
+  }, [setAcf, setArticles, setExpertises, data]);
 
-  // // Words animation
-  // useEffect(() => {
-  //   if (!!acf && !!acf.introWords) {
-  //     setIntroWords(acf.introWords.split(","));
-  //   }
-  // }, [setIntroWords, acf]);
+  // Words animation
+  useEffect(() => {
+    if (!!acf && !!acf.introWords) {
+      setIntroWords(acf.introWords.split(','));
+    }
+  }, [setIntroWords, acf]);
 
   // Force play video
-  // useEffect(() => {
-  //   if (!videoRef || !videoRef.current) return;
+  useEffect(() => {
+    if (!videoRef || !videoRef.current) return;
 
-  //   //open bug since 2017 that you cannot set muted in video element https://github.com/facebook/react/issues/10389
-  //   videoRef.current.defaultMuted = true;
-  //   videoRef.current.muted = true;
+    //open bug since 2017 that you cannot set muted in video element https://github.com/facebook/react/issues/10389
+    videoRef.current.defaultMuted = true;
+    videoRef.current.muted = true;
 
-  //   if (!!videoRef && !!videoRef.current) {
-  //     const promise = videoRef.current.play();
-  //     videoRef.current.play();
-  //     if (promise !== undefined) {
-  //       promise
-  //         .catch((error) => {
-  //           // Auto-play was prevented
-  //           // Show a UI element to let the user manually start playback
-  //         })
-  //         .then(() => {
-  //           // Auto-play started
-  //           videoRef.current.play();
-  //         });
-  //     }
-  //   }
-  // }, [videoRef]);
+    if (!!videoRef && !!videoRef.current) {
+      const promise = videoRef.current.play();
+      videoRef.current.play();
+      if (promise !== undefined) {
+        promise
+          .catch((error) => {
+            // Auto-play was prevented
+            // Show a UI element to let the user manually start playback
+          })
+          .then(() => {
+            // Auto-play started
+            videoRef.current.play();
+          });
+      }
+    }
+  }, [videoRef]);
 
-  // let introTextTL;
-  // // Intro Text scroll animation
-  // useEffect(() => {
-  //   if (!indexRef || !indexRef.current) return;
-  //   if (
-  //     typeof window !== `undefined` &&
-  //     typeof document !== `undefined` &&
-  //     !!acf
-  //   ) {
-  //     // eslint-disable-next-line react-hooks/exhaustive-deps
-  //     introTextTL = gsap.timeline({
-  //       scrollTrigger: {
-  //         trigger: indexRef.current,
-  //         start: "200px 10%",
-  //         end: "center 20%",
-  //         scrub: 2,
-  //         onUpdate: ({ progress }) => [
-  //           progress > 0.3
-  //             ? ScrollProgressToggleOut()
-  //             : ScrollProgressToggleIn(),
-  //         ],
-  //       },
-  //     });
+  let introTextTL;
+  // Intro Text scroll animation
+  useEffect(() => {
+    if (!indexRef || !indexRef.current) return;
+    if (
+      typeof window !== `undefined` &&
+      typeof document !== `undefined` &&
+      !!acf
+    ) {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      introTextTL = gsap.timeline({
+        scrollTrigger: {
+          trigger: indexRef.current,
+          start: '200px 10%',
+          end: 'center 20%',
+          scrub: 2,
+          onUpdate: ({ progress }) => [
+            progress > 0.3
+              ? ScrollProgressToggleOut()
+              : ScrollProgressToggleIn(),
+          ],
+        },
+      });
 
-  //     ScrollTrigger.defaults({
-  //       immediateRender: false,
-  //       ease: Power1.inOut,
-  //     });
+      ScrollTrigger.defaults({
+        immediateRender: false,
+        ease: Power1.inOut,
+      });
 
-  //     introTextTL
-  //       .to(
-  //         introTextRef.current,
-  //         {
-  //           duration: 3,
-  //           scale: 2,
-  //         },
-  //         indexRef.current
-  //       )
-  //       .to(
-  //         introTextRef.current,
-  //         {
-  //           opacity: 1,
-  //         },
-  //         0.6
-  //       )
-  //       .to(
-  //         introTextRef.current,
-  //         {
-  //           duration: 0.5,
-  //           opacity: 0,
-  //         },
-  //         "1.4"
-  //       )
-  //       .to(
-  //         videoContainerRef.current,
-  //         {
-  //           duration: 1,
-  //           opacity: 1,
-  //         },
-  //         "1.5"
-  //       );
-  //   }
-  // }, [indexRef, videoContainerRef, acf]);
+      introTextTL
+        .to(
+          introTextRef.current,
+          {
+            duration: 3,
+            scale: 2,
+          },
+          indexRef.current
+        )
+        .to(
+          introTextRef.current,
+          {
+            opacity: 1,
+          },
+          0.6
+        )
+        .to(
+          introTextRef.current,
+          {
+            duration: 0.5,
+            opacity: 0,
+          },
+          '1.4'
+        )
+        .to(
+          videoContainerRef.current,
+          {
+            duration: 1,
+            opacity: 1,
+          },
+          '1.5'
+        );
+    }
+  }, [indexRef, videoContainerRef, acf]);
 
   const hideVideo = () => {
     if (!videoRef) return;
     if (!!videoRef && !!videoRef.current)
-      videoRef.current.style.display = "none";
+      videoRef.current.style.display = 'none';
   };
   const showVideo = () => {
     if (!videoRef) return;
     if (!!videoRef && !!videoRef.current)
-      videoRef.current.style.display = "flex";
+      videoRef.current.style.display = 'flex';
   };
-
-  // useEffect(() => {
-  //   console.log("data", data);
-  // }, [data]);
 
   let visionTL;
   useEffect(() => {
@@ -170,9 +166,9 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
       // eslint-disable-next-line react-hooks/exhaustive-deps
       visionTL = gsap.timeline({
         scrollTrigger: {
-          trigger: ".vision-section",
-          start: "top bottom",
-          end: "bottom bottom",
+          trigger: '.vision-section',
+          start: 'top bottom',
+          end: 'bottom bottom',
           onUpdate: ({ progress }) => [
             progress === 0 ? showVideo() : hideVideo(),
           ],
@@ -185,7 +181,7 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
       });
 
       visionTL.to(videoContainerRef.current, {
-        display: "hidden",
+        display: 'hidden',
       });
     }
   }, [visionTL, visionSectionRef.current]);
@@ -194,14 +190,14 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
     <Layout>
       <Helmet>
         <title>
-          {lang === "it"
+          {lang === 'it'
             ? `WAU Architetti - Torino - Home Page`
             : `WAU Architects - Turin, Italy - Home Page`}
         </title>
         <link
           rel="canonical"
           href={
-            lang === "it"
+            lang === 'it'
               ? `https://www.wauarchitetti.com`
               : `https://www.wauarchitetti.com/en`
           }
@@ -209,19 +205,19 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
         <meta
           name="description"
           content={`${
-            lang === "it"
-              ? "Architettura. Design. Urbanistica. Ingegneria. Un’Architecture Factory che offre soluzioni di progettazione globali."
-              : "Architecture. Design. City planning. Engineering. An Architecture Factory offering global design solutions."
+            lang === 'it'
+              ? 'Architettura. Design. Urbanistica. Ingegneria. Un’Architecture Factory che offre soluzioni di progettazione globali.'
+              : 'Architecture. Design. City planning. Engineering. An Architecture Factory offering global design solutions.'
           }`}
         />
         <meta
           property="og:site_name"
-          content={lang === "it" ? `WAU Architetti` : `WAU Architects`}
+          content={lang === 'it' ? `WAU Architetti` : `WAU Architects`}
         />
         <meta
           property="og:url"
           content={
-            lang === "it"
+            lang === 'it'
               ? `https://www.wauarchitetti.com`
               : `https://www.wauarchitetti.com/en`
           }
@@ -229,7 +225,7 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
         <meta
           property="og:title"
           content={
-            lang === "it"
+            lang === 'it'
               ? `WAU Architetti - Torino - Home Page`
               : `WAU Architects - Turin, Italy - Home Page`
           }
@@ -237,16 +233,16 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
         <meta
           property="og:description"
           content={`${
-            lang === "it"
-              ? "Architettura. Design. Urbanistica. Ingegneria. Un’Architecture Factory che offre soluzioni di progettazione globali."
-              : "Architecture. Design. City planning. Engineering. An Architecture Factory offering global design solutions."
+            lang === 'it'
+              ? 'Architettura. Design. Urbanistica. Ingegneria. Un’Architecture Factory che offre soluzioni di progettazione globali.'
+              : 'Architecture. Design. City planning. Engineering. An Architecture Factory offering global design solutions.'
           }`}
         />
         <meta name="twitter:card" content="summary" />
         <meta
           name="twitter:site"
           content={
-            lang === "it"
+            lang === 'it'
               ? `https://www.wauarchitetti.com`
               : `https://www.wauarchitetti.com/en`
           }
@@ -254,7 +250,7 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
         <meta
           name="twitter:title"
           content={
-            lang === "it"
+            lang === 'it'
               ? `WAU Architetti - Torino - Home Page`
               : `WAU Architects - Turin, Italy - Home Page`
           }
@@ -262,9 +258,9 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
         <meta
           name="twitter:description"
           content={`${
-            lang === "it"
-              ? "Architettura. Design. Urbanistica. Ingegneria. Un’Architecture Factory che offre soluzioni di progettazione globali."
-              : "Architecture. Design. City planning. Engineering. An Architecture Factory offering global design solutions."
+            lang === 'it'
+              ? 'Architettura. Design. Urbanistica. Ingegneria. Un’Architecture Factory che offre soluzioni di progettazione globali.'
+              : 'Architecture. Design. City planning. Engineering. An Architecture Factory offering global design solutions.'
           }`}
         />
       </Helmet>
@@ -300,7 +296,7 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
                 <p>
                   {acf.testoDentroSfera
                     ? acf.testoDentroSfera
-                    : "SCOPRI L’EFFETTO WAU"}
+                    : 'SCOPRI L’EFFETTO WAU'}
                 </p>
               </div>
               <div className="video-container" ref={videoContainerRef}>
@@ -322,7 +318,7 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
                   Your browser does not support the video tag.
                 </video>
               </div>
-              {/* <IntroCanvas className="canvas" indexRef={indexRef} /> */}
+              <IntroCanvas className="canvas" indexRef={indexRef} />
               <div
                 className="intro-text"
                 tw="fixed w-screen h-screen flex flex-col md:flex-row items-center justify-center"
@@ -332,7 +328,7 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
                   className="intro-title"
                   tw="absolute uppercase flex flex-col md:flex-row items-center justify-center lg:justify-start"
                 >
-                  <span tw="md:mr-4">{lang === "it" ? "è" : "is"}</span>
+                  <span tw="md:mr-4">{lang === 'it' ? 'è' : 'is'}</span>
                   {/* {introWords && (
                     <TextLoop
                       children={introWords ? introWords : []}
@@ -347,18 +343,18 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
               <section tw="relative flex justify-center z-50 bg-white py-16 lg:py-32 text-center">
                 <GridMaxWidthContainer>
                   <SectionTextBlock
-                    label={acf.sezioneStudio.titoletto || ""}
+                    label={acf.sezioneStudio.titoletto || ''}
                     title={
-                      acf.sezioneStudio.titolo ? acf.sezioneStudio.titolo : ""
+                      acf.sezioneStudio.titolo ? acf.sezioneStudio.titolo : ''
                     }
                     content={
                       acf.sezioneStudio.paragrafo
                         ? acf.sezioneStudio.paragrafo
-                        : ""
+                        : ''
                     }
-                    tw="flex justify-center col-span-full xl:(col-span-8 col-start-3) text-center"
-                    link={acf.sezioneStudio.tasto.link || "#"}
-                    cta={acf.sezioneStudio.tasto.testo || ""}
+                    tw="flex justify-center col-span-full xl:col-span-8 xl:col-start-3 text-center"
+                    link={acf.sezioneStudio.tasto.link || '#'}
+                    cta={acf.sezioneStudio.tasto.testo || ''}
                     fullWidthContent
                     hasTextCenter
                   />
@@ -371,14 +367,14 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
                 <GridMaxWidthContainer>
                   {acf.sezioneExpertise && (
                     <SectionTextBlock
-                      label={acf.sezioneExpertise.titoletto || ""}
+                      label={acf.sezioneExpertise.titoletto || ''}
                       title={
                         acf.sezioneExpertise.titolo
                           ? acf.sezioneExpertise.titolo
-                          : ""
+                          : ''
                       }
-                      link={acf.sezioneExpertise.tasto.link || "#"}
-                      cta={acf.sezioneExpertise.tasto.testo || ""}
+                      link={acf.sezioneExpertise.tasto.link || '#'}
+                      cta={acf.sezioneExpertise.tasto.testo || ''}
                       tw="col-span-full mb-10 md:col-span-6"
                     />
                   )}
@@ -395,27 +391,27 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
                 className="vision-section lightGradientBg"
                 ref={visionSectionRef}
               >
-                {/* <VisionSectionCanvas
+                <VisionSectionCanvas
                   className="canvas"
                   visionSectionRef={visionSectionRef}
                   tw="absolute w-1/4 left-0 top-0 h-full"
-                /> */}
+                />
                 <GridMaxWidthContainer>
                   <SectionTextBlock
-                    label={acf.sezioneVision.titoletto || ""}
+                    label={acf.sezioneVision.titoletto || ''}
                     title={
-                      acf.sezioneVision.titolo ? acf.sezioneVision.titolo : ""
+                      acf.sezioneVision.titolo ? acf.sezioneVision.titolo : ''
                     }
                     content={
                       acf.sezioneVision.paragrafo
                         ? acf.sezioneVision.paragrafo
-                        : ""
+                        : ''
                     }
                     link={
                       !!acf.sezioneVision.tasto.link &&
                       acf.sezioneVision.tasto.link
                     }
-                    cta={acf.sezioneVision.tasto.testo || ""}
+                    cta={acf.sezioneVision.tasto.testo || ''}
                     tw="col-span-full md:col-span-6 md:col-start-7"
                   />
                 </GridMaxWidthContainer>
@@ -424,7 +420,7 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
                 <GridMaxWidthContainer>
                   <div tw="col-span-full md:col-span-8 md:col-start-3">
                     <h4 tw="font-mono font-light mb-8 md:mb-16">
-                      {lang === "it" ? "Ultime novità" : "Latest news"}
+                      {lang === 'it' ? 'Ultime novità' : 'Latest news'}
                     </h4>
                     <ul tw="border-0 border-b border-solid border-gray-200">
                       {articles &&
@@ -436,7 +432,7 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
                           >
                             <Link
                               to={
-                                lang === "it"
+                                lang === 'it'
                                   ? `/notizie/${article.slug}`
                                   : `/news/${article.slug}`
                               }
@@ -484,10 +480,10 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
                     </ul>
 
                     <Button
-                      to={lang === "it" ? "/notizie" : "/en/news"}
+                      to={lang === 'it' ? '/notizie' : '/en/news'}
                       tw="mt-8 md:mt-16 inline-block"
                     >
-                      {lang === "it" ? "Esplora le notizie" : "Read all news"}
+                      {lang === 'it' ? 'Esplora le notizie' : 'Read all news'}
                     </Button>
                   </div>
                 </GridMaxWidthContainer>

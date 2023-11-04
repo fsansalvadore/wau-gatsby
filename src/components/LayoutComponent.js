@@ -1,28 +1,29 @@
-import React, { useEffect, useState } from "react";
-import loadable from "@loadable/component";
-import { graphql, useStaticQuery } from "gatsby";
-import GenericMetadata from "./GenericMetadata";
-import MainNav from "./elements/MainNav/MainNav";
-import "../styles/global.css";
-import Footer from "./elements/Atoms/Footer";
+import React, { useEffect, useState } from 'react';
+import loadable from '@loadable/component';
+import { graphql, useStaticQuery } from 'gatsby';
+import GenericMetadata from './GenericMetadata';
+import MainNav from './elements/MainNav/MainNav';
+import '../styles/global.css';
+import Footer from './elements/Atoms/Footer';
+import { GlobalStyles } from 'twin.macro';
 
 const CtaSection = loadable(() =>
-  import("./elements/Contacts/ContactsCtaSection")
+  import('./elements/Contacts/ContactsCtaSection')
 );
 
 const Layout = ({ isMenuLight, hasNoContactsCta, children }) => {
   let location;
-  const [lang, setLang] = useState("it");
+  const [lang, setLang] = useState('it');
 
   useEffect(() => {
     if (typeof window !== `undefined`) {
       location = window.location.href;
       if (
-        location.includes("00/en") ||
-        location.includes("app/en") ||
-        location.includes("com/en")
+        location.includes('00/en') ||
+        location.includes('app/en') ||
+        location.includes('com/en')
       ) {
-        setLang("en");
+        setLang('en');
       }
     }
   }, [lang]);
@@ -54,6 +55,7 @@ const Layout = ({ isMenuLight, hasNoContactsCta, children }) => {
 
   return (
     <>
+      <GlobalStyles />
       <GenericMetadata lang={lang} />
       <MainNav lang={lang} isMenuLight={isMenuLight} />
       {children}

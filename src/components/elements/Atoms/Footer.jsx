@@ -1,10 +1,10 @@
-import { Link, useStaticQuery, graphql } from "gatsby";
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import tw, { css } from "twin.macro";
-import SocialIcons from "../SocialIcons/SocialIcons";
-import Logo from "../Logo/Logo";
-import GridMaxWidthContainer from "./GridMaxWidthContainer";
+import { Link, useStaticQuery, graphql } from 'gatsby';
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import tw, { css } from 'twin.macro';
+import SocialIcons from '../SocialIcons/SocialIcons';
+import Logo from '../Logo/Logo';
+import GridMaxWidthContainer from './GridMaxWidthContainer';
 
 // eslint-disable-next-line import/no-default-export
 export default ({ lang }) => {
@@ -50,7 +50,7 @@ export default ({ lang }) => {
     <StyledFooter>
       <GridMaxWidthContainer>
         <div tw="col-span-12 text-center xl:col-span-5 xl:text-left">
-          <Link to={lang == "it" ? "/" : "/en"}>
+          <Link to={lang === 'it' ? '/' : '/en'}>
             <Logo isMenuLight />
           </Link>
           <div tw="mt-6 text-sm">
@@ -66,7 +66,7 @@ export default ({ lang }) => {
           </div>
         </div>
         <div className="footer-list">
-          <h5>{lang === "it" ? "Naviga" : "Explore"}</h5>
+          <h5>{lang === 'it' ? 'Naviga' : 'Explore'}</h5>
           {/* <ul>
             {lang === "it"
               ? data.wordpress.menus.nodes
@@ -107,7 +107,7 @@ export default ({ lang }) => {
           className="footer-list"
           tw="col-span-12 md:col-span-4! xl:col-span-2"
         >
-          <h5>{lang === "it" ? "Seguici" : "Follow us"}</h5>
+          <h5>{lang === 'it' ? 'Seguici' : 'Follow us'}</h5>
           {!!socialMenu && (
             <SocialIcons menu={socialMenu} hasGrid haveSpacing />
           )}
@@ -136,7 +136,7 @@ export default ({ lang }) => {
           <ul tw="inline">
             <li>
               <Link
-                to={lang === "it" ? "/privacy-policy" : "/en/privacy-policy"}
+                to={lang === 'it' ? '/privacy-policy' : '/en/privacy-policy'}
                 tw="py-4"
               >
                 Privacy Policy

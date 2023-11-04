@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { useStaticQuery, graphql, Link } from "gatsby";
-import styled from "styled-components";
-import { motion } from "framer-motion";
-import tw from "twin.macro";
-import { transition } from "../../../helpers/framer-defaults";
+import React, { useEffect, useState } from 'react';
+import { useStaticQuery, graphql, Link } from 'gatsby';
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
+import tw from 'twin.macro';
+import { transition } from '../../../helpers/framer-defaults';
 
-import LanguageSelector from "../LanguageSelector";
-import SocialIcons from "../SocialIcons/SocialIcons";
+import LanguageSelector from '../LanguageSelector';
+import SocialIcons from '../SocialIcons/SocialIcons';
 
 const MenuContainer = styled(motion.div)`
-  ${tw`fixed w-screen h-screen z-index[101]`}
+  ${tw`fixed w-screen h-screen z-[101]`}
 `;
 const MenuSlider = styled(motion.div)`
   min-height: 550px;
@@ -35,10 +35,12 @@ const MenuSlider = styled(motion.div)`
     max-height: 70vh;
 
     a {
-      ${tw`text-2xl padding[2px 0] sm:padding[5px 0] lg:text-3xl block`}
+      ${tw`text-2xl p-[2px 0] sm:p-[5px 0] lg:text-3xl block`}
       line-height: 2rem;
       opacity: 0.3;
-      transition: opacity 0.15s ease, padding 0.2s ease;
+      transition:
+        opacity 0.15s ease,
+        padding 0.2s ease;
       will-change: opacity;
 
       &:hover {
@@ -53,7 +55,7 @@ const MenuSlider = styled(motion.div)`
         opacity: 0.9;
 
         &:before {
-          content: "";
+          content: '';
           width: 6px;
           height: 6px;
           position: absolute;
@@ -78,7 +80,7 @@ const MenuSlider = styled(motion.div)`
 
   @media screen and (min-width: 768px) {
     & {
-      ${tw`width[60%]`}
+      ${tw`w-[60%]`}
     }
 
     .menu-top {
@@ -111,80 +113,80 @@ export const DimOverlay = styled(motion.div)`
 
 const sliderVariants = {
   initial: {
-    x: "100%",
+    x: '100%',
   },
   show: {
     x: 0,
   },
   hidden: {
-    x: "100%",
+    x: '100%',
   },
 };
 
 export const menuContainer = {
   initial: {
-    display: "none",
+    display: 'none',
   },
   hidden: {
-    display: "block",
+    display: 'block',
     delay: 0.4,
     transitionEnd: {
-      display: "none",
+      display: 'none',
     },
   },
   show: {
-    display: "block",
+    display: 'block',
   },
 };
 
 export const menuDim = {
   initial: {
     opacity: 0,
-    display: "none",
+    display: 'none',
   },
   hidden: {
     opacity: 0,
-    display: "block",
+    display: 'block',
     transitionEnd: {
-      display: "none",
+      display: 'none',
     },
   },
   show: {
     opacity: 1,
-    display: "block",
+    display: 'block',
   },
 };
 
 const Menu = ({ lang, isOpen }) => {
-  // const data = useStaticQuery(graphql`
-  //   query GET_MENU_BY_NAME {
-  //     wordpress {
-  //       menus {
-  //         nodes {
-  //           count
-  //           name
-  //           menuItems {
-  //             nodes {
-  //               id
-  //               databaseId
-  //               title
-  //               url
-  //               cssClasses
-  //               description
-  //               label
-  //               linkRelationship
-  //               target
-  //               parentId
-  //               path
-  //             }
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-  // `);
+  const data = useStaticQuery(graphql`
+    query GET_MENU_BY_NAME {
+      menus: allWpMenu {
+        nodes {
+          count
+          name
+          menuItems {
+            nodes {
+              id
+              databaseId
+              title
+              url
+              cssClasses
+              description
+              label
+              linkRelationship
+              target
+              parentId
+              path
+            }
+          }
+        }
+      }
+    }
+  `);
 
-  const [location, setLocation] = useState("");
+  console.log('menu', data);
+
+  const [location, setLocation] = useState('');
   const [socialMenu, setSocialMenu] = useState(null);
 
   useEffect(() => {
@@ -193,66 +195,64 @@ const Menu = ({ lang, isOpen }) => {
     }
   }, [setLocation]);
 
-  // useEffect(() => {
-  //   if (typeof window !== `undefined`) {
-  //     setSocialMenu(
-  //       data.wordpress.menus.nodes.find((node) => node.name === "Social")
-  //     );
-  //   }
-  // }, [data.wordpress.menus.nodes]);
+  useEffect(() => {
+    if (typeof window !== `undefined`) {
+      setSocialMenu(data.menus.nodes.find((node) => node.name === 'Social'));
+    }
+  }, [data.menus.nodes]);
 
   return (
     <MenuContainer
       variants={menuContainer}
-      animate={isOpen ? "show" : "hidden"}
+      animate={isOpen ? 'show' : 'hidden'}
       initial="initial"
       exit="hidden"
       transition={{ ...transition, duration: 0.4 }}
     >
       <MenuSlider
         variants={sliderVariants}
-        animate={isOpen ? "show" : "hidden"}
+        animate={isOpen ? 'show' : 'hidden'}
         initial="initial"
         transition={{ ...transition, duration: 0.4 }}
       >
         <div className="menu-top">
-          {/* <ul>
-            {lang === "it"
-              ? data.wordpress.menus.nodes
-                  .find((node) => node.name === "Menu ita")
+          <ul>
+            {lang === 'it'
+              ? data.menus.nodes
+                  .find((node) => node.name === 'Menu ita')
                   .menuItems.nodes.map((item) => (
                     <li key={item.id}>
                       <Link
-                        to={item.path.replace("/dev/wau/wp", "")}
+                        to={item.path.replace('/dev/wau/wp', '')}
                         activeClassName="active-menuLink"
                         className={
                           location.includes(item.label.toLowerCase())
-                            ? "active-menuLink"
-                            : ""
+                            ? 'active-menuLink'
+                            : ''
                         }
                       >
                         {item.label}
                       </Link>
                     </li>
                   ))
-              : data.wordpress.menus.nodes
-                  .find((node) => node.name === "Menu eng")
+              : data.menus.nodes
+                  .find((node) => node.name === 'Menu eng')
                   .menuItems.nodes.map((item) => (
                     <li key={item.id}>
                       <Link
-                        to={item.path.replace("/dev/wau/wp", "")}
+                        to={item.path.replace('/dev/wau/wp', '')}
                         activeClassName="active-menuLink"
                         className={
                           location.includes(item.label.toLowerCase())
-                            ? "active-menuLink"
-                            : ""
+                            ? 'active-menuLink'
+                            : ''
                         }
                       >
                         {item.label}
                       </Link>
                     </li>
                   ))}
-          </ul> */}
+          </ul>
         </div>
         <div className="menu-bottom">
           <div className="menu-bottom-info">
@@ -267,7 +267,7 @@ const Menu = ({ lang, isOpen }) => {
                   Via Po, 1 - 10124 Torino, Italia
                 </a>
                 <p>
-                  T{" "}
+                  T{' '}
                   <a target="_blank" href="tel:+390118127237" rel="noreferrer">
                     +39 011 812 7237
                   </a>
@@ -287,7 +287,7 @@ const Menu = ({ lang, isOpen }) => {
         id="dim-overlay"
         variants={menuDim}
         initial="initial"
-        animate={isOpen ? "show" : "hidden"}
+        animate={isOpen ? 'show' : 'hidden'}
         transition={{ ...transition, duration: 0.4 }}
       />
     </MenuContainer>
