@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import tw from 'twin.macro';
+// import styled from 'styled-components';
+import tw, { styled } from 'twin.macro';
 import { Canvas } from '@react-three/fiber';
 import { animated } from '@react-spring/three';
 
@@ -158,7 +158,7 @@ export const StyledIntroContainer = styled.div`
     z-index: -2;
 
     p {
-      ${tw`text-2xl font-light line-height[110%]! max-width[200px] md:(text-3xl max-width[300px] line-height[100%]!)`}
+      ${tw`text-2xl font-light leading-[110%]! max-w-[200px] md:(text-3xl max-w-[300px] leading-[100%]!)`}
       text-align: center;
       color: white;
       letter-spacing: -0.02rem;

@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { css } from "twin.macro";
-import { Link } from "gatsby";
-import { motion } from "framer-motion";
-import styled from "styled-components";
-import LazyLoad from "react-lazyload";
-import Img from "gatsby-image";
+import React, { useEffect, useState } from 'react';
+import { css } from 'twin.macro';
+import { Link } from 'gatsby';
+import { motion } from 'framer-motion';
+import styled from 'styled-components';
+import LazyLoad from 'react-lazyload';
+import Img from 'gatsby-image';
 // import { WPImage } from '../../WPImage/WPImage'
-import WAUFallback from "../../../assets/WAUFallback.svg";
-import { months } from "../../../helpers/utils";
+import WAUFallback from '../../../assets/WAUFallback.svg';
+import { months } from '../../../helpers/utils';
 
 const MotionLink = motion.a(Link);
 
@@ -17,7 +17,7 @@ const ArticlePreviewCard = ({ article, ...otherProps }) => {
 
   useEffect(() => {
     if (date) {
-      if (article.language.code === "EN") {
+      if (article.language.code === 'EN') {
         setArticleDate(
           `${
             months.eng[date.getMonth()]
@@ -38,16 +38,16 @@ const ArticlePreviewCard = ({ article, ...otherProps }) => {
       <LazyLoad>
         <StyledArticlePreviewCard
           to={
-            article.language.code === "EN"
+            article.language.code === 'EN'
               ? `/en/news/${article.slug}`
               : `/notizie/${article.slug}`
           }
-          tw="w-full grid grid-cols-9 row-gap[20px]"
+          tw="w-full grid grid-cols-9 gap-y-[20px]"
           {...otherProps}
         >
           <div
             className="article-preview-image"
-            tw="relative flex items-center justify-center col-span-9 md:col-span-3 height[50vw] md:height[12vw] min-height[200px] w-full overflow-hidden"
+            tw="relative flex items-center justify-center col-span-9 md:col-span-3 h-[50vw] md:h-[12vw] min-h-[200px] w-full overflow-hidden"
           >
             {article.featuredImage && article.featuredImage.node.imageFile ? (
               <Img
@@ -56,7 +56,7 @@ const ArticlePreviewCard = ({ article, ...otherProps }) => {
                 }
                 // fluid={article.featuredImage.node.imageFile.childImageSharp.fluid}
                 tw=""
-                alt={article.imgAlt ? article.imgAlt : "Image"}
+                alt={article.imgAlt ? article.imgAlt : 'Image'}
               />
             ) : (
               <img
@@ -66,7 +66,7 @@ const ArticlePreviewCard = ({ article, ...otherProps }) => {
                     ? article.featuredImage.node.sourceUrl
                     : WAUFallback
                 }
-                alt={article.imgAlt ? article.imgAlt : "Image"}
+                alt={article.imgAlt ? article.imgAlt : 'Image'}
               />
             )}
           </div>
@@ -95,8 +95,8 @@ const ArticlePreviewCard = ({ article, ...otherProps }) => {
               )}
             </div>
             <p tw="font-bold mt-4">
-              {article.language.code === "EN"
-                ? "Read the article"
+              {article.language.code === 'EN'
+                ? 'Read the article'
                 : "Leggi l'articolo"}
             </p>
           </div>

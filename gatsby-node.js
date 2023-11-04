@@ -352,7 +352,7 @@ exports.createResolvers = async ({
   await createResolvers({
     WORDPRESS_MediaItem: {
       imageFile: {
-        type: "File",
+        type: 'File',
         async resolve(source) {
           let sourceUrl = source.sourceUrl;
 
@@ -375,17 +375,15 @@ exports.createResolvers = async ({
 };
 
 exports.createPages = async ({ actions, graphql, gatsbyUtilities }) => {
-  const { data } = await graphql(
-    `
-      ${query}
-    `
-  );
+  const { data } = await graphql(`
+    ${query}
+  `);
 
-  console.log("data", data)
+  console.log('data', data);
 
   // create ita projects pages
   data.allWpProject.nodes
-    .filter((p) => p.language.code === "IT")
+    .filter((p) => p.language.code === 'IT')
     .forEach((project) => {
       actions.createPage({
         path: `/progetti/${project.slug}`,
@@ -406,7 +404,7 @@ exports.createPages = async ({ actions, graphql, gatsbyUtilities }) => {
 
   // create eng projects pages
   data.allWpProject.nodes
-    .filter((p) => p.language.code === "EN")
+    .filter((p) => p.language.code === 'EN')
     .forEach((project) => {
       actions.createPage({
         path: `/en/projects/${project.slug}`,
@@ -427,7 +425,7 @@ exports.createPages = async ({ actions, graphql, gatsbyUtilities }) => {
 
   // create ita expertises pages
   data.allWpExpertise.nodes
-    .filter((e) => e.language.code === "IT")
+    .filter((e) => e.language.code === 'IT')
     .forEach((expertise) => {
       actions.createPage({
         path: `/expertise/${expertise.slug}`,
@@ -448,7 +446,7 @@ exports.createPages = async ({ actions, graphql, gatsbyUtilities }) => {
 
   // create eng expertises pages
   data.allWpExpertise.nodes
-    .filter((e) => e.language.code === "EN")
+    .filter((e) => e.language.code === 'EN')
     .forEach((expertise) => {
       actions.createPage({
         path: `/en/expertise/${expertise.slug}`,
@@ -469,7 +467,7 @@ exports.createPages = async ({ actions, graphql, gatsbyUtilities }) => {
 
   // create ita articles pages
   data.allWpArticle.nodes
-    .filter((a) => a.language.code === "IT")
+    .filter((a) => a.language.code === 'IT')
     .forEach((article) => {
       actions.createPage({
         path: `/notizie/${article.slug}`,
@@ -488,7 +486,7 @@ exports.createPages = async ({ actions, graphql, gatsbyUtilities }) => {
 
   // create eng articles pages
   data.allWpArticle.nodes
-    .filter((a) => a.language.code === "EN")
+    .filter((a) => a.language.code === 'EN')
     .forEach((article) => {
       actions.createPage({
         path: `/en/news/${article.slug}`,

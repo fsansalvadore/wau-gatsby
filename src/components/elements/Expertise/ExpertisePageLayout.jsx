@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { Helmet } from "react-helmet";
-import { Link } from "gatsby";
-import tw, { styled, css } from "twin.macro";
-import Layout from "../../LayoutComponent";
-import Heading from "../Heading/Heading";
-import HeadingIntroHalf from "../Heading/HeadingIntroHalf";
-import GridMaxWidthContainer from "../Atoms/GridMaxWidthContainer";
-import Button from "../Atoms/Button";
-import ClientsSection from "../Clients/ClientsSection";
+import React, { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet';
+import { Link } from 'gatsby';
+import tw, { styled, css } from 'twin.macro';
+import Layout from '../../LayoutComponent';
+import Heading from '../Heading/Heading';
+import HeadingIntroHalf from '../Heading/HeadingIntroHalf';
+import GridMaxWidthContainer from '../Atoms/GridMaxWidthContainer';
+import Button from '../Atoms/Button';
+import ClientsSection from '../Clients/ClientsSection';
 
 const ThumbImage = styled.div`
   ${tw`relative z-0 padding-bottom[60%] w-full bg-cover bg-center opacity-90 hover:opacity-100 transition-opacity`}
@@ -31,7 +31,7 @@ const Paragraph = styled.p`
 `;
 
 const ExpertiseWrapper = styled.div`
-  ${tw`grid grid-cols-1 lg:grid-cols-2 column-gap[40px] row-gap[30px] border-0 border-b border-solid border-black py-12`}
+  ${tw`grid grid-cols-1 lg:grid-cols-2 gap-x-[40px] gap-y-[30px] border-0 border-b border-solid border-black py-12`}
 `;
 
 const ListWrapper = styled.div`
@@ -71,9 +71,9 @@ const ExpertisePageLayout = ({ data, lang }) => {
       <div>
         <Heading>
           <HeadingIntroHalf
-            breadcrumb={page ? page.title : "Expertise"}
-            heading={page ? page.pagesACF.title : ""}
-            subheading={page ? page.pagesACF.introduzione : ""}
+            breadcrumb={page ? page.title : 'Expertise'}
+            heading={page ? page.pagesACF.title : ''}
+            subheading={page ? page.pagesACF.introduzione : ''}
           />
         </Heading>
         <section tw="w-full flex justify-center">
@@ -101,13 +101,13 @@ const ExpertisePageLayout = ({ data, lang }) => {
                           <Button
                             as={Link}
                             to={
-                              lang === "it"
+                              lang === 'it'
                                 ? `/expertise/${expertise.slug}`
                                 : `/en/expertise/${expertise.slug}`
                             }
                             isWhite
                           >
-                            {lang === "it" ? "Approfondisci" : "Learn more"}
+                            {lang === 'it' ? 'Approfondisci' : 'Learn more'}
                           </Button>
                         </div>
                       </div>
@@ -117,9 +117,9 @@ const ExpertisePageLayout = ({ data, lang }) => {
               ) : (
                 <li>
                   <p className="not-found">
-                    {lang === "it"
-                      ? "Nessuna expertise trovata"
-                      : "No expertise found"}
+                    {lang === 'it'
+                      ? 'Nessuna expertise trovata'
+                      : 'No expertise found'}
                   </p>
                 </li>
               )}

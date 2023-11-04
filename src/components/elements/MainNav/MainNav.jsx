@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "gatsby";
-import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
-import styled from "styled-components";
-import { motion } from "framer-motion";
-import tw, { css } from "twin.macro";
-import Logo from "../Logo/Logo";
-import Menu from "../Menu/Menu";
-import { transition, fixedNavbarAnim } from "../../../helpers/framer-defaults";
+import React, { useEffect, useState } from 'react';
+import { Link } from 'gatsby';
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
+import tw, { css } from 'twin.macro';
+import Logo from '../Logo/Logo';
+import Menu from '../Menu/Menu';
+import { transition, fixedNavbarAnim } from '../../../helpers/framer-defaults';
 
 const Navbar = styled.div(({ isMenuLight }) => [
   css`
@@ -29,9 +29,9 @@ const FixedNavbar = styled(motion.div)(() => [
     position: fixed;
     z-index: 999;
     height: 80px;
-    background: ${(props) => (props.isOpen ? "transparent" : "var(--white)")};
+    background: ${(props) => (props.isOpen ? 'transparent' : 'var(--white)')};
     box-shadow: ${(props) =>
-      props.isOpen ? "none" : "1px 0 1px rgba(0, 0, 0, 0.4)"};
+      props.isOpen ? 'none' : '1px 0 1px rgba(0, 0, 0, 0.4)'};
     ${tw`fixed w-full py-0 px-4 sm:px-8 md:px-16 flex items-center justify-between`}
   `,
 ]);
@@ -39,12 +39,12 @@ const FixedNavbar = styled(motion.div)(() => [
 // const WCampLink = motion.custom(Link);
 
 const WCampLink = styled(Link)`
-    opacity: 0.8;
-    &:hover {
-        cursor: pointer !important;
-        opacity: 1;
-    }
-`
+  opacity: 0.8;
+  &:hover {
+    cursor: pointer !important;
+    opacity: 1;
+  }
+`;
 
 const MenuBtn = styled.button`
   position: relative;
@@ -96,12 +96,12 @@ const openBtnVariant = {
   },
   show: {
     opacity: 1,
-    display: "flex",
+    display: 'flex',
   },
   hidden: {
     opacity: 0,
     transitionEnd: {
-      display: "none",
+      display: 'none',
     },
   },
 };
@@ -111,12 +111,12 @@ const closeBtnVariant = {
   },
   show: {
     opacity: 1,
-    display: "flex",
+    display: 'flex',
   },
   hidden: {
     opacity: 0,
     transitionEnd: {
-      display: "none",
+      display: 'none',
     },
   },
 };
@@ -124,15 +124,15 @@ const closeBtnVariant = {
 const NavContent = ({ lang, isOpen, toggleMenu, isMenuLight }) => {
   return (
     <>
-      <Link to={lang === "en" ? "/en/" : "/"}>
+      <Link to={lang === 'en' ? '/en/' : '/'}>
         <Logo isMenuLight={isMenuLight} />
       </Link>
-      <div tw="flex items-center" className="navbar-right">
-        {lang === "it" && (
-          <div tw="opacity-80 hover:opacity-100">
+      <div className="navbar-right flex items-center">
+        {lang === 'it' && (
+          <div className="opacity-80 hover:opacity-100">
             <WCampLink
               variants={openBtnVariant}
-              animate={!isOpen ? "show" : "hidden"}
+              animate={!isOpen ? 'show' : 'hidden'}
               initial="hidden"
               exit={{ opacity: 0, ...transition }}
               to="/wau-camp"
@@ -145,20 +145,20 @@ const NavContent = ({ lang, isOpen, toggleMenu, isMenuLight }) => {
           <motion.span
             className="menu-icon"
             variants={openBtnVariant}
-            animate={!isOpen ? "show" : "hidden"}
+            animate={!isOpen ? 'show' : 'hidden'}
             initial="hidden"
             exit={{ opacity: 0, ...transition }}
             transition={{ ...transition, duration: 0.4 }}
           >
             <span>Menu</span>
           </motion.span>
-          <span tw="opacity-0" aria-hidden="true">
+          <span className="opacity-0" aria-hidden="true">
             Menu
           </span>
           <motion.div
             className="close-icon"
             variants={closeBtnVariant}
-            animate={isOpen ? "show" : "hidden"}
+            animate={isOpen ? 'show' : 'hidden'}
             initial="initial"
             exit={{ opacity: 0, ...transition }}
             transition={{ ...transition, duration: 0.4 }}
@@ -182,7 +182,7 @@ const MainNav = ({ lang, isMenuLight }) => {
   useEffect(() => {
     if (typeof window !== `undefined`) {
       if (!isMobileViewport) setIsMobileViewport(window.outerWidth < 768);
-      window.addEventListener("resize", () => {
+      window.addEventListener('resize', () => {
         // your custom logic
         setIsMobileViewport(window.outerWidth < 768);
       });
@@ -207,8 +207,8 @@ const MainNav = ({ lang, isMenuLight }) => {
 
   // Detect scroll direction
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      window.addEventListener("scroll", () => {
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', () => {
         const st = window.pageYOffset || document.documentElement.scrollTop;
         if (window.scrollY > 80 && st <= scrollPos) {
           setIsScrollUp(false);
@@ -227,13 +227,13 @@ const MainNav = ({ lang, isMenuLight }) => {
   // Close menu with Esc key and clicking outside
   useEffect(() => {
     if (typeof window !== `undefined`) {
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") {
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
           toggleMenu(false);
         }
       });
-      if (document.querySelector("#dim-overlay")) {
-        document.querySelector("#dim-overlay").addEventListener("click", () => {
+      if (document.querySelector('#dim-overlay')) {
+        document.querySelector('#dim-overlay').addEventListener('click', () => {
           toggleMenu(false);
         });
       }
@@ -253,7 +253,7 @@ const MainNav = ({ lang, isMenuLight }) => {
       <FixedNavbar
         variants={fixedNavbarAnim}
         initial={{ y: -80 }}
-        animate={!isScrollUp && showFixed ? "show" : "hidden"}
+        animate={!isScrollUp && showFixed ? 'show' : 'hidden'}
         transition={transition}
         isOpen={isOpen}
       >

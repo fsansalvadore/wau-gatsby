@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { graphql, useStaticQuery } from "gatsby";
-import tw, { styled, css } from "twin.macro";
-import Img from "gatsby-image";
+import React, { useState, useEffect } from 'react';
+import { graphql, useStaticQuery } from 'gatsby';
+import tw, { styled, css } from 'twin.macro';
+import Img from 'gatsby-image';
 
 const ClientLink = styled.a`
-  ${tw`block flex-basis[200px] xl:max-width[220px] p-4 m-4 flex-1`}
+  ${tw`block flex-basis[200px] xl:max-w-[220px] p-4 m-4 flex-1`}
 
   ${({ $hasLink }) => !$hasLink && tw`pointer-events-none`}
 `;
@@ -50,14 +50,14 @@ export default ({ lang, ...otherProps }) => {
   return (
     <StyledClientsSection {...otherProps}>
       <h3 tw="text-4xl">
-        {lang === "it" ? "Chi si è affidato a noi" : "Who has relied on us"}
+        {lang === 'it' ? 'Chi si è affidato a noi' : 'Who has relied on us'}
       </h3>
-      <div tw="flex justify-around xl:justify-between flex-wrap my-16 mx-auto max-width[1440px]">
+      <div tw="flex justify-around xl:justify-between flex-wrap my-16 mx-auto max-w-[1440px]">
         {!!clients &&
           clients.map((client, i) => (
             <ClientLink
-              href={!!client.clientACF.link ? client.clientACF.link : "#"}
-              target={!!client.clientACF.link ? "_blank" : "_self"}
+              href={!!client.clientACF.link ? client.clientACF.link : '#'}
+              target={!!client.clientACF.link ? '_blank' : '_self'}
               rel="noreferrer"
               $hasLink={!!client.clientACF.link}
               key={i}
@@ -65,7 +65,7 @@ export default ({ lang, ...otherProps }) => {
               {!!client.featuredImage &&
                 (client.featuredImage.node.imageFile ? (
                   <Img
-                    tw="relative max-width[220px] w-full h-64"
+                    tw="relative max-w-[220px] w-full h-64"
                     fixed={
                       client.featuredImage.node.imageFile.childImageSharp.fixed
                     }
@@ -75,7 +75,7 @@ export default ({ lang, ...otherProps }) => {
                   <img
                     src={client.featuredImage.node.sourceUrl}
                     alt={client.title}
-                    tw="relative max-width[220px] w-full h-64"
+                    tw="relative max-w-[220px] w-full h-64"
                   />
                 ))}
             </ClientLink>

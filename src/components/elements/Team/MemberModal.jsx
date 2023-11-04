@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useRef } from "react";
-import tw, { styled, css } from "twin.macro";
-import parse from "html-react-parser";
-import Img from "gatsby-image";
+import React, { useEffect, useState, useRef } from 'react';
+import tw, { styled, css } from 'twin.macro';
+import parse from 'html-react-parser';
+import Img from 'gatsby-image';
 
 const Wrapper = styled.div(({ isOpen }) => [
   tw`fixed z-index[9990] top-0 lg:bottom-0 right-0 left-0 w-screen h-screen transform translate-y-3 invisible opacity-0 bg-white`,
@@ -37,7 +37,7 @@ const CloseButton = styled.button`
   height: 50px;
   opacity: 0.8;
 `;
-const ModalImageContainer = tw.div`relative w-full h-1/2 min-height[400px] md:min-height[400px] overflow-hidden lg:w-2/5 lg:h-full xl:w-1/2`;
+const ModalImageContainer = tw.div`relative w-full h-1/2 min-h-[400px] md:min-h-[400px] overflow-hidden lg:w-2/5 lg:h-full xl:w-1/2`;
 const ModalImage = tw(Img)`absolute! w-full! -top-40 lg:-top-10 right-0 left-0`;
 const ModalContentContainer = styled.div`
   ${tw`relative w-full h-auto lg:h-screen flex items-start justify-center overflow-y-scroll px-3 md:px-10 lg:w-3/5 xl:(w-1/2 justify-start px-24)`}
@@ -59,7 +59,7 @@ const ModalContentContainer = styled.div`
   }
 `;
 const ModalScrollContainer = styled.div`
-  ${tw`max-width[500px] w-full h-auto min-height[400px] lg:h-full pt-8 pb-16 md:pt-16 lg:pt-40 lg:overflow-y-scroll scrollbar-color[transparent] scrollbar-width[0]`}
+  ${tw`max-w-[500px] w-full h-auto min-h-[400px] lg:h-full pt-8 pb-16 md:pt-16 lg:pt-40 lg:overflow-y-scroll scrollbar-color[transparent] scrollbar-width[0]`}
 
   ::-webkit-scrollbar {
     width: 0;
@@ -121,7 +121,7 @@ export const MemberModal = ({ isOpen, setModalIsOpen, activeMember }) => {
                     alt={
                       activeMember.featuredImage.node.altText
                         ? activeMember.featuredImage.node.altText
-                        : "WAU team member"
+                        : 'WAU team member'
                     }
                   />
                 ) : (

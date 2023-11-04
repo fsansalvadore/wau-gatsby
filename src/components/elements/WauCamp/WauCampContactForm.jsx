@@ -1,9 +1,9 @@
-import React from "react";
-import { Link } from "gatsby";
-import { Input, Checkbox } from "antd";
-import styled from "styled-components";
-import { motion } from "framer-motion";
-import tw from "twin.macro";
+import React from 'react';
+import { Link } from 'gatsby';
+import { Input, Checkbox } from 'antd';
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
+import tw from 'twin.macro';
 
 const { TextArea } = Input;
 
@@ -24,7 +24,7 @@ const WauCampContactFormContainer = styled.div`
   }
 
   form {
-    ${tw`lg:(grid grid-cols-2 column-gap[1rem])`}
+    ${tw`lg:(grid grid-cols-2 gap-x-[1rem])`}
   }
 
   textarea {
@@ -137,22 +137,22 @@ const WauCampContactFormContainer = styled.div`
 
 const encode = (data) => {
   return Object.keys(data)
-    .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-    .join("&");
+    .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+    .join('&');
 };
 
 class WauCampContactForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      nome: "",
-      cognome: "",
-      email: "",
-      nascita: "",
-      messaggio: "",
-      btn: props.lang === "it" ? "Invia" : "Send",
-      feedback: "",
-      error: "",
+      nome: '',
+      cognome: '',
+      email: '',
+      nascita: '',
+      messaggio: '',
+      btn: props.lang === 'it' ? 'Invia' : 'Send',
+      feedback: '',
+      error: '',
       loading: false,
       lang: props.lang,
     };
@@ -168,24 +168,24 @@ class WauCampContactForm extends React.Component {
       }
     });
     this.setState({ loading: true });
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({ "form-name": "waucamp", ...this.state }),
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: encode({ 'form-name': 'waucamp', ...this.state }),
     })
       .then(() => {
         this.setState({
-          feedback: "Messaggio inviato",
+          feedback: 'Messaggio inviato',
           loading: false,
-          nome: "",
-          cognome: "",
-          nascita: "",
-          messaggio: "",
-          email: "",
+          nome: '',
+          cognome: '',
+          nascita: '',
+          messaggio: '',
+          email: '',
         });
         setTimeout(() => {
           this.setState({
-            feedback: "",
+            feedback: '',
           });
         }, 3000);
       })
@@ -227,7 +227,7 @@ class WauCampContactForm extends React.Component {
               <input type="hidden" name="form-name" value="waucamp" />
               <Input
                 placeholder={
-                  this.props.lang === "it" ? "Nome *" : "First Name *"
+                  this.props.lang === 'it' ? 'Nome *' : 'First Name *'
                 }
                 type="text"
                 label="Nome"
@@ -238,7 +238,7 @@ class WauCampContactForm extends React.Component {
               />
               <Input
                 placeholder={
-                  this.props.lang === "it" ? "Cognome *" : "Last Name *"
+                  this.props.lang === 'it' ? 'Cognome *' : 'Last Name *'
                 }
                 type="text"
                 label="Cognome"
@@ -258,7 +258,7 @@ class WauCampContactForm extends React.Component {
               />
               <Input
                 placeholder={
-                  this.props.lang === "it" ? "Data di nascita *" : "Birthdate *"
+                  this.props.lang === 'it' ? 'Data di nascita *' : 'Birthdate *'
                 }
                 type="text"
                 label="Data di nascita"
@@ -268,7 +268,7 @@ class WauCampContactForm extends React.Component {
               />
               <TextArea
                 placeholder={
-                  this.props.lang === "it" ? "Messaggio *" : "Message *"
+                  this.props.lang === 'it' ? 'Messaggio *' : 'Message *'
                 }
                 label="Messaggio"
                 name="messaggio"
@@ -288,9 +288,9 @@ class WauCampContactForm extends React.Component {
                       name="privacy-check"
                       onChange={this.handleChange}
                       required
-                      inputProps={{ "aria-label": "Checkbox A" }}
+                      inputProps={{ 'aria-label': 'Checkbox A' }}
                     >
-                      {this.props.lang === "it" ? (
+                      {this.props.lang === 'it' ? (
                         <p>
                           Ho letto e accettato l’
                           <Link to="/privacy-policy">
@@ -300,7 +300,7 @@ class WauCampContactForm extends React.Component {
                         </p>
                       ) : (
                         <p>
-                          I read and accepted the{" "}
+                          I read and accepted the{' '}
                           <Link to="/privacy">Privacy Policy</Link>.*
                         </p>
                       )}
@@ -317,7 +317,7 @@ class WauCampContactForm extends React.Component {
                   >
                     {
                       // check if loading or success
-                      loading ? "loading" : btn
+                      loading ? 'loading' : btn
                     }
                   </button>
                 </div>
@@ -348,7 +348,7 @@ const FormErrorComponent = styled.div`
 
   * {
     font-weight: 800;
-    font-family: "ff-real-text-pro", sans-serif !important;
+    font-family: 'ff-real-text-pro', sans-serif !important;
     font-size: 1rem !important;
     letter-spacing: -0.01rem !important;
   }

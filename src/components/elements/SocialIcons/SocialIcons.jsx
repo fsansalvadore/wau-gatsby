@@ -1,7 +1,7 @@
-import React, { useRef, useEffect } from "react";
-import styled from "styled-components";
-import tw, { css } from "twin.macro";
-import SocialIcon from "./SocialIcon";
+import React, { useRef, useEffect } from 'react';
+import styled from 'styled-components';
+import tw, { css } from 'twin.macro';
+import SocialIcon from './SocialIcon';
 
 const SocialIconsContainer = styled.div((isDark, hasGrid) => [
   css`
@@ -18,7 +18,7 @@ const SocialIconsContainer = styled.div((isDark, hasGrid) => [
     ${({ $hasGrid }) =>
       $hasGrid &&
       css`
-        ${tw`md:(grid grid-cols-3 grid-auto-columns[min-content] max-width[145px])`}
+        ${tw`md:(grid grid-cols-3 auto-cols-min max-w-[145px])`}
       `}
   `,
 ]);
@@ -27,19 +27,19 @@ const SocialIcons = ({ menu, isDark, haveSpacing, hasGrid }) => {
   const socialIconsRef = useRef(null);
 
   useEffect(() => {
-    const links = socialIconsRef.current.querySelectorAll("a");
+    const links = socialIconsRef.current.querySelectorAll('a');
 
     links.forEach((link) => {
-      link.addEventListener("mouseover", () => {
+      link.addEventListener('mouseover', () => {
         socialIconsRef.current
-          .querySelectorAll("a")
-          .forEach((l) => (l.style.opacity = "0.5"));
-        link.style.opacity = "1";
+          .querySelectorAll('a')
+          .forEach((l) => (l.style.opacity = '0.5'));
+        link.style.opacity = '1';
       });
-      link.addEventListener("mouseout", () => {
+      link.addEventListener('mouseout', () => {
         socialIconsRef.current
-          .querySelectorAll("a")
-          .forEach((l) => (l.style.opacity = "1"));
+          .querySelectorAll('a')
+          .forEach((l) => (l.style.opacity = '1'));
       });
     });
   }, [socialIconsRef]);

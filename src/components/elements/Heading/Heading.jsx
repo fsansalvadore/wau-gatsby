@@ -1,12 +1,12 @@
-import styled from "styled-components";
-import tw from "twin.macro";
+import styled from 'styled-components';
+import tw from 'twin.macro';
 
 const Heading = styled.div`
   width: 100%;
   ${tw`px-4 sm:px-8 py-8 pt-28 md:p-16 md:pt-40`}
 
   h1 {
-    ${tw`text-3xl letter-spacing[-0.05rem] md:(text-5xl letter-spacing[-0.01rem])`}
+    ${tw`text-3xl tracking-[-0.05rem] md:(text-5xl tracking-[-0.01rem])`}
   }
 
   .breadcrumbs,
@@ -15,7 +15,7 @@ const Heading = styled.div`
   }
 
   .intro {
-    ${tw`text-xl letter-spacing[-0.02rem] md:(letter-spacing[-0.01rem])`}
+    ${tw`text-xl tracking-[-0.02rem] md:(tracking-[-0.01rem])`}
 
     > p {
       ${tw`mb-4`}

@@ -1,11 +1,11 @@
-import React, { useEffect, useRef } from "react";
-import styled from "styled-components";
-import tw, { css } from "twin.macro";
-import parse from "html-react-parser";
-import { motion } from "framer-motion";
-import { gsap, Power1 } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Button from "./Button";
+import React, { useEffect, useRef } from 'react';
+import styled from 'styled-components';
+import tw, { css } from 'twin.macro';
+import parse from 'html-react-parser';
+import { motion } from 'framer-motion';
+import { gsap, Power1 } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Button from './Button';
 
 // eslint-disable-next-line import/no-default-export
 export default ({
@@ -31,12 +31,12 @@ export default ({
       // const title     = sectionRef.current.querySelector(".st-title h5")
       // const content   = sectionRef.current.querySelector(".st-content p")
       // const link      = sectionRef.current.querySelector(".st-link > div")
-      const items = sectionRef.current.querySelectorAll(".st-anim > *");
+      const items = sectionRef.current.querySelectorAll('.st-anim > *');
 
       const sectionTextTL = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 80%",
+          start: 'top 80%',
         },
       });
 
@@ -48,7 +48,7 @@ export default ({
       sectionTextTL.fromTo(
         [items],
         {
-          y: "170%",
+          y: '170%',
           // skewY: 4,
           opacity: 0,
         },
@@ -57,7 +57,7 @@ export default ({
           skewY: 0,
           opacity: 1,
           ease: Power1.easeOut,
-          y: "0",
+          y: '0',
           stagger: 0.1,
         },
         sectionRef.current
@@ -92,7 +92,7 @@ export default ({
       {link && (
         <div className="st-link st-anim" tw="py-8">
           <div>
-            <Button to={link || "#"}>{cta ? cta : "Scopri di più"}</Button>
+            <Button to={link || '#'}>{cta ? cta : 'Scopri di più'}</Button>
           </div>
         </div>
       )}
@@ -111,7 +111,7 @@ const StyledContactsTextBlock = styled(motion.div)(
 
       .st-title {
         > * {
-          ${tw`text-3xl line-height[110%] letter-spacing[-0.02rem] mb-8 w-full lg:(text-5xl line-height[115%] w-3/4)`}
+          ${tw`text-3xl leading-[110%] tracking-[-0.02rem] mb-8 w-full lg:(text-5xl leading-[115%] w-3/4)`}
         }
       }
     `,
