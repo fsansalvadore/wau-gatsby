@@ -1,26 +1,26 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import tw, { css } from "twin.macro";
-import { Collapse } from "antd";
-import { Link } from "gatsby";
-import Button from "./Button";
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import tw, { css } from 'twin.macro';
+import { Collapse } from 'antd';
+import { Link } from 'gatsby';
+import Button from './Button';
 
 const { Panel } = Collapse;
 
 // eslint-disable-next-line import/no-default-export
 export default ({ list = [], ...otherProps }) => {
   let location;
-  const [lang, setLang] = useState("it");
+  const [lang, setLang] = useState('it');
 
   useEffect(() => {
     if (typeof window !== `undefined`) {
       location = window.location.href;
       if (
-        location.includes("00/en") ||
-        location.includes("app/en") ||
-        location.includes("com/en")
+        location.includes('00/en') ||
+        location.includes('app/en') ||
+        location.includes('com/en')
       ) {
-        setLang("en");
+        setLang('en');
       }
     }
   }, [lang]);
@@ -34,19 +34,19 @@ export default ({ list = [], ...otherProps }) => {
               header={item.title}
               key={index}
               // showArrow={false}
-              tw="border-0 border-t border-solid border-white border-opacity-20 py-4 text-2xl md:text-3xl font-bold cursor-pointer opacity-60 hover:opacity-100"
+              tw="!border-0 !border-t !rounded-none last:!border-b !border-solid !border-white !border-opacity-20 !py-4 !text-2xl md:!text-3xl !font-bold !cursor-pointer !opacity-60 hover:!opacity-100"
             >
-              <div tw="py-4 text-lg">
+              <div tw="!py-4 !text-lg">
                 <p tw="mb-8">{item.expertiseACF.anteprima}</p>
                 <Button
                   as={Link}
                   to={
-                    lang === "it"
+                    lang === 'it'
                       ? `/expertise/${item.slug}`
                       : `/en/expertise/${item.slug}`
                   }
                 >
-                  {lang === "it" ? "Approfondisci" : "Explore"}
+                  {lang === 'it' ? 'Approfondisci' : 'Explore'}
                 </Button>
               </div>
             </Panel>
@@ -59,50 +59,64 @@ export default ({ list = [], ...otherProps }) => {
 
 const StyledAccordion = styled.div(() => [
   css`
-    ${tw``}
+    ${tw`!border-none`}
     * {
       outline: none !important;
       box-shadow: none !important;
     }
 
-    .ant-collapse-header {
-      position: relative !important;
-      ${tw`pr-6`}
+    .ant-collapse {
+      font-family: 'Montserrat', Helvetica, sans-serif;
+      ${tw`border-none bg-transparent text-white`}
     }
-    .ant-collapse-item:last-of-type {
-      ${tw`border-b`}
+    .ant-collapse-content {
+      ${tw`!bg-transparent text-white !border-none`}
     }
 
-    .anticon {
-      position: absolute !important;
-      right: 0 !important;
+    .ant-collapse-header {
+      position: relative !important;
+      ${tw`!p-0 flex-row-reverse !items-center !text-white`}
     }
+    .ant-collapse-header-text {
+      ${tw`text-white`}
+    }
+
+    .ant-collapse-content-box {
+      ${tw`!p-0 !border-none`}
+    }
+
     // Antd accordion css
     .ant-motion-collapse-legacy {
       overflow: hidden;
     }
     .ant-motion-collapse-legacy-active {
-      -webkit-transition: height 0.2s cubic-bezier(0.645, 0.045, 0.355, 1),
+      -webkit-transition:
+        height 0.2s cubic-bezier(0.645, 0.045, 0.355, 1),
         opacity 0.2s cubic-bezier(0.645, 0.045, 0.355, 1) !important;
-      transition: height 0.2s cubic-bezier(0.645, 0.045, 0.355, 1),
+      transition:
+        height 0.2s cubic-bezier(0.645, 0.045, 0.355, 1),
         opacity 0.2s cubic-bezier(0.645, 0.045, 0.355, 1) !important;
     }
     .ant-motion-collapse {
       overflow: hidden;
-      -webkit-transition: height 0.2s cubic-bezier(0.645, 0.045, 0.355, 1),
+      -webkit-transition:
+        height 0.2s cubic-bezier(0.645, 0.045, 0.355, 1),
         opacity 0.2s cubic-bezier(0.645, 0.045, 0.355, 1) !important;
-      transition: height 0.2s cubic-bezier(0.645, 0.045, 0.355, 1),
+      transition:
+        height 0.2s cubic-bezier(0.645, 0.045, 0.355, 1),
         opacity 0.2s cubic-bezier(0.645, 0.045, 0.355, 1) !important;
     }
     .ant-alert.ant-alert-motion-leave {
       overflow: hidden;
       opacity: 1;
-      -webkit-transition: max-height 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86),
+      -webkit-transition:
+        max-height 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86),
         opacity 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86),
         padding-top 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86),
         padding-bottom 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86),
         margin-bottom 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
-      transition: max-height 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86),
+      transition:
+        max-height 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86),
         opacity 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86),
         padding-top 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86),
         padding-bottom 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86),
@@ -120,7 +134,9 @@ const StyledAccordion = styled.div(() => [
       -webkit-transition: -webkit-transform 0.3s;
       transition: -webkit-transform 0.3s;
       transition: transform 0.3s;
-      transition: transform 0.3s, -webkit-transform 0.3s;
+      transition:
+        transform 0.3s,
+        -webkit-transform 0.3s;
     }
     .ant-collapse-content-hidden {
       display: none;
