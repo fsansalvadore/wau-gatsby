@@ -141,7 +141,7 @@ const NavContent = ({ lang, isOpen, toggleMenu, isMenuLight }) => {
             </WCampLink>
           </div>
         )}
-        <MenuBtn as="a" onClick={() => toggleMenu(!isOpen)} isOpen={isOpen}>
+        <MenuBtn as="a" onClick={() => toggleMenu(!isOpen)}>
           <motion.span
             className="menu-icon"
             variants={openBtnVariant}

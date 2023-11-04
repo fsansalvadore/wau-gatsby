@@ -404,7 +404,7 @@ exports.createPages = async ({ actions, graphql, gatsbyUtilities }) => {
       });
     });
 
-  // create ita projects pages
+  // create eng projects pages
   data.allWpProject.nodes
     .filter((p) => p.language.code === "EN")
     .forEach((project) => {
@@ -446,7 +446,7 @@ exports.createPages = async ({ actions, graphql, gatsbyUtilities }) => {
       });
     });
 
-  // create ita expertises pages
+  // create eng expertises pages
   data.allWpExpertise.nodes
     .filter((e) => e.language.code === "EN")
     .forEach((expertise) => {
@@ -486,7 +486,7 @@ exports.createPages = async ({ actions, graphql, gatsbyUtilities }) => {
       });
     });
 
-  // create ita articles pages
+  // create eng articles pages
   data.allWpArticle.nodes
     .filter((a) => a.language.code === "EN")
     .forEach((article) => {
