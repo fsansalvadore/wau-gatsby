@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "gatsby";
-import Select from "react-select";
-import { Helmet } from "react-helmet";
-import Layout from "../../LayoutComponent";
-import "twin.macro";
-import Heading from "../../elements/Heading/Heading";
-import HeadingIntroHalf from "../../elements/Heading/HeadingIntroHalf";
-import ProjectPreviewCard from "../../elements/Projects/ProjectPreviewCard/ProjectPreviewCard";
-import FilterForm from "../Forms/FilterForm";
+import React, { useEffect, useState } from 'react';
+import { Link } from 'gatsby';
+import Select from 'react-select';
+import { Helmet } from 'react-helmet';
+import Layout from '../../LayoutComponent';
+import 'twin.macro';
+import Heading from '../../elements/Heading/Heading';
+import HeadingIntroHalf from '../../elements/Heading/HeadingIntroHalf';
+import ProjectPreviewCard from '../../elements/Projects/ProjectPreviewCard/ProjectPreviewCard';
+import FilterForm from '../Forms/FilterForm';
 
 const SelectStyles = {
   option: (provided, state) => ({
     ...provided,
-    backgroundColor: state.isFocused ? "#eee" : "transparent",
-    color: "#111",
+    backgroundColor: state.isFocused ? '#eee' : 'transparent',
+    color: '#111',
   }),
   control: (provided) => ({
     ...provided,
@@ -21,24 +21,24 @@ const SelectStyles = {
   }),
   container: (provided, state) => ({
     ...provided,
-    width: "100%",
+    width: '100%',
     maxWidth: 400,
-    border: state.isFocused ? "transparent" : "transparent",
+    border: state.isFocused ? 'transparent' : 'transparent',
   }),
   indicatorSeparator: () => ({
-    display: "none",
+    display: 'none',
   }),
 };
 
 const ProjectsPageLayout = ({ data, lang }) => {
   const [projects, setProjects] = useState(null);
-  const [term, setTerm] = useState("");
+  const [term, setTerm] = useState('');
   const [page, setPage] = useState(null);
 
   useEffect(() => {
-    if (!!data && !!data.wordpress.projects) {
+    if (!!data && !!data.projects) {
       setProjects(
-        data.wordpress.projects.nodes
+        data.projects.nodes
           .filter(
             (item) =>
               item.title.toLowerCase().includes(term.toLowerCase()) ||
@@ -76,18 +76,18 @@ const ProjectsPageLayout = ({ data, lang }) => {
 
   useEffect(() => {
     if (!!data) {
-      setPage(data.wordpress.pages.nodes[0]);
+      setPage(data.pages.nodes[0]);
     }
   }, [data]);
 
   const AllProjects = {
-    value: "",
-    label: lang === "it" ? "Tutti i progetti" : "All projects",
+    value: '',
+    label: lang === 'it' ? 'Tutti i progetti' : 'All projects',
   };
   const tags = [];
 
-  if (data.wordpress.projects.nodes) {
-    data.wordpress.projects.nodes.map((node) => {
+  if (data.projects.nodes) {
+    data.projects.nodes.map((node) => {
       if (node.tags.nodes) {
         node.tags.nodes.map((tag) => {
           if (!tags.includes(tag.name)) {
@@ -102,14 +102,14 @@ const ProjectsPageLayout = ({ data, lang }) => {
     <Layout>
       <Helmet>
         <title>
-          {lang === "it"
+          {lang === 'it'
             ? `${page && page.title} • WAU Architetti`
             : `${page && page.title} • WAU Architects`}
         </title>
         <link
           rel="canonical"
           href={
-            lang === "it"
+            lang === 'it'
               ? `https://www.wauarchitetti.com/progetti`
               : `https://www.wauarchitetti.com/en/projects`
           }
@@ -121,7 +121,7 @@ const ProjectsPageLayout = ({ data, lang }) => {
         <meta
           property="og:site_name"
           content={
-            lang === "it"
+            lang === 'it'
               ? `${page && page.title} • WAU Architetti`
               : `${page && page.title} • WAU Architects`
           }
@@ -130,7 +130,7 @@ const ProjectsPageLayout = ({ data, lang }) => {
         <meta
           property="og:url"
           content={
-            lang === "it"
+            lang === 'it'
               ? `https://www.wauarchitetti.com/progetti`
               : `https://www.wauarchitetti.com/en/projects`
           }
@@ -138,7 +138,7 @@ const ProjectsPageLayout = ({ data, lang }) => {
         <meta
           property="og:title"
           content={
-            lang === "it"
+            lang === 'it'
               ? `${page && page.title} • WAU Architetti`
               : `${page && page.title} • WAU Architects`
           }
@@ -151,7 +151,7 @@ const ProjectsPageLayout = ({ data, lang }) => {
         <meta
           name="twitter:site"
           content={
-            lang === "it"
+            lang === 'it'
               ? `https://www.wauarchitetti.com/progetti`
               : `https://www.wauarchitetti.com/en/projects`
           }
@@ -159,7 +159,7 @@ const ProjectsPageLayout = ({ data, lang }) => {
         <meta
           name="twitter:title"
           content={
-            lang === "it"
+            lang === 'it'
               ? `${page && page.title} • WAU Architetti`
               : `${page && page.title} • WAU Architects`
           }
@@ -172,8 +172,8 @@ const ProjectsPageLayout = ({ data, lang }) => {
       <div>
         <Heading>
           <HeadingIntroHalf
-            breadcrumb={page ? page.title : "Projects"}
-            heading={page ? page.pagesACF.title : ""}
+            breadcrumb={page ? page.title : 'Projects'}
+            heading={page ? page.pagesACF.title : ''}
           />
           <FilterForm>
             {!!tags.length && (
@@ -184,7 +184,7 @@ const ProjectsPageLayout = ({ data, lang }) => {
                 }}
                 defaultValue={AllProjects}
                 placeholder={
-                  lang === "it" ? "Cerca progetti" : "Search projects"
+                  lang === 'it' ? 'Cerca progetti' : 'Search projects'
                 }
                 indicator={false}
                 styles={SelectStyles}
@@ -198,7 +198,7 @@ const ProjectsPageLayout = ({ data, lang }) => {
           </FilterForm>
         </Heading>
         <ul className="proj_content" tw="grid grid-cols-1 md:grid-cols-2 m-0">
-          {/* {!!projects && projects.length > 0 ? (
+          {!!projects && projects.length > 0 ? (
             projects.map((proj) => (
               <li
                 key={`${proj.id}-${proj.slug}-${Math.floor(
@@ -211,10 +211,10 @@ const ProjectsPageLayout = ({ data, lang }) => {
                   title={proj.title}
                   featuredImage={proj.featuredImage}
                   imgSrc={
-                    proj.featuredImage ? proj.featuredImage.node.link : ""
+                    proj.featuredImage ? proj.featuredImage.node.link : ''
                   }
                   imgAlt={
-                    proj.featuredImage ? proj.featuredImage.node.altText : ""
+                    proj.featuredImage ? proj.featuredImage.node.altText : ''
                   }
                   projectdate={
                     proj.ProjectAFC.projectdate
@@ -236,7 +236,7 @@ const ProjectsPageLayout = ({ data, lang }) => {
                 </div>
               </Link>
             </li>
-          )} */}
+          )}
         </ul>
       </div>
     </Layout>

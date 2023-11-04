@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
-import tw, { css } from "twin.macro";
-import { motion } from "framer-motion";
-import styled from "styled-components";
-import LazyLoad from "react-lazyload";
-import Img from "gatsby-image";
+import React, { useState } from 'react';
+import tw, { css } from 'twin.macro';
+import { motion } from 'framer-motion';
+import styled from 'styled-components';
+import LazyLoad from 'react-lazyload';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 // import parse from "html-react-parser";
-import Button from "../Atoms/Button";
+import Button from '../Atoms/Button';
 import {
   transition,
   teamMemberFilterVariants,
   teamMemberContentVariants,
   teamMemberDescriptionVariants,
-} from "../../../helpers/framer-defaults";
+} from '../../../helpers/framer-defaults';
 
 const ButtonWrapper = tw.div`mt-10 z-10`;
 
@@ -75,6 +75,8 @@ const TeamMemberCard = ({
     }
   };
 
+  const featuredImg = getImage(featuredImage.node.gatsbyImage);
+
   return (
     <LazyLoad height={500}>
       <StyledTeamMemberCard
@@ -90,14 +92,14 @@ const TeamMemberCard = ({
         <div tw="w-full relative" className="team-card-container">
           <motion.div
             variants={teamMemberContentVariants}
-            animate={isHovered ? "hovered" : "hidden"}
-            initial={"hidden"}
+            animate={isHovered ? 'hovered' : 'hidden'}
+            initial={'hidden'}
             className="preview-card-info-container"
             tw="absolute w-full h-full bottom-0 py-4 px-4 md:py-8 md:px-8 z-20"
           >
             <div tw="overflow-hidden pt-1 mb-px">
               <motion.h2 tw="pb-2">
-                {title ? title : "Missing member name"}
+                {title ? title : 'Missing member name'}
               </motion.h2>
             </div>
             {afc && afc.ruolo && (
@@ -106,13 +108,13 @@ const TeamMemberCard = ({
               </div>
             )}
             <ButtonWrapper>
-              <Button>{lang === "it" ? "Leggi di più" : "Read more"}</Button>
+              <Button>{lang === 'it' ? 'Leggi di più' : 'Read more'}</Button>
             </ButtonWrapper>
             {afc && afc.email && (
               <motion.div
                 tw="absolute bottom-4 mb-4 hidden md:block text-sm"
                 variants={teamMemberDescriptionVariants}
-                animate={isHovered ? "hovered" : "hidden"}
+                animate={isHovered ? 'hovered' : 'hidden'}
                 initial="hidden"
               >
                 <a href={`mailto:${afc.email}`}>{afc.email}</a>
@@ -121,24 +123,33 @@ const TeamMemberCard = ({
           </motion.div>
           <motion.div
             variants={teamMemberFilterVariants}
-            animate={isHovered ? "hovered" : "hidden"}
-            initial={"hidden"}
+            animate={isHovered ? 'hovered' : 'hidden'}
+            initial={'hidden'}
             transition={{ ...transition, duration: 1 }}
             tw="absolute w-full h-full left-0 top-0 right-0 bottom-0 z-10"
             className="team-card-filter"
           />
           <div tw="absolute w-full h-full top-0 right-0 bottom-0 left-0 z-0">
             {featuredImage ? (
-              <Img
-                fixed={featuredImage.node.imageFile.childImageSharp.fixed}
+              <GatsbyImage
+                image={featuredImg}
                 tw="absolute w-full h-full top-0 right-0 bottom-0 left-0"
                 alt={
                   featuredImage.node.altText
                     ? featuredImage.node.altText
-                    : "WAU team member"
+                    : 'WAU team member'
                 }
               />
             ) : (
+              // <Img
+              //   src={featuredImage.node.sourceUrl}
+              //   tw="absolute w-full h-full top-0 right-0 bottom-0 left-0"
+              //   alt={
+              //     featuredImage.node.altText
+              //       ? featuredImage.node.altText
+              //       : 'WAU team member'
+              //   }
+              // />
               <img
                 tw="absolute w-full h-full top-0 right-0 bottom-0 left-0"
                 src=""

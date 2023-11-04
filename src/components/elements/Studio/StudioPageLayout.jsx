@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { Helmet } from "react-helmet";
-import "twin.macro";
-import Img from "gatsby-image";
-import parse from "html-react-parser";
-import { motion } from "framer-motion";
-import Layout from "../../LayoutComponent";
-import Heading from "../Heading/Heading";
-import HeadingIntroHalf from "../Heading/HeadingIntroHalf";
-import GridMaxWidthContainer from "../Atoms/GridMaxWidthContainer";
-import { transition } from "../../../helpers/framer-defaults";
-import SectionTextBlock from "../Atoms/SectionTextBlock";
-import ValueCircle from "./ValueCircle";
-import StyledStudioPage from "./StyledStudioPage";
+import React, { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet';
+import 'twin.macro';
+import Img from 'gatsby-image';
+import parse from 'html-react-parser';
+import { motion } from 'framer-motion';
+import Layout from '../../LayoutComponent';
+import Heading from '../Heading/Heading';
+import HeadingIntroHalf from '../Heading/HeadingIntroHalf';
+import GridMaxWidthContainer from '../Atoms/GridMaxWidthContainer';
+import { transition } from '../../../helpers/framer-defaults';
+import SectionTextBlock from '../Atoms/SectionTextBlock';
+import ValueCircle from './ValueCircle';
+import StyledStudioPage from './StyledStudioPage';
 
 const StudioPageLayout = ({ data }) => {
   const [studio, setStudio] = useState(null);
@@ -20,32 +20,29 @@ const StudioPageLayout = ({ data }) => {
 
   useEffect(() => {
     if (data) {
-      setStudio(data.wordpress.pages.nodes[0]);
+      setStudio(data.pages.nodes[0]);
     }
-    if (data && data.wordpress.pages.nodes[0].studioACF.valuesSection.values) {
+    if (data && data.pages.nodes[0].studioACF.valuesSection.values) {
       setValues([
         {
           title:
-            data.wordpress.pages.nodes[0].studioACF.valuesSection.values.value1
-              .title,
+            data.pages.nodes[0].studioACF.valuesSection.values.value1.title,
           description:
-            data.wordpress.pages.nodes[0].studioACF.valuesSection.values.value1
+            data.pages.nodes[0].studioACF.valuesSection.values.value1
               .description,
         },
         {
           title:
-            data.wordpress.pages.nodes[0].studioACF.valuesSection.values.value2
-              .title,
+            data.pages.nodes[0].studioACF.valuesSection.values.value2.title,
           description:
-            data.wordpress.pages.nodes[0].studioACF.valuesSection.values.value2
+            data.pages.nodes[0].studioACF.valuesSection.values.value2
               .description,
         },
         {
           title:
-            data.wordpress.pages.nodes[0].studioACF.valuesSection.values.value3
-              .title,
+            data.pages.nodes[0].studioACF.valuesSection.values.value3.title,
           description:
-            data.wordpress.pages.nodes[0].studioACF.valuesSection.values.value3
+            data.pages.nodes[0].studioACF.valuesSection.values.value3
               .description,
         },
       ]);
@@ -70,10 +67,10 @@ const StudioPageLayout = ({ data }) => {
 
   useEffect(() => {
     if (typeof window !== `undefined`) {
-      const items = document.querySelectorAll(".value-items li");
+      const items = document.querySelectorAll('.value-items li');
       items.forEach((item) => {
         if (item.dataset.counter === counter) {
-          item.querySelector("div").classList.add("active");
+          item.querySelector('div').classList.add('active');
         }
       });
     }
@@ -82,14 +79,14 @@ const StudioPageLayout = ({ data }) => {
   return (
     <Layout>
       <Helmet>
-        <title>WAU Architetti • {studio ? `${studio.title}` : "Studio"}</title>
+        <title>WAU Architetti • {studio ? `${studio.title}` : 'Studio'}</title>
       </Helmet>
       <StyledStudioPage>
         <Heading>
           <HeadingIntroHalf
-            breadcrumb={studio ? studio.title : "Studio"}
-            heading={studio ? studio.pagesACF.title : ""}
-            subheading={studio ? studio.pagesACF.introduzione : ""}
+            breadcrumb={studio ? studio.title : 'Studio'}
+            heading={studio ? studio.pagesACF.title : ''}
+            subheading={studio ? studio.pagesACF.introduzione : ''}
           />
         </Heading>
         <div className="studio-content" tw="w-full flex justify-center">

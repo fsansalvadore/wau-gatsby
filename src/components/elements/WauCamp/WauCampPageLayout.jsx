@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { Helmet } from "react-helmet";
-import "twin.macro";
-import parse from "html-react-parser";
-import Layout from "../../LayoutComponent";
-import Heading from "../Heading/Heading";
-import ImageWrapper from "../Atoms/ImageWrapper";
-import GridMaxWidthContainer from "../Atoms/GridMaxWidthContainer";
-import Button from "../Atoms/Button";
-import StyledWAUCampPage from "./WauCampPageLayout.styled";
-import WauCampContactForm from "./WauCampContactForm";
-import WauCampSlider from "./WauCampSlider";
+import React, { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet';
+import 'twin.macro';
+import parse from 'html-react-parser';
+import Layout from '../../LayoutComponent';
+import Heading from '../Heading/Heading';
+import ImageWrapper from '../Atoms/ImageWrapper';
+import GridMaxWidthContainer from '../Atoms/GridMaxWidthContainer';
+import Button from '../Atoms/Button';
+import StyledWAUCampPage from './WauCampPageLayout.styled';
+import WauCampContactForm from './WauCampContactForm';
+import WauCampSlider from './WauCampSlider';
 
 const WauCampPageLayout = ({ data, lang }) => {
   const [page, setPage] = useState(null);
@@ -17,17 +17,17 @@ const WauCampPageLayout = ({ data, lang }) => {
 
   useEffect(() => {
     if (data) {
-      setPage(data.wordpress.pages.nodes[0]);
+      setPage(data.pages.nodes[0]);
     }
   }, [data, setPage]);
 
   useEffect(() => {
-    if (data.wordpress.pages.nodes[0].waucampACF.caroselloIntro) {
+    if (data.pages.nodes[0]?.waucampACF.caroselloIntro) {
       setSlides([
-        data.wordpress.pages.nodes[0].waucampACF.caroselloIntro.slide1,
-        data.wordpress.pages.nodes[0].waucampACF.caroselloIntro.slide2,
-        data.wordpress.pages.nodes[0].waucampACF.caroselloIntro.slide3,
-        data.wordpress.pages.nodes[0].waucampACF.caroselloIntro.slide4,
+        data.pages.nodes[0]?.waucampACF.caroselloIntro.slide1,
+        data.pages.nodes[0]?.waucampACF.caroselloIntro.slide2,
+        data.pages.nodes[0]?.waucampACF.caroselloIntro.slide3,
+        data.pages.nodes[0]?.waucampACF.caroselloIntro.slide4,
       ]);
     }
   }, [data]);
@@ -35,16 +35,16 @@ const WauCampPageLayout = ({ data, lang }) => {
   return (
     <Layout hasNoContactsCta>
       <Helmet>
-        <title>WAU Architetti • {page ? `${page.title}` : "page"}</title>
+        <title>WAU Architetti • {page ? `${page.title}` : 'page'}</title>
       </Helmet>
       <StyledWAUCampPage>
         <Heading tw="pb-8">
           <div tw="flex w-full flex-col xl:flex-row pb-6">
             <div tw="w-full xl:w-1/3 mb-4">
               <p className="breadcrumbs mono" tw="text-wauGreen">
-                {page ? page.title : "page"}
+                {page ? page.title : 'page'}
               </p>
-              <h1 tw="leading-10 mb-12">{page ? page.pagesACF.title : ""}</h1>
+              <h1 tw="leading-10 mb-12">{page ? page.pagesACF.title : ''}</h1>
               <div tw="mt-12">
                 <Button as="a" href="#contact">
                   Richiedi info

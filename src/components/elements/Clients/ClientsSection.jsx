@@ -4,7 +4,7 @@ import tw, { styled, css } from 'twin.macro';
 import Img from 'gatsby-image';
 
 const ClientLink = styled.a`
-  ${tw`block flex-basis[200px] xl:max-w-[220px] p-4 m-4 flex-1`}
+  ${tw`block basis-[200px] xl:max-w-[220px] p-4 m-4 flex-1`}
 
   ${({ $hasLink }) => !$hasLink && tw`pointer-events-none`}
 `;
@@ -87,7 +87,8 @@ export default ({ lang, ...otherProps }) => {
 
 const StyledClientsSection = styled.section(() => [
   css`
-    ${tw`p-8 py-16 md:py-32 text-center background-image[linear-gradient(#FCFCFC 0%, #fff 20%)]`}
+    ${tw`p-8 py-16 md:py-32 text-center`}
+    background-image: linear-gradient(#FCFCFC 0%, #fff 20%);
 
     .gatsby-image-wrapper,
     img,

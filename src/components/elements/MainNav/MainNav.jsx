@@ -36,15 +36,15 @@ const FixedNavbar = styled(motion.div)(() => [
   `,
 ]);
 
-// const WCampLink = motion.custom(Link);
+const WCampLink = motion(Link);
 
-const WCampLink = styled(Link)`
-  opacity: 0.8;
-  &:hover {
-    cursor: pointer !important;
-    opacity: 1;
-  }
-`;
+// const WCampLink = styled(Link)`
+//   opacity: 0.8;
+//   &:hover {
+//     cursor: pointer !important;
+//     opacity: 1;
+//   }
+// `;
 
 const MenuBtn = styled.button`
   position: relative;
@@ -127,9 +127,9 @@ const NavContent = ({ lang, isOpen, toggleMenu, isMenuLight }) => {
       <Link to={lang === 'en' ? '/en/' : '/'}>
         <Logo isMenuLight={isMenuLight} />
       </Link>
-      <div className="navbar-right flex items-center">
+      <div tw="flex items-center" className="navbar-right">
         {lang === 'it' && (
-          <div className="opacity-80 hover:opacity-100">
+          <div tw="opacity-80 hover:opacity-100">
             <WCampLink
               variants={openBtnVariant}
               animate={!isOpen ? 'show' : 'hidden'}
@@ -141,7 +141,7 @@ const NavContent = ({ lang, isOpen, toggleMenu, isMenuLight }) => {
             </WCampLink>
           </div>
         )}
-        <MenuBtn as="a" onClick={() => toggleMenu(!isOpen)}>
+        <MenuBtn as="a" onClick={() => toggleMenu(!isOpen)} isOpen={isOpen}>
           <motion.span
             className="menu-icon"
             variants={openBtnVariant}
@@ -152,7 +152,7 @@ const NavContent = ({ lang, isOpen, toggleMenu, isMenuLight }) => {
           >
             <span>Menu</span>
           </motion.span>
-          <span className="opacity-0" aria-hidden="true">
+          <span tw="opacity-0" aria-hidden="true">
             Menu
           </span>
           <motion.div

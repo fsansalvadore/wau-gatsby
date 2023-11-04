@@ -10,7 +10,7 @@ import Button from '../Atoms/Button';
 import ClientsSection from '../Clients/ClientsSection';
 
 const ThumbImage = styled.div`
-  ${tw`relative z-0 padding-bottom[60%] w-full bg-cover bg-center opacity-90 hover:opacity-100 transition-opacity`}
+  ${tw`relative z-0 pb-[60%] w-full bg-cover bg-center opacity-90 hover:opacity-100 transition-opacity`}
   ${({ $image }) =>
     !!$image &&
     css`
@@ -52,16 +52,16 @@ const ExpertisePageLayout = ({ data, lang }) => {
   const [expertises, setExpertises] = useState(null);
 
   useEffect(() => {
-    if (data.wordpress.expertises) {
-      setExpertises(data.wordpress.expertises.nodes);
+    if (data.expertises) {
+      setExpertises(data.expertises.nodes);
     }
-  }, [setExpertises, data.wordpress.expertises]);
+  }, [setExpertises, data.expertises]);
 
   useEffect(() => {
-    if (data.wordpress.pages) {
-      setPage(data.wordpress.pages.nodes[0]);
+    if (data.pages) {
+      setPage(data.pages.nodes[0]);
     }
-  }, [setPage, data.wordpress.pages]);
+  }, [setPage, data.pages]);
 
   return (
     <Layout>

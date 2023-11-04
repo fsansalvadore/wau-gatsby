@@ -1,14 +1,14 @@
-import React from "react";
-import tw, { css } from "twin.macro";
-import { Helmet } from "react-helmet";
-import parse from "html-react-parser";
-import styled from "styled-components";
-import Img from "gatsby-image";
-import Layout from "../../LayoutComponent";
-import Heading from "../../elements/Heading/Heading";
-import SocialIcons from "../SocialIcons/SocialIcons";
-import map from "../../../assets/wau-map.jpg";
-import ContactForm from "./Form/ContactForm";
+import React from 'react';
+import tw, { css } from 'twin.macro';
+import { Helmet } from 'react-helmet';
+import parse from 'html-react-parser';
+import styled from 'styled-components';
+import Img from 'gatsby-image';
+import Layout from '../../LayoutComponent';
+import Heading from '../../elements/Heading/Heading';
+import SocialIcons from '../SocialIcons/SocialIcons';
+import map from '../../../assets/wau-map.jpg';
+import ContactForm from './Form/ContactForm';
 
 const StyledContactsPageLayout = styled.div(() => [
   css`
@@ -31,7 +31,7 @@ const ContactsPageLayout = ({ data, socials, lang }) => {
     <Layout hasNoContactsCta>
       <Helmet>
         <title>
-          {data.title ? `${data.title}` : "Contacts"} · WAU Architetti
+          {data.title ? `${data.title}` : 'Contacts'} · WAU Architetti
         </title>
       </Helmet>
       <StyledContactsPageLayout>
@@ -61,12 +61,12 @@ const ContactsPageLayout = ({ data, socials, lang }) => {
                     Math.random() * (100 - 999) + 100
                   )}00`}
                 >
-                  <p tw="text-sm opacity-60">{item[1]["etichetta"]}</p>
+                  <p tw="text-sm opacity-60">{item[1]['etichetta']}</p>
                   <a
                     tw="font-bold text-lg mt-2"
-                    href={`mailto:${item[1]["email"]}`}
+                    href={`mailto:${item[1]['email']}`}
                   >
-                    {item[1]["email"]}
+                    {item[1]['email']}
                   </a>
                 </div>
               ))}
@@ -93,7 +93,7 @@ const ContactsPageLayout = ({ data, socials, lang }) => {
               alt={
                 data.contactsACF.map.mappa.altText
                   ? data.contactsACF.map.mappa.altText
-                  : "WAU location"
+                  : 'WAU location'
               }
             />
           ) : (
@@ -108,7 +108,7 @@ const ContactsPageLayout = ({ data, socials, lang }) => {
               alt={
                 data.contactsACF.map.mappa && data.contactsACF.map.mappa.altText
                   ? data.contactsACF.map.mappa.altText
-                  : "WAU location"
+                  : 'WAU location'
               }
             />
           )}
@@ -136,7 +136,7 @@ const ContactsPageLayout = ({ data, socials, lang }) => {
               type="hidden"
               data-netlify="true"
               data-netlify-honeypot="bot-field"
-              tw="invisible h-0 absolute left[9999]"
+              tw="invisible h-0 absolute left-[9999px]"
             >
               <input type="hidden" name="form-name" value="contatti" />
               <input type="email" name="email" required />

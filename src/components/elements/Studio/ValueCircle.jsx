@@ -17,7 +17,7 @@ export default ({ value, index, counter }) => {
 
 const StyledValueCircle = styled.div(() => [
   css`
-    ${tw`width[30vw] h-[30vw] sm:max-w-[200px] sm:max-h-[200px] md:max-w-[270px] md:max-h-[270px] flex items-center justify-center rounded-full border-2 border-solid border-gray-800 opacity-50 hover:opacity-100 transition-all cursor-pointer`}
+    ${tw`w-[30vw] h-[30vw] sm:max-w-[200px] sm:max-h-[200px] md:max-w-[270px] md:max-h-[270px] flex items-center justify-center rounded-full border-2 border-solid border-gray-800 opacity-50 hover:opacity-100 transition-all cursor-pointer`}
     p {
       ${tw`font-bold! text-10 sm:text-base`}
     }

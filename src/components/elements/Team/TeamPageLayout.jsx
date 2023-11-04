@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { Helmet } from "react-helmet";
-import tw from "twin.macro";
-import Layout from "../../LayoutComponent";
-import Heading from "../../elements/Heading/Heading";
-import HeadingIntroHalf from "../../elements/Heading/HeadingIntroHalf";
-import TeamMemberCard from "../../elements/Team/TeamMemberCard";
-import GridMaxWidthContainer from "../../elements/Atoms/GridMaxWidthContainer";
-import { MemberModal } from "./MemberModal";
+import React, { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet';
+import tw from 'twin.macro';
+import Layout from '../../LayoutComponent';
+import Heading from '../../elements/Heading/Heading';
+import HeadingIntroHalf from '../../elements/Heading/HeadingIntroHalf';
+import TeamMemberCard from '../../elements/Team/TeamMemberCard';
+import GridMaxWidthContainer from '../../elements/Atoms/GridMaxWidthContainer';
+import { MemberModal } from './MemberModal';
 
 const Role = tw.div`text-base`;
 
@@ -20,14 +20,14 @@ const TeamPageLayout = ({ data, lang }) => {
 
   useEffect(() => {
     if (data) {
-      setPage(data.wordpress.pages.nodes[0]);
+      setPage(data.pages.nodes[0]);
     }
   }, [data]);
 
   useEffect(() => {
-    if (data && data.wordpress.team_members) {
+    if (data && data.team_members) {
       setFounders(
-        data.wordpress.team_members.nodes
+        data.team_members.nodes
           .filter((member) => !!member.teamMemberAFC.founder)
           .sort((a, b) =>
             a.date < b.date
@@ -40,7 +40,7 @@ const TeamPageLayout = ({ data, lang }) => {
           )
       );
       setTeamMembers(
-        data.wordpress.team_members.nodes
+        data.team_members.nodes
           .filter((member) => !member.teamMemberAFC.founder)
           .sort((a, b) =>
             a.date < b.date
@@ -53,7 +53,7 @@ const TeamPageLayout = ({ data, lang }) => {
           )
       );
       setCollaborators(
-        data.wordpress.collaborators.nodes.sort((a, b) =>
+        data.collaborators.nodes.sort((a, b) =>
           a.date < b.date
             ? 1
             : a.date === b.date
@@ -71,7 +71,7 @@ const TeamPageLayout = ({ data, lang }) => {
       <Helmet>
         <title>WAU Architetti • Team</title>
       </Helmet>
-      <div tw="background-color[#ffffff]">
+      <div tw="bg-white">
         <MemberModal
           activeMember={activeMember}
           isOpen={modalIsOpen}
@@ -88,7 +88,7 @@ const TeamPageLayout = ({ data, lang }) => {
           <GridMaxWidthContainer tw="my-4 lg:mb-16 lg:mt-0">
             <hr tw="col-span-12 mb-8 lg:mb-16" />
             <h2 tw="col-span-12 text-3xl md:text-5xl">
-              {lang === "it" ? "Soci" : "Founders"}
+              {lang === 'it' ? 'Soci' : 'Founders'}
             </h2>
             <ul
               className="team_content"
@@ -129,7 +129,7 @@ const TeamPageLayout = ({ data, lang }) => {
           <GridMaxWidthContainer tw="my-4 lg:my-8">
             <hr tw="col-span-12 mb-8 lg:mb-16" />
             <h2 tw="col-span-12 text-3xl md:text-5xl">
-              {lang === "it" ? "Team operativo" : "Operations Team"}
+              {lang === 'it' ? 'Team operativo' : 'Operations Team'}
             </h2>
             <ul
               className="team_content"
@@ -173,7 +173,7 @@ const TeamPageLayout = ({ data, lang }) => {
             <GridMaxWidthContainer tw="my-4 lg:mb-8">
               <hr tw="col-span-12 mb-8 lg:mb-16" />
               <h2 tw="col-span-12 md:col-span-4 md:col-start-1 text-3xl md:text-5xl">
-                {lang === "it" ? "Referenti" : "Referents"}
+                {lang === 'it' ? 'Referenti' : 'Referents'}
               </h2>
               <ul tw="col-span-12 md:col-span-5 md:col-start-7 mt-8 md:mt-0">
                 {collaborators.map((collaborator) => (

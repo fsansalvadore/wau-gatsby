@@ -1,3 +1,5 @@
+const path = require(`path`);
+
 /**
  * @type {import('gatsby').GatsbyConfig}
  */
@@ -31,9 +33,19 @@ module.exports = {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'images',
-        path: './src/images/',
+        // path: './src/images/',
+        path: path.join(__dirname, `src`, `images`),
       },
       __key: 'images',
+    },
+    {
+      resolve: 'gatsby-plugin-i18n',
+      options: {
+        langKeyDefault: 'it',
+        langKeyForNull: 'it ',
+        prefixDefault: false,
+        useLangKeyLayout: false,
+      },
     },
     {
       resolve: 'gatsby-plugin-google-analytics',
