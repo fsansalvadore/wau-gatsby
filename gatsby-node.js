@@ -379,7 +379,7 @@ exports.createPages = async ({ actions, graphql, gatsbyUtilities }) => {
     ${query}
   `);
 
-  console.log('data', data);
+  console.log('CREATING PROJECT PAGES =========');
 
   // create ita projects pages
   data.allWpProject.nodes
@@ -423,6 +423,8 @@ exports.createPages = async ({ actions, graphql, gatsbyUtilities }) => {
       });
     });
 
+  console.log('CREATING EXPERTISE PAGES =========');
+
   // create ita expertises pages
   data.allWpExpertise.nodes
     .filter((e) => e.language.code === 'IT')
@@ -464,6 +466,8 @@ exports.createPages = async ({ actions, graphql, gatsbyUtilities }) => {
         },
       });
     });
+
+  console.log('CREATING ARTICLES PAGES =========');
 
   // create ita articles pages
   data.allWpArticle.nodes

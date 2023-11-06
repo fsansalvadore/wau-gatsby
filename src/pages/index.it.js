@@ -105,13 +105,11 @@ const IndexIta = () => {
     }
   `);
 
-  console.log('index data', data);
   const [lang, setLang] = useState('it');
-  let location;
 
   useEffect(() => {
     if (typeof window !== `undefined`) {
-      location = window.location.href;
+      const location = window.location.href;
       if (
         location.includes('00/en') ||
         location.includes('app/en') ||

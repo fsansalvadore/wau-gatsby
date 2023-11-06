@@ -123,7 +123,7 @@ export const IntroCanvas = ({ indexRef }) => {
       camera={{ position: [0, 0, 10], fov: 50 }}
       ref={canvasRef}
     >
-      <SoftShadows />
+      <SoftShadows size={10} />
       {/* lighting can be defined globally */}
       {/* directionalLight can cast shadows */}
       <directionalLight
@@ -140,11 +140,17 @@ export const IntroCanvas = ({ indexRef }) => {
         shadow-camera-bottom={-10}
       />
       {/* poinLight can be positioned as sources of light */}
-      <pointLight position={[-10, 0, 20]} intensity={1} />
-      <pointLight position={[0, -10, 20]} intensity={1} />
+      <pointLight
+        position={[0, 20, 0]}
+        intensity={1000}
+        color="#00ACA9"
+        // castShadow
+      />
+      <pointLight position={[-10, 0, 20]} intensity={10} />
+      <pointLight position={[0, 10, 20]} intensity={10} />
       {/* <pointLight position={[0, 0, 2]} intensity={10} color='#00ACA9' /> */}
       {/* ambient light doesn't cast shadows */}
-      <ambientLight intensity={0.7} color="#00ACA9" />
+      <ambientLight intensity={9} color="#00ACA9" />
 
       {/* Suspence from React to wait for texture loading */}
       <Suspense fallback={null}>
@@ -153,23 +159,22 @@ export const IntroCanvas = ({ indexRef }) => {
 
       {/* plane that receives casted shadow */}
       <group>
-        <animated.mesh
+        <mesh
           // enable receiving shadows
           receiveShadow
           rotation={[-Math.PI / 2, 0, 0]}
           position={[0, -2, 0]}
         >
-          <planeGeometry attach="geometry" args={[100, 100]} />
-
-          <shadowMaterial attach="material" opacity={0.1} />
-        </animated.mesh>
+          <planeGeometry args={[2000, 2000]} />
+          <shadowMaterial opacity={0.1} />
+        </mesh>
       </group>
     </StyledIntroCanvas>
   );
 };
 
 // Sphere in "vision" section
-export const VisionSphere = ({ visionSectionRef, position, url }) => {
+export const VisionSphere = ({ visionSectionRef, position }) => {
   const visionSphereRef = useRef(null);
   const meshRef = useRef(null);
   const [hovered, setHover] = useState(false);
@@ -277,7 +282,7 @@ export const VisionSectionCanvas = ({ visionSectionRef, ...otherProps }) => {
       <pointLight position={[0, -10, 20]} intensity={1} />
       {/* <pointLight position={[0, 0, 2]} intensity={10} color='#00ACA9' /> */}
       {/* ambient light doesn't cast shadows */}
-      <ambientLight intensity={0.7} color="#00ACA9" />
+      <ambientLight intensity={9} color="#00ACA9" />
 
       {/* Suspence from React to wait for texture loading */}
       <Suspense fallback={null}>

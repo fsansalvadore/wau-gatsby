@@ -8,43 +8,66 @@ import GridMaxWidthContainer from './GridMaxWidthContainer';
 
 // eslint-disable-next-line import/no-default-export
 export default ({ lang }) => {
-  // const data = useStaticQuery(graphql`
-  //   query GET_FOOTERMENU_BY_NAME {
-  //     wordpress {
-  //       menus {
-  //         nodes {
-  //           count
-  //           name
-  //           menuItems {
-  //             nodes {
-  //               id
-  //               databaseId
-  //               title
-  //               url
-  //               cssClasses
-  //               description
-  //               label
-  //               linkRelationship
-  //               target
-  //               parentId
-  //               path
-  //             }
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-  // `);
+  const data = useStaticQuery(graphql`
+    query GET_FOOTERMENU_BY_NAME {
+      menus: allWpMenu {
+        nodes {
+          count
+          name
+          menuItems {
+            nodes {
+              id
+              databaseId
+              title
+              url
+              cssClasses
+              description
+              label
+              linkRelationship
+              target
+              parentId
+              path
+            }
+          }
+        }
+      }
+      globals: wpPage(title: { eq: "Globals" }) {
+        title
+        globalsACF {
+          email {
+            email
+            emailDisplay
+          }
+          telefono {
+            telefono
+            telefonoDisplay
+          }
+        }
+      }
+    }
+  `);
 
+  console.log('data', data);
   const [socialMenu, setSocialMenu] = useState(null);
 
-  // useEffect(() => {
-  //   if (typeof window !== `undefined`) {
-  //     setSocialMenu(
-  //       data.wordpress.menus.nodes.find((node) => node.name === "Social")
-  //     );
-  //   }
-  // }, [data.wordpress.menus.nodes]);
+  useEffect(() => {
+    if (typeof window !== `undefined`) {
+      setSocialMenu(data.menus.nodes.find((node) => node.name === 'Social'));
+    }
+  }, [data.menus.nodes]);
+
+  const footerData = {
+    email: {
+      email: data.globals.globalsACF.email.email ?? 'info@wauarchitetti.com',
+      display:
+        data.globals.globalsACF.email.emailDisplay ?? 'info@wauarchitetti.com',
+    },
+    tel: {
+      telefono: data.globals.globalsACF.telefono.telefono ?? '+3901119171909',
+      display:
+        data.globals.globalsACF.telefono.telefonoDisplay ?? '011 1917 1909',
+    },
+  };
 
   return (
     <StyledFooter>
@@ -67,27 +90,27 @@ export default ({ lang }) => {
         </div>
         <div className="footer-list">
           <h5>{lang === 'it' ? 'Naviga' : 'Explore'}</h5>
-          {/* <ul>
-            {lang === "it"
-              ? data.wordpress.menus.nodes
-                  .find((node) => node.name === "Menu ita")
+          <ul>
+            {lang === 'it'
+              ? data.menus.nodes
+                  .find((node) => node.name === 'Menu ita')
                   .menuItems.nodes.map((item) => (
                     <li key={item.id}>
-                      <Link to={item.path.replace("/dev/wau/wp", "")}>
+                      <Link to={item.path.replace('/dev/wau/wp', '')}>
                         {item.label}
                       </Link>
                     </li>
                   ))
-              : data.wordpress.menus.nodes
-                  .find((node) => node.name === "Menu eng")
+              : data.menus.nodes
+                  .find((node) => node.name === 'Menu eng')
                   .menuItems.nodes.map((item) => (
                     <li key={item.id}>
-                      <Link to={item.path.replace("/dev/wau/wp", "")}>
+                      <Link to={item.path.replace('/dev/wau/wp', '')}>
                         {item.label}
                       </Link>
                     </li>
                   ))}
-          </ul> */}
+          </ul>
         </div>
         <div
           className="footer-list"
@@ -96,10 +119,14 @@ export default ({ lang }) => {
           <h5>Chat</h5>
           <ul>
             <li>
-              <a href="mailto:info@wauarchitetti.com">info@wauarchitetti.com</a>
+              <a href={`mailto:${footerData.email.email}`}>
+                {footerData.email.emailDisplay}
+              </a>
             </li>
             <li>
-              <a href="tel:+390118127237">(+39) 011 8127237</a>
+              <a href={`tel:${footerData.tel.telefono}`}>
+                {footerData.tel.telefonoDisplay}
+              </a>
             </li>
           </ul>
         </div>
