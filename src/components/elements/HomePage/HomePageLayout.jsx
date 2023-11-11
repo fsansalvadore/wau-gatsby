@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 import { gsap, Power1 } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from 'gatsby';
-import TextLoop from 'react-text-loop-next-18';
+import Typed from 'typed.js';
 import 'twin.macro';
 import WauLogo from '../../../assets/WAU-Logo.svg';
 import WauVideoMp4 from '../../../assets/Wau-Architetti-cut.mp4';
@@ -39,6 +39,25 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
   const [articles, setArticles] = useState(null);
   const [acf, setAcf] = useState(null);
   const [expertises, setExpertises] = useState(null);
+  const typedRef = useRef(null);
+
+  useEffect(() => {
+    if (!!typedRef && !!typedRef.current) {
+      const typed = new Typed(typedRef.current, {
+        strings: introWords,
+        startDelay: 100,
+        cursorChar: null,
+        loop: true,
+        typeSpeed: 15,
+        backSpeed: 10,
+        backDelay: 1400,
+      });
+
+      return () => {
+        typed.destroy();
+      };
+    }
+  }, [typedRef]);
 
   useEffect(() => {
     if (data && data.articles) {
@@ -314,7 +333,6 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
                 >
                   <source src={WauVideoMp4} type="video/mp4" />
                   <source src={WauVideoWebM} type="video/webm" />
-                  {/* <source src={WauVideoOgg} type="video/ogg" /> */}
                   Your browser does not support the video tag.
                 </video>
               </div>
@@ -329,13 +347,7 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
                   tw="absolute uppercase flex flex-col md:flex-row items-center justify-center lg:justify-start"
                 >
                   <span tw="md:mr-4">{lang === 'it' ? 'è' : 'is'}</span>
-                  {/* {introWords && (
-                    <TextLoop
-                      children={introWords ? introWords : []}
-                      interval={1500}
-                      mask
-                    />
-                  )} */}
+                  <span ref={typedRef} />
                 </h1>
               </div>
             </StyledIntroContainer>
