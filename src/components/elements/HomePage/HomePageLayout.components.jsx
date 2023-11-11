@@ -119,11 +119,12 @@ export const IntroCanvas = ({ indexRef }) => {
       id="canvas-root"
       // enable shadows
       shadowMap
+      shadows
       colorManagement
       camera={{ position: [0, 0, 10], fov: 50 }}
       ref={canvasRef}
     >
-      <SoftShadows size={10} />
+      <SoftShadows size={75} samples={10} />
       {/* lighting can be defined globally */}
       {/* directionalLight can cast shadows */}
       <directionalLight
@@ -131,26 +132,18 @@ export const IntroCanvas = ({ indexRef }) => {
         castShadow
         position={[0, 10, 0]}
         intensity={1}
-        shadow-mapSize-width={1024}
-        shadow-mapSize-height={1024}
+        shadow-mapSize={[1024, 1024]}
         shadow-camera-far={100}
         shadow-camera-left={-10}
         shadow-camera-top={20}
         shadow-camera-right={20}
         shadow-camera-bottom={-10}
-      />
-      {/* poinLight can be positioned as sources of light */}
-      <pointLight
-        position={[0, 20, 0]}
-        intensity={1000}
-        color="#00ACA9"
-        // castShadow
-      />
-      <pointLight position={[-10, 0, 20]} intensity={10} />
-      <pointLight position={[0, 10, 20]} intensity={10} />
-      {/* <pointLight position={[0, 0, 2]} intensity={10} color='#00ACA9' /> */}
-      {/* ambient light doesn't cast shadows */}
-      <ambientLight intensity={9} color="#00ACA9" />
+      >
+        <orthographicCamera attach="shadow-camera" args={[-10, 10, 10, -10]} />
+      </directionalLight>
+      <directionalLight position={[-10, 0, 20]} intensity={1} />
+      <directionalLight position={[0, 10, 20]} intensity={1} />
+      <ambientLight intensity={4} color="#fff" />
 
       {/* Suspence from React to wait for texture loading */}
       <Suspense fallback={null}>
@@ -158,17 +151,17 @@ export const IntroCanvas = ({ indexRef }) => {
       </Suspense>
 
       {/* plane that receives casted shadow */}
-      <group>
-        <mesh
-          // enable receiving shadows
-          receiveShadow
-          rotation={[-Math.PI / 2, 0, 0]}
-          position={[0, -2, 0]}
-        >
-          <planeGeometry args={[2000, 2000]} />
-          <shadowMaterial opacity={0.1} />
-        </mesh>
-      </group>
+      {/* <group> */}
+      <mesh
+        // enable receiving shadows
+        receiveShadow
+        rotation={[-Math.PI / 2, 0, 0]}
+        position={[0, -2, 0]}
+      >
+        <planeGeometry args={[100, 100]} />
+        <shadowMaterial opacity={0.1} />
+      </mesh>
+      {/* </group> */}
     </StyledIntroCanvas>
   );
 };
