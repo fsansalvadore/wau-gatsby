@@ -9,7 +9,7 @@ const ProjectsPageIta = () => {
         filter: {
           status: { eq: "publish" }
           language: { slug: { eq: "en" } }
-          title: { eq: "Progects" }
+          title: { eq: "Projects" }
         }
       ) {
         nodes {

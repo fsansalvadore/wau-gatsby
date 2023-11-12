@@ -105,12 +105,11 @@ const IndexEng = () => {
     }
   `);
 
-  let location;
-  const [lang, setLang] = useState('it');
+  const [lang, setLang] = useState('en');
 
   useEffect(() => {
     if (typeof window !== `undefined`) {
-      location = window.location.href;
+      const location = window.location.href;
       if (
         location.includes('00/en') ||
         location.includes('app/en') ||

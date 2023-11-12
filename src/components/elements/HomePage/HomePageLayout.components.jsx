@@ -112,7 +112,16 @@ const Sphere = ({ indexRef, position }) => {
 };
 
 export const IntroCanvas = ({ indexRef }) => {
-  const canvasRef = useRef(null);
+  // const canvasRef = useRef(null);
+  // const [mounted, setMounted] = useState(false);
+
+  // useEffect(() => {
+  //   setMounted(true);
+
+  //   return setMounted(false);
+  // }, []);
+
+  // if (!mounted) return null;
 
   return (
     <StyledIntroCanvas
@@ -120,7 +129,7 @@ export const IntroCanvas = ({ indexRef }) => {
       // enable shadows
       shadows
       camera={{ position: [0, 0, 10], fov: 50 }}
-      ref={canvasRef}
+      // ref={canvasRef}
     >
       <SoftShadows size={75} samples={10} />
       {/* lighting can be defined globally */}
@@ -149,7 +158,6 @@ export const IntroCanvas = ({ indexRef }) => {
       </Suspense>
 
       {/* plane that receives casted shadow */}
-      {/* <group> */}
       <mesh
         // enable receiving shadows
         receiveShadow
@@ -159,7 +167,6 @@ export const IntroCanvas = ({ indexRef }) => {
         <planeGeometry args={[100, 100]} />
         <shadowMaterial opacity={0.1} />
       </mesh>
-      {/* </group> */}
     </StyledIntroCanvas>
   );
 };

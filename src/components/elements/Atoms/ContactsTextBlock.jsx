@@ -15,7 +15,8 @@ export default ({ title, content, link, cta, ...otherProps }) => {
     if (
       typeof window !== `undefined` &&
       typeof document !== `undefined` &&
-      contactsTextBlockRef.current
+      !!contactsTextBlockRef?.current &&
+      !!gsap
     ) {
       gsap.registerPlugin(ScrollTrigger);
       const title = contactsTextBlockRef.current.querySelector('.st-title h5');
@@ -23,6 +24,7 @@ export default ({ title, content, link, cta, ...otherProps }) => {
         contactsTextBlockRef.current.querySelector('.st-content p');
       const link = contactsTextBlockRef.current.querySelector('.st-link > div');
 
+      console.log(contactsTextBlockRef, title, content, link);
       const sectionTextTL = gsap.timeline({
         scrollTrigger: {
           trigger: contactsTextBlockRef.current,
@@ -36,7 +38,8 @@ export default ({ title, content, link, cta, ...otherProps }) => {
       });
 
       sectionTextTL.fromTo(
-        [title, content, link],
+        // [title, content, link],
+        contactsTextBlockRef.current,
         { y: '170%', skewY: 4, opacity: 0 },
         {
           duration: 0.8,

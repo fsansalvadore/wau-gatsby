@@ -91,6 +91,25 @@ const query = `
         }
         expertiseACF {
           introduzione
+          progetti {
+            ... on WpProject {
+              id
+              title
+              date
+              slug
+              language {
+                code
+              }
+              ProjectAFC {
+                location
+              }
+              featuredImage {
+                node {
+                  sourceUrl
+                }
+              }
+            }
+          }
         }
       }
     }

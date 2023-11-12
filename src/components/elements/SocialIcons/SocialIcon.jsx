@@ -22,11 +22,11 @@ const CircleLink = styled.a(() => [
       }
     }
 
-    ${({ haveSpacing }) => haveSpacing && tw`mb-3`}
+    ${({ spacing }) => spacing && tw`mb-3`}
   `,
 ]);
 
-const SocialIcon = ({ social, isDark, size, haveSpacing }) => {
+const SocialIcon = ({ social, isDark, size, spacing }) => {
   const [current, setCurrent] = useState(null);
 
   const socials = {
@@ -102,7 +102,7 @@ const SocialIcon = ({ social, isDark, size, haveSpacing }) => {
       className="social-link"
       target="_blank"
       isDark={isDark}
-      haveSpacing={haveSpacing}
+      spacing={spacing}
     >
       <svg
         style={styles.svg}

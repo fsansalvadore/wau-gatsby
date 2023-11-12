@@ -7,7 +7,7 @@ import Logo from '../Logo/Logo';
 import GridMaxWidthContainer from './GridMaxWidthContainer';
 
 // eslint-disable-next-line import/no-default-export
-export default ({ lang }) => {
+const Footer = ({ lang }) => {
   const data = useStaticQuery(graphql`
     query GET_FOOTERMENU_BY_NAME {
       menus: allWpMenu {
@@ -135,7 +135,7 @@ export default ({ lang }) => {
         >
           <h5>{lang === 'it' ? 'Seguici' : 'Follow us'}</h5>
           {!!socialMenu && (
-            <SocialIcons menu={socialMenu} hasGrid haveSpacing />
+            <SocialIcons menu={socialMenu} hasGrid spacing="false" />
           )}
         </div>
         <div
@@ -168,11 +168,11 @@ export default ({ lang }) => {
                 Privacy Policy
               </Link>
             </li>
-            <li>
-              <a href="javascript:void()" id="csconsentlink" tw="py-4">
+            {/* <li>
+              <a href="#" id="csconsentlink" tw="py-4">
                 Cookie Settings
               </a>
-            </li>
+            </li> */}
           </ul>
         </div>
         <div
@@ -245,3 +245,5 @@ const StyledFooter = styled.footer(() => [
     }
   `,
 ]);
+
+export default Footer;

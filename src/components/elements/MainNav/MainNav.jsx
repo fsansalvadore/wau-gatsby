@@ -29,22 +29,14 @@ const FixedNavbar = styled(motion.div)(() => [
     position: fixed;
     z-index: 999;
     height: 80px;
-    background: ${(props) => (props.isOpen ? 'transparent' : 'var(--white)')};
-    box-shadow: ${(props) =>
-      props.isOpen ? 'none' : '1px 0 1px rgba(0, 0, 0, 0.4)'};
+    background: ${({ isOpen }) => (isOpen ? 'transparent' : 'var(--white)')};
+    box-shadow: ${({ isOpen }) =>
+      isOpen ? 'none' : '1px 0 1px rgba(0, 0, 0, 0.4)'};
     ${tw`fixed w-full py-0 px-4 sm:px-8 md:px-16 flex items-center justify-between`}
   `,
 ]);
 
 const WCampLink = motion(Link);
-
-// const WCampLink = styled(Link)`
-//   opacity: 0.8;
-//   &:hover {
-//     cursor: pointer !important;
-//     opacity: 1;
-//   }
-// `;
 
 const MenuBtn = styled.button`
   position: relative;
@@ -177,7 +169,6 @@ const MainNav = ({ lang, isMenuLight }) => {
   const [showFixed, setShowFixed] = useState(false);
   const [isScrollUp, setIsScrollUp] = useState(false);
   const [isMobileViewport, setIsMobileViewport] = useState(false);
-  let scrollPos = 0;
 
   useEffect(() => {
     if (typeof window !== `undefined`) {
@@ -208,6 +199,8 @@ const MainNav = ({ lang, isMenuLight }) => {
   // Detect scroll direction
   useEffect(() => {
     if (typeof window !== 'undefined') {
+      let scrollPos = 0;
+
       window.addEventListener('scroll', () => {
         const st = window.pageYOffset || document.documentElement.scrollTop;
         if (window.scrollY > 80 && st <= scrollPos) {

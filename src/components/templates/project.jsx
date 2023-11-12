@@ -24,6 +24,8 @@ const ProjectPage = (props) => {
     tags,
   } = props.pageContext;
 
+  console.log(props, title);
+
   const data = useStaticQuery(graphql`
     query PrevNextQuery {
       projects: allWpProject(
