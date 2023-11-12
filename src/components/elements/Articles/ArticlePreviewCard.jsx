@@ -4,12 +4,11 @@ import { Link } from 'gatsby';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import LazyLoad from 'react-lazyload';
-import Img from 'gatsby-image';
-// import { WPImage } from '../../WPImage/WPImage'
 import WAUFallback from '../../../assets/WAUFallback.svg';
 import { months } from '../../../helpers/utils';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
-const MotionLink = motion.a(Link);
+const MotionLink = motion(Link);
 
 const ArticlePreviewCard = ({ article, ...otherProps }) => {
   const [date, setDate] = useState(new Date(article.date));
@@ -50,13 +49,9 @@ const ArticlePreviewCard = ({ article, ...otherProps }) => {
             tw="relative flex items-center justify-center col-span-9 md:col-span-3 h-[50vw] md:h-[12vw] min-h-[200px] w-full overflow-hidden"
           >
             {article.featuredImage && article.featuredImage.node.imageFile ? (
-              <Img
-                fixed={
-                  article.featuredImage.node.imageFile.childImageSharp.fixed
-                }
-                // fluid={article.featuredImage.node.imageFile.childImageSharp.fluid}
-                tw=""
+              <GatsbyImage
                 alt={article.imgAlt ? article.imgAlt : 'Image'}
+                image={getImage(article.featuredImage.node.gatsbyImage)}
               />
             ) : (
               <img

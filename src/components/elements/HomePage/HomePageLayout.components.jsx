@@ -19,7 +19,7 @@ const Sphere = ({ indexRef, position }) => {
   const sphereRef = useRef(null);
   const meshRef = useRef(null);
   const [hovered, setHover] = useState(false);
-  const texture = useLoader(TextureLoader, WauGradient);
+  const materialMap = useLoader(TextureLoader, WauGradient);
   const [introFinished, setIntroFinished] = useState(false);
 
   useEffect(() => {
@@ -104,7 +104,7 @@ const Sphere = ({ indexRef, position }) => {
         attach="material"
         ref={meshRef}
         factor={introSpring.factor}
-        map={texture}
+        map={materialMap}
         speed={hovered ? 2 : 2}
       />
     </animated.mesh>
@@ -112,15 +112,17 @@ const Sphere = ({ indexRef, position }) => {
 };
 
 export const IntroCanvas = ({ indexRef }) => {
-  const canvasRef = useRef();
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    console.log('intro canvas ref', canvasRef);
+  }, []);
 
   return (
     <StyledIntroCanvas
       id="canvas-root"
       // enable shadows
-      shadowMap
       shadows
-      colorManagement
       camera={{ position: [0, 0, 10], fov: 50 }}
       ref={canvasRef}
     >
@@ -171,7 +173,7 @@ export const VisionSphere = ({ visionSectionRef, position }) => {
   const visionSphereRef = useRef(null);
   const meshRef = useRef(null);
   const [hovered, setHover] = useState(false);
-  const texture = useLoader(TextureLoader, WauGradient);
+  const materialMap = useLoader(TextureLoader, WauGradient);
 
   useEffect(() => {
     if (
@@ -235,7 +237,7 @@ export const VisionSphere = ({ visionSectionRef, position }) => {
         // drei arguments for MeshWobbleMaterial
         ref={meshRef}
         factor={introSpring.factor}
-        map={texture}
+        map={materialMap}
         speed={hovered ? 2 : 2}
       />
     </animated.mesh>
@@ -246,46 +248,46 @@ export const VisionSectionCanvas = ({ visionSectionRef, ...otherProps }) => {
   const visionCanvasRef = useRef();
 
   return (
-    <StyledVisionSectionCanvas
-      id="canvas-root"
-      // enable shadows
-      shadowMap
-      colorManagement
-      camera={{ position: [0, 0, 10], fov: 50 }}
-      ref={visionCanvasRef}
-      {...otherProps}
-    >
-      {/* lighting can be defined globally */}
-      {/* directionalLight can cast shadows */}
-      <directionalLight
-        // to cast shadow
-        castShadow
-        position={[0, 10, 0]}
-        intensity={1}
-        shadow-mapSize-width={1024}
-        shadow-mapSize-height={1024}
-        shadow-camera-far={100}
-        shadow-camera-left={-10}
-        shadow-camera-top={20}
-        shadow-camera-right={20}
-        shadow-camera-bottom={-10}
-      />
-      {/* poinLight can be positioned as sources of light */}
-      <pointLight position={[-10, 0, 20]} intensity={1} />
-      <pointLight position={[0, -10, 20]} intensity={1} />
-      {/* <pointLight position={[0, 0, 2]} intensity={10} color='#00ACA9' /> */}
-      {/* ambient light doesn't cast shadows */}
-      <ambientLight intensity={9} color="#00ACA9" />
-
-      {/* Suspence from React to wait for texture loading */}
-      <Suspense fallback={null}>
-        <VisionSphere
-          position={[0, 0, 0]}
-          url={WauGradient}
-          visionSectionRef={visionSectionRef}
+    <Suspense fallback={null}>
+      <StyledVisionSectionCanvas
+        id="canvas-root"
+        // enable shadows
+        camera={{ position: [0, 0, 10], fov: 50 }}
+        ref={visionCanvasRef}
+        {...otherProps}
+      >
+        {/* lighting can be defined globally */}
+        {/* directionalLight can cast shadows */}
+        <directionalLight
+          // to cast shadow
+          castShadow
+          position={[0, 10, 0]}
+          intensity={1}
+          shadow-mapSize-width={1024}
+          shadow-mapSize-height={1024}
+          shadow-camera-far={100}
+          shadow-camera-left={-10}
+          shadow-camera-top={20}
+          shadow-camera-right={20}
+          shadow-camera-bottom={-10}
         />
-      </Suspense>
-    </StyledVisionSectionCanvas>
+        {/* poinLight can be positioned as sources of light */}
+        <pointLight position={[-10, 0, 20]} intensity={1} />
+        <pointLight position={[0, -10, 20]} intensity={1} />
+        {/* <pointLight position={[0, 0, 2]} intensity={10} color='#00ACA9' /> */}
+        {/* ambient light doesn't cast shadows */}
+        <ambientLight intensity={9} color="#00ACA9" />
+
+        {/* Suspence from React to wait for texture loading */}
+        <Suspense fallback={null}>
+          <VisionSphere
+            position={[0, 0, 0]}
+            url={WauGradient}
+            visionSectionRef={visionSectionRef}
+          />
+        </Suspense>
+      </StyledVisionSectionCanvas>
+    </Suspense>
   );
 };
 

@@ -23,7 +23,7 @@ const SocialIconsContainer = styled.div((isDark, hasGrid) => [
   `,
 ]);
 
-const SocialIcons = ({ menu, isDark, haveSpacing, hasGrid }) => {
+const SocialIcons = ({ menu, isDark, haveSpacing = false, hasGrid }) => {
   const socialIconsRef = useRef(null);
 
   useEffect(() => {

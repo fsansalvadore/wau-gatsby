@@ -35,6 +35,7 @@ const query = `
       nodes {
         content
         date
+        id
         status
         slug
         title

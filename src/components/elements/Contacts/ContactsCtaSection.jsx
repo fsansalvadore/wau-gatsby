@@ -31,7 +31,7 @@ const Sphere = ({ ctaSectionRef, position }) => {
   const contactsCtaSphereRef = useRef(null);
   const meshRef = useRef(null);
   const [hovered, setHover] = useState(false);
-  const texture = useLoader(TextureLoader, WauGradient);
+  const materialMap = useLoader(TextureLoader, WauGradient);
 
   useEffect(() => {
     if (!ctaSectionRef || !ctaSectionRef.current) return;
@@ -97,7 +97,7 @@ const Sphere = ({ ctaSectionRef, position }) => {
         // drei arguments for MeshWobbleMaterial
         ref={meshRef}
         factor={introSpring.factor}
-        map={texture}
+        map={materialMap}
         // speed={introSpring.speed}
         speed={hovered ? 2 : 2}
       />
@@ -112,8 +112,6 @@ const ContentCtaCanvas = ({ ctaSectionRef, ...otherProps }) => {
     <StyledContactsCtaCanvas
       id="canvas-contacts-cta"
       // enable shadows
-      shadowMap
-      colorManagement
       camera={{ position: [0, 0, 10], fov: 50 }}
       ref={contactsCtaCanvasRef}
       {...otherProps}

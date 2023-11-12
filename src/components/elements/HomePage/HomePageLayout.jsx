@@ -480,9 +480,9 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
                                         )
                                       )}
                                   </ul>
-                                  <p tw="text-2xl md:text-3xl font-bold">
+                                  <div tw="text-2xl md:text-3xl font-bold">
                                     {article.title}
-                                  </p>
+                                  </div>
                                 </div>
                                 <div className="arrow-icon">
                                   <svg

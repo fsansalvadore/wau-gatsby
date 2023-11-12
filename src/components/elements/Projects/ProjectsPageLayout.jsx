@@ -200,12 +200,7 @@ const ProjectsPageLayout = ({ data, lang }) => {
         <ul className="proj_content" tw="grid grid-cols-1 md:grid-cols-2 m-0">
           {!!projects && projects.length > 0 ? (
             projects.map((proj) => (
-              <li
-                key={`${proj.id}-${proj.slug}-${Math.floor(
-                  Math.random() * (100 - 999) + 100
-                )}`}
-                tw="p-px"
-              >
+              <li key={proj.id} tw="p-px">
                 <ProjectPreviewCard
                   link={proj.slug}
                   title={proj.title}

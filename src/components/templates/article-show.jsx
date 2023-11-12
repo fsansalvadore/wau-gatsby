@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { graphql, Link, useStaticQuery } from "gatsby";
-import { Helmet } from "react-helmet";
-import Img from "gatsby-image";
-import styled from "styled-components";
-import tw, { css } from "twin.macro";
-import parse from "html-react-parser";
-import GridMaxWidthContainer from "../elements/Atoms/GridMaxWidthContainer";
-import Layout from "../LayoutComponent";
-import Heading from "../elements/Heading/Heading";
-import "../../styles/gallery.style.css";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-// import ComponentParser from "../elements/Articles/ArticleComponentParser"
-import { months } from "../../helpers/utils";
-import SocialShare from "../elements/Atoms/SocialShare";
-import fallbackImg from "../../images/Wau-Architetti-social-logo.jpg";
+import React, { useEffect, useState } from 'react';
+import { graphql, Link, useStaticQuery } from 'gatsby';
+import { Helmet } from 'react-helmet';
+import styled from 'styled-components';
+import tw, { css } from 'twin.macro';
+import parse from 'html-react-parser';
+import GridMaxWidthContainer from '../elements/Atoms/GridMaxWidthContainer';
+import Layout from '../LayoutComponent';
+import Heading from '../elements/Heading/Heading';
+import '../../styles/gallery.style.css';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import { months } from '../../helpers/utils';
+import SocialShare from '../elements/Atoms/SocialShare';
+import fallbackImg from '../../images/Wau-Architetti-social-logo.jpg';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
 const ArticleShowPage = (props) => {
   const {
@@ -30,36 +29,31 @@ const ArticleShowPage = (props) => {
     featuredImage,
   } = props.pageContext;
 
-  // const data = useStaticQuery(graphql`
-  //   query ArticlesMediaQuery {
-  //     wordpress {
-  //       articles(first: 100, where: { status: PUBLISH }) {
-  //         nodes {
-  //           title
-  //           featuredImage {
-  //             node {
-  //               sourceUrl(size: LARGE)
-  //               imageFile {
-  //                 childImageSharp {
-  //                   fixed(width: 1500, quality: 90) {
-  //                     ...GatsbyImageSharpFixed
-  //                   }
-  //                 }
-  //               }
-  //             }
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-  // `);
+  const data = useStaticQuery(graphql`
+    query ArticlesMediaQuery {
+      articles: allWpArticle(
+        limit: 100
+        filter: { status: { eq: "publish" } }
+      ) {
+        nodes {
+          title
+          featuredImage {
+            node {
+              sourceUrl
+              gatsbyImage(width: 1200)
+            }
+          }
+        }
+      }
+    }
+  `);
 
   const [aDate, setADate] = useState(new Date(date));
   const [articleDate, setArticleDate] = useState(null);
 
   useEffect(() => {
     if (aDate) {
-      if (lang.code === "EN") {
+      if (lang.code === 'EN') {
         setArticleDate(
           `${
             months.eng[aDate.getMonth()]
@@ -81,14 +75,14 @@ const ArticleShowPage = (props) => {
         <title>
           {seo && seo.title
             ? `${seo.title}`
-            : lang.code === "IT"
+            : lang.code === 'IT'
             ? `${title} • Notizie • WAU Architetti`
             : `${title} • News • WAU Architects`}
         </title>
         <link
           rel="canonical"
           href={
-            lang.code === "IT"
+            lang.code === 'IT'
               ? `https://www.wauarchitetti.com/notizie/${slug}`
               : `https://www.wauarchitetti.com/en/news/${slug}`
           }
@@ -98,8 +92,8 @@ const ArticleShowPage = (props) => {
           name="keywords"
           content={
             tags
-              ? tags.nodes.map((tag) => (tag.name ? ` ${tag.name},` : ""))
-              : "WAU Architetti, architetti a torino, studio di architetti"
+              ? tags.nodes.map((tag) => (tag.name ? ` ${tag.name},` : ''))
+              : 'WAU Architetti, architetti a torino, studio di architetti'
           }
         />
         <meta
@@ -111,7 +105,7 @@ const ArticleShowPage = (props) => {
         <meta
           property="og:site_name"
           content={
-            lang.code === "IT"
+            lang.code === 'IT'
               ? `${title} • Notizie • WAU Architetti`
               : `${title} • News • WAU Architects`
           }
@@ -120,7 +114,7 @@ const ArticleShowPage = (props) => {
         <meta
           property="og:url"
           content={
-            lang.code === "IT"
+            lang.code === 'IT'
               ? `https://www.wauarchitetti.com/notizie/${slug}`
               : `https://www.wauarchitetti.com/en/news/${slug}`
           }
@@ -128,7 +122,7 @@ const ArticleShowPage = (props) => {
         <meta
           property="og:title"
           content={
-            lang.code === "IT"
+            lang.code === 'IT'
               ? `${title} • Notizie • WAU Architetti`
               : `${title} • News • WAU Architects`
           }
@@ -145,7 +139,7 @@ const ArticleShowPage = (props) => {
         <meta
           name="twitter:site"
           content={
-            lang.code === "IT"
+            lang.code === 'IT'
               ? `https://www.wauarchitetti.com/notizie/${slug}`
               : `https://www.wauarchitetti.com/en/news/${slug}`
           }
@@ -153,7 +147,7 @@ const ArticleShowPage = (props) => {
         <meta
           name="twitter:title"
           content={
-            lang.code === "IT"
+            lang.code === 'IT'
               ? `${title} • Notizie • WAU Architetti`
               : `${title} • News • WAU Architects`
           }
@@ -175,10 +169,10 @@ const ArticleShowPage = (props) => {
             <Heading className="article-heading" tw="col-span-12">
               <p className="breadcrumbs mono opacity-80">
                 <Link
-                  to={lang.code === "EN" ? "/en/news/" : "/notizie/"}
+                  to={lang.code === 'EN' ? '/en/news/' : '/notizie/'}
                   tw="block opacity-80 hover:opacity-100"
                 >
-                  {lang.code === "EN" ? "News" : "Notizie"} /
+                  {lang.code === 'EN' ? 'News' : 'Notizie'} /
                 </Link>
               </p>
               <h1>{title}</h1>
@@ -205,33 +199,33 @@ const ArticleShowPage = (props) => {
                 )}
               </div>
             </Heading>
-            {/* {featuredImage ? (
+            {featuredImage ? (
               <figure
                 className="cover-image cover-image-fullscreen"
                 tw="col-span-12 mb-10 md:mb-16 xl:mb-32"
               >
-                {data.wordpress.articles.nodes.find(
-                  (project) => project.title === title
-                ).featuredImage.node.imageFile ? (
-                  <Img
+                {data.articles.nodes.find((project) => project.title === title)
+                  .featuredImage.node.imageFile ? (
+                  <GatsbyImage
                     tw="absolute w-full h-64 top-0 right-0 bottom-0 left-0"
-                    fixed={
-                      data.wordpress.articles.nodes.find(
+                    alt={title}
+                    image={getImage(
+                      data.articles.nodes.find(
                         (project) => project.title === title
-                      ).featuredImage.node.imageFile.childImageSharp.fixed
-                    }
+                      ).featuredImage.node.gatsbyImage
+                    )}
                   />
                 ) : (
                   <img
                     src={featuredImage.node.sourceUrl}
-                    alt={featuredImage.node.altText}
+                    alt={title}
                     tw="relative w-full h-64 top-0 right-0 bottom-0 left-0"
                   />
                 )}
               </figure>
             ) : (
               <hr tw="my-8 md:my-16 w-full col-span-full opacity-50" />
-            )} */}
+            )}
           </GridMaxWidthContainer>
         </div>
         <article tw="w-full flex justify-center">

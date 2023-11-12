@@ -1,20 +1,20 @@
-import React, { useRef } from "react";
-import { graphql, useStaticQuery, Link } from "gatsby";
-import { Helmet } from "react-helmet";
-import styled from "styled-components";
-import tw from "twin.macro";
-import parse from "html-react-parser";
-import Img from "gatsby-image";
-import Heading from "../elements/Heading/Heading";
-import Layout from "../LayoutComponent";
-import GridMaxWidthContainer from "../elements/Atoms/GridMaxWidthContainer";
-import SocialShare from "../elements/Atoms/SocialShare";
-import fallbackImg from "../../images/Wau-Architetti-social-logo.jpg";
+import React from 'react';
+import { graphql, useStaticQuery, Link } from 'gatsby';
+import { Helmet } from 'react-helmet';
+import styled from 'styled-components';
+import tw from 'twin.macro';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
+import parse from 'html-react-parser';
+import Heading from '../elements/Heading/Heading';
+import Layout from '../LayoutComponent';
+import GridMaxWidthContainer from '../elements/Atoms/GridMaxWidthContainer';
+import SocialShare from '../elements/Atoms/SocialShare';
+import fallbackImg from '../../images/Wau-Architetti-social-logo.jpg';
 
 const ProjectPage = (props) => {
   const {
     slug,
-    // index,
+    id,
     title,
     featuredImage,
     ProjectAFC,
@@ -22,75 +22,30 @@ const ProjectPage = (props) => {
     content,
     seo,
     tags,
-    // project,
   } = props.pageContext;
 
-  // const data = useStaticQuery(graphql`
-  //   query PrevNextQuery {
-  //     wordpress {
-  //       projects(first: 100, where: { status: PUBLISH }) {
-  //         nodes {
-  //           id
-  //           title
-  //           date
-  //           slug
-  //           language {
-  //             code
-  //           }
-  //           tags {
-  //             nodes {
-  //               name
-  //             }
-  //           }
-  //           ProjectAFC {
-  //             projectdate
-  //             location
-  //           }
-  //           featuredImage {
-  //             node {
-  //               altText
-  //               link
-  //               sourceUrl
-  //               imageFile {
-  //                 childImageSharp {
-  //                   fixed(width: 1500, quality: 90) {
-  //                     ...GatsbyImageSharpFixed
-  //                   }
-  //                 }
-  //               }
-  //             }
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-  // `);
+  const data = useStaticQuery(graphql`
+    query PrevNextQuery {
+      projects: allWpProject(
+        limit: 100
+        filter: { status: { eq: "publish" } }
+      ) {
+        nodes {
+          id
+          featuredImage {
+            node {
+              altText
+              link
+              sourceUrl
+              gatsbyImage(width: 1600)
+            }
+          }
+        }
+      }
+    }
+  `);
 
-  // const [prevPost, setPrevPost] = useState(null)
-  // const [nextPost, setNextPost] = useState(null)
-  // const proj = data.wordpress.projects.nodes.find(
-  //   (project) => project.title === title
-  // );
-  // const sortedProjects = data.wordpress.projects.nodes.sort((a, b) =>
-  //   a.date < b.date ? 1 : a.date === b.date ? (a.title > b.title ? 1 : -1) : -1
-  // );
-  const pdfRef = useRef(null);
-  // const postLength = sortedProjects.length;
-
-  // useEffect(() => {
-  //   if(sortedProjects) {
-  //     if (index === postLength - 1) {
-  //       setPrevPost(sortedProjects[index - 1])
-  //       setNextPost(sortedProjects[0])
-  //     } else if (index === 0) {
-  //       setPrevPost(sortedProjects[postLength - 1])
-  //       setNextPost(sortedProjects[index + 1])
-  //     } else {
-  //       setPrevPost(sortedProjects[index - 1])
-  //       setNextPost(sortedProjects[index + 1])
-  //     }
-  //   }
-  // }, [index, sortedProjects])
+  const proj = data.projects?.nodes.find((project) => project.id === id);
 
   return (
     <Layout>
@@ -98,14 +53,14 @@ const ProjectPage = (props) => {
         <title>
           {seo && seo.title
             ? `${parse(seo.title)}`
-            : lang.code === "IT"
+            : lang.code === 'IT'
             ? `${title} • Progetti • WAU Architetti`
             : `${title} • Projects • WAU Architects`}
         </title>
         <link
           rel="canonical"
           href={
-            lang.code === "IT"
+            lang.code === 'IT'
               ? `https://www.wauarchitetti.com/progetti/${slug}`
               : `https://www.wauarchitetti.com/en/projects/${slug}`
           }
@@ -115,8 +70,8 @@ const ProjectPage = (props) => {
           name="keywords"
           content={
             tags
-              ? tags.nodes.map((tag) => (tag.name ? ` ${tag.name}` : ""))
-              : "WAU Architetti, architetti a torino, studio di architetti"
+              ? tags.nodes.map((tag) => (tag.name ? ` ${tag.name}` : ''))
+              : 'WAU Architetti, architetti a torino, studio di architetti'
           }
         />
         <meta
@@ -128,7 +83,7 @@ const ProjectPage = (props) => {
         <meta
           property="og:site_name"
           content={
-            lang.code === "IT"
+            lang.code === 'IT'
               ? `${title} • Progetti • WAU Architetti`
               : `${title} • Projects • WAU Architects`
           }
@@ -137,7 +92,7 @@ const ProjectPage = (props) => {
         <meta
           property="og:url"
           content={
-            lang.code === "IT"
+            lang.code === 'IT'
               ? `https://www.wauarchitetti.com/progetti/${slug}`
               : `https://www.wauarchitetti.com/en/projects/${slug}`
           }
@@ -145,7 +100,7 @@ const ProjectPage = (props) => {
         <meta
           property="og:title"
           content={
-            lang.code === "IT"
+            lang.code === 'IT'
               ? `${title} • Progetti • WAU Architetti`
               : `${title} • Projects • WAU Architects`
           }
@@ -162,7 +117,7 @@ const ProjectPage = (props) => {
         <meta
           name="twitter:site"
           content={
-            lang.code === "IT"
+            lang.code === 'IT'
               ? `https://www.wauarchitetti.com/progetti/${slug}`
               : `https://www.wauarchitetti.com/en/projects/${slug}`
           }
@@ -170,7 +125,7 @@ const ProjectPage = (props) => {
         <meta
           name="twitter:title"
           content={
-            lang.code === "IT"
+            lang.code === 'IT'
               ? `${title} • Progetti • WAU Architetti`
               : `${title} • Projects • WAU Architects`
           }
@@ -183,16 +138,15 @@ const ProjectPage = (props) => {
           }`}
         />
       </Helmet>
-      <ProjectContainer ref={pdfRef}>
-      {/* <ProjectContainer ref={pdfRef}> */}
+      <ProjectContainer>
         <Heading tw="flex flex-col lg:flex-row">
           <div tw="w-full md:w-3/4">
-            <p className="breadcrumbs mono">
-              <Link to={lang.code === "EN" ? "/en/projects/" : "/progetti/"}>
-                {lang.code === "EN" ? "Projects" : "Progetti"}
-              </Link>{" "}
+            <div className="breadcrumbs mono">
+              <Link to={lang.code === 'EN' ? '/en/projects/' : '/progetti/'}>
+                {lang.code === 'EN' ? 'Projects' : 'Progetti'}
+              </Link>{' '}
               /
-            </p>
+            </div>
             <div tw="w-full p-0 md:pr-32">
               <div tw="w-full">
                 <h1 tw="leading-10">{title}</h1>
@@ -213,7 +167,9 @@ const ProjectPage = (props) => {
               <div>
                 <ul tw="my-2">
                   {tags.nodes.map((tag) => (
-                    <li tw="py-0">/ {tag.name}</li>
+                    <li key={tag} tw="py-0">
+                      / {tag.name}
+                    </li>
                   ))}
                 </ul>
                 <hr />
@@ -221,10 +177,10 @@ const ProjectPage = (props) => {
             )}
             {ProjectAFC &&
               ProjectAFC.projectdate &&
-              ProjectAFC.projectdate.split("/") && (
+              ProjectAFC.projectdate.split('/') && (
                 <div>
                   <p tw="my-2">
-                    {ProjectAFC.projectdate.split("/").slice(-1)[0]}
+                    {ProjectAFC.projectdate.split('/').slice(-1)[0]}
                   </p>
                   <hr />
                 </div>
@@ -237,12 +193,13 @@ const ProjectPage = (props) => {
             )}
           </aside>
         </Heading>
-        {/* {proj.featuredImage && (
+        {proj.featuredImage && (
           <figure className="project-coverImage" tw="mb-10 md:mb-16 xl:mb-24">
-            {proj.featuredImage.node.imageFile ? (
-              <Img
+            {proj?.featuredImage.node.gatsbyImage ? (
+              <GatsbyImage
                 tw="relative w-full h-64 top-0 right-0 bottom-0 left-0"
-                fixed={proj.featuredImage.node.imageFile.childImageSharp.fixed}
+                alt={title}
+                image={getImage(proj?.featuredImage.node.gatsbyImage)}
               />
             ) : (
               <img
@@ -252,7 +209,7 @@ const ProjectPage = (props) => {
               />
             )}
           </figure>
-        )} */}
+        )}
         <article tw="w-full flex justify-center">
           <GridMaxWidthContainer
             className="project-content"
@@ -268,14 +225,14 @@ const ProjectPage = (props) => {
 };
 
 const ProjectContainer = styled.div`
-  .project-coverImage
-    .gatsby-image-wrapper {
-        width: 100% !important;
-        height: 50vw !important;
-    }
-  
+  .project-coverImage .gatsby-image-wrapper {
+    width: 100% !important;
+    height: 50vw !important;
+  }
+
   .project-aside-info {
-    p, li {
+    p,
+    li {
       ${tw`inline-block font-light`}
     }
     li {
@@ -289,8 +246,8 @@ const ProjectContainer = styled.div`
       > * {
         ${tw`col-span-12`}
       }
-      
-      > p, 
+
+      > p,
       > ul,
       > ol,
       > h1,
@@ -305,14 +262,13 @@ const ProjectContainer = styled.div`
       ul {
         ${tw`pl-4`}
 
-          li {
+        li {
           ${tw`list-disc`}
         }
       }
 
       p {
         line-height: 1.6rem;
-        /* font-weight: 200; */
         ${tw`md:text-lg`}
       }
 
@@ -323,7 +279,7 @@ const ProjectContainer = styled.div`
           flex-grow: 1;
           ${tw`mr-0 md:mr-4`}
         }
-        
+
         .wp-block-column:last-of-type {
           ${tw`mr-0`}
         }
@@ -336,25 +292,12 @@ const ProjectContainer = styled.div`
         }
       }
 
-      /* > .wp-block-image.size-large {
-        grid-column: 1 / span 12;
-        margin-left: calc(50% - 50vw);
-        margin-right: calc(50% - 50vw);
-        max-width: 1000%;
-        width: auto;
-        
-        img {
-          width: 100%;
-          height: auto;
-        }
-      } */
-
       .wp-block-separator {
         ${tw`my-6 md:my-12 xl:my-24`}
       }
       .wp-block-image {
         ${tw`my-4 md:my-12 xl:my-24`}
-        
+
         img {
           ${tw`w-full h-auto`}
         }

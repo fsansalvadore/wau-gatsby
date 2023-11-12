@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import tw, { styled, css } from 'twin.macro';
 import Img from 'gatsby-image';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
 const ClientLink = styled.a`
   ${tw`block basis-[200px] xl:max-w-[220px] p-4 m-4 flex-1`}
@@ -11,41 +12,33 @@ const ClientLink = styled.a`
 
 // eslint-disable-next-line import/no-default-export
 export default ({ lang, ...otherProps }) => {
-  // const data = useStaticQuery(graphql`
-  //   query ClientsQuery {
-  //     wordpress {
-  //       clients(first: 100, where: { status: PUBLISH }) {
-  //         nodes {
-  //           title
-  //           featuredImage {
-  //             node {
-  //               altText
-  //               link
-  //               sourceUrl
-  //               imageFile {
-  //                 childImageSharp {
-  //                   fixed(width: 500, quality: 90) {
-  //                     ...GatsbyImageSharpFixed
-  //                   }
-  //                 }
-  //               }
-  //             }
-  //           }
-  //           clientACF {
-  //             link
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-  // `);
+  const data = useStaticQuery(graphql`
+    query ClientsQuery {
+      clients: allWpClient(limit: 100, filter: { status: { eq: "publish" } }) {
+        nodes {
+          title
+          featuredImage {
+            node {
+              altText
+              link
+              sourceUrl
+              gatsbyImage(width: 500)
+            }
+          }
+          clientACF {
+            link
+          }
+        }
+      }
+    }
+  `);
   const [clients, setClients] = useState([]);
 
-  // useEffect(() => {
-  //   if (!!data && !!data.wordpress.clients) {
-  //     setClients(data.wordpress.clients.nodes);
-  //   }
-  // }, [data]);
+  useEffect(() => {
+    if (!!data && !!data.clients) {
+      setClients(data.clients.nodes);
+    }
+  }, [data]);
 
   return (
     <StyledClientsSection {...otherProps}>
@@ -64,11 +57,9 @@ export default ({ lang, ...otherProps }) => {
             >
               {!!client.featuredImage &&
                 (client.featuredImage.node.imageFile ? (
-                  <Img
+                  <GatsbyImage
                     tw="relative max-w-[220px] w-full h-64"
-                    fixed={
-                      client.featuredImage.node.imageFile.childImageSharp.fixed
-                    }
+                    image={getImage(client.featuredImage.node.gatsbyImage)}
                     alt={client.title}
                   />
                 ) : (
