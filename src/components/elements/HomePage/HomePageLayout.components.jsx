@@ -1,7 +1,7 @@
 import React, { useRef, useState, Suspense, useEffect } from 'react';
 import * as THREE from 'three';
 import { useLoader } from '@react-three/fiber';
-import { MeshDistortMaterial, SoftShadows } from '@react-three/drei';
+import { MeshDistortMaterial } from '@react-three/drei';
 import { useSpring, animated } from '@react-spring/three';
 import { gsap, Power1 } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -112,26 +112,13 @@ const Sphere = ({ indexRef, position }) => {
 };
 
 export const IntroCanvas = ({ indexRef }) => {
-  // const canvasRef = useRef(null);
-  // const [mounted, setMounted] = useState(false);
-
-  // useEffect(() => {
-  //   setMounted(true);
-
-  //   return setMounted(false);
-  // }, []);
-
-  // if (!mounted) return null;
-
   return (
     <StyledIntroCanvas
       id="canvas-root"
       // enable shadows
       shadows
       camera={{ position: [0, 0, 10], fov: 50 }}
-      // ref={canvasRef}
     >
-      <SoftShadows size={75} samples={10} />
       {/* lighting can be defined globally */}
       {/* directionalLight can cast shadows */}
       <directionalLight
@@ -139,12 +126,6 @@ export const IntroCanvas = ({ indexRef }) => {
         castShadow
         position={[0, 10, 0]}
         intensity={1}
-        shadow-mapSize={[1024, 1024]}
-        shadow-camera-far={100}
-        shadow-camera-left={-10}
-        shadow-camera-top={20}
-        shadow-camera-right={20}
-        shadow-camera-bottom={-10}
       >
         <orthographicCamera attach="shadow-camera" args={[-10, 10, 10, -10]} />
       </directionalLight>
@@ -164,8 +145,8 @@ export const IntroCanvas = ({ indexRef }) => {
         rotation={[-Math.PI / 2, 0, 0]}
         position={[0, -2, 0]}
       >
-        <planeGeometry args={[100, 100]} />
-        <shadowMaterial opacity={0.1} />
+        <planeGeometry args={[1000, 1000]} />
+        <shadowMaterial opacity={0.05} />
       </mesh>
     </StyledIntroCanvas>
   );
@@ -236,7 +217,7 @@ export const VisionSphere = ({ visionSectionRef, position }) => {
       {/* meterial */}
       {/* https://github.com/pmndrs/drei#shaders */}
       <AnimatedMeshDistortMaterial
-        attach="material"
+        // attach="material"
         // drei arguments for MeshWobbleMaterial
         ref={meshRef}
         factor={introSpring.factor}
@@ -266,13 +247,13 @@ export const VisionSectionCanvas = ({ visionSectionRef, ...otherProps }) => {
           castShadow
           position={[0, 10, 0]}
           intensity={1}
-          shadow-mapSize-width={1024}
-          shadow-mapSize-height={1024}
-          shadow-camera-far={100}
-          shadow-camera-left={-10}
-          shadow-camera-top={20}
-          shadow-camera-right={20}
-          shadow-camera-bottom={-10}
+          // shadow-mapSize-width={1024}
+          // shadow-mapSize-height={1024}
+          // shadow-camera-far={100}
+          // shadow-camera-left={-10}
+          // shadow-camera-top={20}
+          // shadow-camera-right={20}
+          // shadow-camera-bottom={-10}
         />
         {/* poinLight can be positioned as sources of light */}
         <pointLight position={[-10, 0, 20]} intensity={1} />

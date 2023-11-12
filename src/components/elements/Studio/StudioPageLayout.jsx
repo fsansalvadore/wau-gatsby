@@ -128,6 +128,8 @@ const StudioPageLayout = ({ data }) => {
                             data-counter={index}
                             onClick={() => setCounter(index)}
                             onMouseOver={() => setCounter(index)}
+                            onFocus={() => setCounter(index)}
+                            onKeyDown={() => setCounter(index)}
                           >
                             <ValueCircle
                               value={value}

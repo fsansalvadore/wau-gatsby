@@ -80,8 +80,6 @@ const ProjectsPageLayout = ({ data, lang }) => {
     }
   }, [data]);
 
-  console.log('page', page, data);
-
   const AllProjects = {
     value: '',
     label: lang === 'it' ? 'Tutti i progetti' : 'All projects',

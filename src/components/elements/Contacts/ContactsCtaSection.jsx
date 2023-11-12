@@ -1,7 +1,7 @@
 import React, { useRef, useState, Suspense, useEffect } from 'react';
 import * as THREE from 'three';
 import { Canvas, useLoader } from '@react-three/fiber';
-import { SoftShadows, MeshDistortMaterial } from '@react-three/drei';
+import { MeshDistortMaterial } from '@react-three/drei';
 import { useSpring, animated } from '@react-spring/three';
 import styled from 'styled-components';
 import { gsap, Power1 } from 'gsap';
@@ -86,14 +86,11 @@ const Sphere = ({ ctaSectionRef, position }) => {
       position={position}
       ref={contactsCtaSphereRef}
     >
-      <SoftShadows size={10} />
       {/* geomtery */}
-      <sphereGeometry attach="geometry" args={[1, 150, 150]} />
+      <sphereGeometry args={[1, 150, 150]} />
       {/* meterial */}
       {/* https://github.com/pmndrs/drei#shaders */}
       <AnimatedMeshDistortMaterial
-        attach="material"
-        // color={"#403C90"}
         // drei arguments for MeshWobbleMaterial
         ref={meshRef}
         factor={introSpring.factor}
@@ -112,6 +109,7 @@ const ContentCtaCanvas = ({ ctaSectionRef, ...otherProps }) => {
     <StyledContactsCtaCanvas
       id="canvas-contacts-cta"
       // enable shadows
+      shadows
       camera={{ position: [0, 0, 10], fov: 50 }}
       ref={contactsCtaCanvasRef}
       {...otherProps}
@@ -123,14 +121,9 @@ const ContentCtaCanvas = ({ ctaSectionRef, ...otherProps }) => {
         castShadow
         position={[0, 10, 0]}
         intensity={1}
-        shadow-mapSize-width={1024}
-        shadow-mapSize-height={1024}
-        shadow-camera-far={100}
-        shadow-camera-left={-10}
-        shadow-camera-top={20}
-        shadow-camera-right={20}
-        shadow-camera-bottom={-10}
-      />
+      >
+        <orthographicCamera attach="shadow-camera" args={[-10, 10, 10, -10]} />
+      </directionalLight>
       {/* poinLight can be positioned as sources of light */}
       <pointLight position={[-10, 0, 20]} intensity={1} />
       <pointLight position={[0, -10, 20]} intensity={1} />
@@ -154,9 +147,9 @@ const ContentCtaCanvas = ({ ctaSectionRef, ...otherProps }) => {
           rotation={[-Math.PI / 2, 0, 0]}
           position={[0, -1.5, 0]}
         >
-          <planeGeometry attach="geometry" args={[100, 100]} />
+          <planeGeometry args={[1000, 1000]} />
 
-          <shadowMaterial attach="material" opacity={0.1} />
+          <shadowMaterial opacity={0.05} />
         </animated.mesh>
       </group>
     </StyledContactsCtaCanvas>
