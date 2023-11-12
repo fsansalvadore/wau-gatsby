@@ -41,8 +41,21 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
   const [expertises, setExpertises] = useState(null);
   const typedRef = useRef(null);
 
+  const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
-    if (!!typedRef && !!typedRef.current) {
+    if (typeof window !== `undefined`) {
+      window.onload = () => {
+        setIsLoaded(true);
+      };
+      setTimeout(() => {
+        setIsLoaded(true);
+      }, 800);
+    }
+  }, [setIsLoaded]);
+
+  useEffect(() => {
+    if (!!typedRef?.current) {
       const typed = new Typed(typedRef.current, {
         strings: introWords,
         startDelay: 100,
@@ -57,7 +70,7 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
         typed.destroy();
       };
     }
-  }, [typedRef]);
+  }, [typedRef, isLoaded]);
 
   useEffect(() => {
     if (data && data.articles) {
@@ -284,7 +297,7 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
         />
       </Helmet>
       <div ref={indexRef}>
-        <PageLoader />
+        <PageLoader isLoaded={isLoaded} />
         {!!acf && (
           <>
             <StyledIntroContainer className="intro-container">

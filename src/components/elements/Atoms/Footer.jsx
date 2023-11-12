@@ -47,7 +47,6 @@ export default ({ lang }) => {
     }
   `);
 
-  console.log('data', data);
   const [socialMenu, setSocialMenu] = useState(null);
 
   useEffect(() => {
@@ -120,12 +119,12 @@ export default ({ lang }) => {
           <ul>
             <li>
               <a href={`mailto:${footerData.email.email}`}>
-                {footerData.email.emailDisplay}
+                {footerData.email.display}
               </a>
             </li>
             <li>
               <a href={`tel:${footerData.tel.telefono}`}>
-                {footerData.tel.telefonoDisplay}
+                {footerData.tel.display}
               </a>
             </li>
           </ul>

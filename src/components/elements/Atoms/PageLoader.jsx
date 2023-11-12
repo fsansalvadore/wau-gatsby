@@ -1,31 +1,18 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import tw, { css } from "twin.macro";
-import { motion } from "framer-motion";
-import Logo from "../../../assets/WAU-Logo-white.svg";
-import { transition, loaderVariants } from "../../../helpers/framer-defaults";
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import tw, { css } from 'twin.macro';
+import { motion } from 'framer-motion';
+import Logo from '../../../assets/WAU-Logo-white.svg';
+import { transition, loaderVariants } from '../../../helpers/framer-defaults';
 
 // eslint-disable-next-line import/no-default-export
-export default () => {
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    if (typeof window !== `undefined`) {
-      window.onload = () => {
-        setIsLoaded(true);
-      };
-      setTimeout(() => {
-        setIsLoaded(true);
-      }, 800);
-    }
-  }, [setIsLoaded]);
-
+export default ({ isLoaded }) => {
   return (
     <StyledPageLoader
-      animate={isLoaded ? "hidden" : "initial"}
+      animate={isLoaded ? 'hidden' : 'initial'}
       initial="initial"
       variants={loaderVariants}
-      exit={{ y: "-100%", ...transition }}
+      exit={{ y: '-100%', ...transition }}
       transition={{ ...transition, duration: 0.4 }}
     >
       <img src={Logo} alt="WAU Architetti logo" className="loader-logo" />
