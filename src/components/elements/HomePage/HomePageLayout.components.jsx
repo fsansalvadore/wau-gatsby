@@ -114,10 +114,6 @@ const Sphere = ({ indexRef, position }) => {
 export const IntroCanvas = ({ indexRef }) => {
   const canvasRef = useRef(null);
 
-  useEffect(() => {
-    console.log('intro canvas ref', canvasRef);
-  }, []);
-
   return (
     <StyledIntroCanvas
       id="canvas-root"
