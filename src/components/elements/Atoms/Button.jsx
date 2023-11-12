@@ -1,7 +1,7 @@
-import React from "react";
-import tw, { css } from "twin.macro";
-import styled from "styled-components";
-import { Link } from "gatsby";
+import React from 'react';
+import tw, { css } from 'twin.macro';
+import styled from 'styled-components';
+import { Link } from 'gatsby';
 
 const StyledButton = styled(Link)(() => [
   css`
@@ -18,6 +18,8 @@ const StyledButton = styled(Link)(() => [
 ]);
 
 // eslint-disable-next-line import/no-default-export
-export default ({ children, ...props }) => {
+const Button = ({ children, ...props }) => {
   return <StyledButton {...props}>{children}</StyledButton>;
 };
+
+export default Button;

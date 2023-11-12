@@ -1,26 +1,18 @@
-import React from "react";
-import { graphql, Link, useStaticQuery } from "gatsby";
-import Img from "gatsby-image";
-import parse from "html-react-parser";
-import styled from "styled-components";
-import tw, { css } from "twin.macro";
-import { Helmet } from "react-helmet";
-import GridMaxWidthContainer from "../elements/Atoms/GridMaxWidthContainer";
-import ProjectPreviewCard from "../elements/Projects/ProjectPreviewCard/ProjectPreviewCard";
-import Layout from "../LayoutComponent";
-import Heading from "../elements/Heading/Heading";
-import fallbackImg from "../../images/Wau-Architetti-social-logo.jpg";
+import React from 'react';
+import { Link } from 'gatsby';
+import parse from 'html-react-parser';
+import styled from 'styled-components';
+import tw, { css } from 'twin.macro';
+import { Helmet } from 'react-helmet';
+import GridMaxWidthContainer from '../elements/Atoms/GridMaxWidthContainer';
+import ProjectPreviewCard from '../elements/Projects/ProjectPreviewCard/ProjectPreviewCard';
+import Layout from '../LayoutComponent';
+import Heading from '../elements/Heading/Heading';
+import fallbackImg from '../../images/Wau-Architetti-social-logo.jpg';
 
 const ExpertisePage = (props) => {
-  const {
-    content,
-    slug,
-    expertiseACF,
-    featuredImage,
-    seo,
-    title,
-    lang,
-  } = props.pageContext;
+  const { content, slug, expertiseACF, featuredImage, seo, title, lang } =
+    props.pageContext;
 
   return (
     <Layout>
@@ -28,14 +20,14 @@ const ExpertisePage = (props) => {
         <title>
           {seo && seo.title
             ? `${parse(seo.title)}`
-            : lang.code === "IT"
+            : lang.code === 'IT'
             ? `${title} • Expertise • WAU Architetti`
             : `${title} • Expertise • WAU Architects`}
         </title>
         <link
           rel="canonical"
           href={
-            lang.code === "IT"
+            lang.code === 'IT'
               ? `https://www.wauarchitetti.com/expertise/${slug}`
               : `https://www.wauarchitetti.com/en/expertise/${slug}`
           }
@@ -57,7 +49,7 @@ const ExpertisePage = (props) => {
         <meta
           property="og:site_name"
           content={
-            lang.code === "IT"
+            lang.code === 'IT'
               ? `${title} • Expertise • WAU Architetti`
               : `${title} • Expertise • WAU Architects`
           }
@@ -66,7 +58,7 @@ const ExpertisePage = (props) => {
         <meta
           property="og:url"
           content={
-            lang.code === "IT"
+            lang.code === 'IT'
               ? `https://www.wauarchitetti.com/expertise/${slug}`
               : `https://www.wauarchitetti.com/en/expertise/${slug}`
           }
@@ -74,7 +66,7 @@ const ExpertisePage = (props) => {
         <meta
           property="og:title"
           content={
-            lang.code === "IT"
+            lang.code === 'IT'
               ? `${title} • Expertise • WAU Architetti`
               : `${title} • Expertise • WAU Architects`
           }
@@ -94,7 +86,7 @@ const ExpertisePage = (props) => {
         <meta
           name="twitter:site"
           content={
-            lang.code === "IT"
+            lang.code === 'IT'
               ? `https://www.wauarchitetti.com/expertise/${slug}`
               : `https://www.wauarchitetti.com/en/expertise/${slug}`
           }
@@ -102,7 +94,7 @@ const ExpertisePage = (props) => {
         <meta
           name="twitter:title"
           content={
-            lang.code === "IT"
+            lang.code === 'IT'
               ? `${title} • Expertise • WAU Architetti`
               : `${title} • Expertise • WAU Architects`
           }
@@ -121,9 +113,9 @@ const ExpertisePage = (props) => {
       <ExpertiseContainer>
         <Heading>
           <p className="breadcrumbs mono">
-            <Link to={lang.code === "EN" ? "/en/expertise/" : "/expertise/"}>
-              {lang.code === "EN" ? "Expertise" : "Expertise"}
-            </Link>{" "}
+            <Link to={lang.code === 'EN' ? '/en/expertise/' : '/expertise/'}>
+              {lang.code === 'EN' ? 'Expertise' : 'Expertise'}
+            </Link>{' '}
             /
           </p>
           <div tw="w-full md:w-3/4">
@@ -162,7 +154,7 @@ const ExpertisePage = (props) => {
                   >
                     <ProjectPreviewCard
                       link={
-                        lang.code === "EN"
+                        lang.code === 'EN'
                           ? `/en/projects/${project.slug}`
                           : `/progetti/${project.slug}`
                       }
@@ -171,12 +163,12 @@ const ExpertisePage = (props) => {
                       imgSrc={
                         project.featuredImage
                           ? project.featuredImage.node.sourceUrl
-                          : ""
+                          : ''
                       }
                       imgAlt={
                         project.featuredImage
                           ? project.featuredImage.node.altText
-                          : ""
+                          : ''
                       }
                       projectdate={
                         project.ProjectAFC.projectdate

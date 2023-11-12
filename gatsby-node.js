@@ -370,7 +370,7 @@ exports.createResolvers = async ({
   const { createNode } = actions;
 
   await createResolvers({
-    WORDPRESS_MediaItem: {
+    WpMediaItem: {
       imageFile: {
         type: 'File',
         async resolve(source) {

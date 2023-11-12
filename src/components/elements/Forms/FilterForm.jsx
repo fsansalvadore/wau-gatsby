@@ -4,7 +4,7 @@ import tw, { css } from 'twin.macro';
 import './antd-custom.css';
 
 // eslint-disable-next-line import/no-default-export
-export default ({ children, otherProps }) => {
+const FilterForm = ({ children, otherProps }) => {
   return <StyledFilterForm {...otherProps}>{children}</StyledFilterForm>;
 };
 
@@ -20,3 +20,5 @@ const StyledFilterForm = styled.form(() => [
     }
   `,
 ]);
+
+export default FilterForm;

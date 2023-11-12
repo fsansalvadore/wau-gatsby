@@ -8,7 +8,7 @@ import Layout from '../../LayoutComponent';
 import { Helmet } from 'react-helmet';
 import HeadingIntroHalf from '../Heading/HeadingIntroHalf';
 
-export default ({ data }) => {
+const PrivacyPage = ({ data }) => {
   const [page, setPage] = useState(null);
 
   useEffect(() => {
@@ -164,3 +164,5 @@ const StyledPrivacyPage = styled.div(() => [
     }
   `,
 ]);
+
+export default PrivacyPage;

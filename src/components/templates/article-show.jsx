@@ -48,7 +48,7 @@ const ArticleShowPage = (props) => {
     }
   `);
 
-  const [aDate, setADate] = useState(new Date(date));
+  const [aDate] = useState(new Date(date));
   const [articleDate, setArticleDate] = useState(null);
 
   useEffect(() => {

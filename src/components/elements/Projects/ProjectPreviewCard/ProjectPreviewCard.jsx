@@ -1,11 +1,11 @@
-import React from "react";
-import tw from "twin.macro";
-import { Link } from "gatsby";
-import { motion } from "framer-motion";
-import styled from "styled-components";
-import LazyLoad from "react-lazyload";
-import Img from "gatsby-image";
-import { transition } from "../../../../helpers/framer-defaults";
+import React from 'react';
+import 'twin.macro';
+import { Link } from 'gatsby';
+import { motion } from 'framer-motion';
+import styled from 'styled-components';
+import LazyLoad from 'react-lazyload';
+import Img from 'gatsby-image';
+import { transition } from '../../../../helpers/framer-defaults';
 
 const StyledProjectPreviewCard = styled(motion.div)`
   // height: 300px;
@@ -69,7 +69,7 @@ const ProjectPreviewCard = ({
                 animate={{ y: 0 }}
                 transition={{ ...transition, delay: 0.1, duration: 1 }}
               >
-                {title ? title : "Missing title project"}
+                {title ? title : 'Missing title project'}
               </motion.h2>
             </div>
           </div>
@@ -78,13 +78,13 @@ const ProjectPreviewCard = ({
               fixed={featuredImage.node.imageFile.childImageSharp.fixed}
               // fluid={featuredImage.node.imageFile.childImageSharp.fluid}
               tw="absolute w-full h-full top-0 right-0 bottom-0 left-0 object-cover"
-              alt={imgAlt ? imgAlt : "Image"}
+              alt={imgAlt ? imgAlt : 'Image'}
             />
           ) : (
             <img
               tw="absolute w-full h-full top-0 right-0 bottom-0 left-0 object-cover"
               src={featuredImage && featuredImage.node.sourceUrl}
-              alt={imgAlt ? imgAlt : "Image"}
+              alt={imgAlt ? imgAlt : 'Image'}
             />
           )}
         </Link>

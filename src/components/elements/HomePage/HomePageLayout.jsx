@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
-// import { gsap, Power1 } from 'gsap';
+import { gsap, Power1 } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from 'gatsby';
 import Typed from 'typed.js';
@@ -92,130 +92,130 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
   }, [setIntroWords, acf]);
 
   // Force play video
-  // useEffect(() => {
-  //   if (!videoRef || !videoRef.current) return;
+  useEffect(() => {
+    if (!videoRef || !videoRef.current) return;
 
-  //   //open bug since 2017 that you cannot set muted in video element https://github.com/facebook/react/issues/10389
-  //   videoRef.current.defaultMuted = true;
-  //   videoRef.current.muted = true;
+    //open bug since 2017 that you cannot set muted in video element https://github.com/facebook/react/issues/10389
+    videoRef.current.defaultMuted = true;
+    videoRef.current.muted = true;
 
-  //   if (!!videoRef && !!videoRef.current) {
-  //     const promise = videoRef.current.play();
-  //     videoRef.current.play();
-  //     if (promise !== undefined) {
-  //       promise
-  //         .catch((error) => {
-  //           // Auto-play was prevented
-  //           // Show a UI element to let the user manually start playback
-  //         })
-  //         .then(() => {
-  //           // Auto-play started
-  //           videoRef.current.play();
-  //         });
-  //     }
-  //   }
-  // }, [videoRef]);
+    if (!!videoRef && !!videoRef.current) {
+      const promise = videoRef.current.play();
+      videoRef.current.play();
+      if (promise !== undefined) {
+        promise
+          .catch((error) => {
+            // Auto-play was prevented
+            // Show a UI element to let the user manually start playback
+          })
+          .then(() => {
+            // Auto-play started
+            videoRef.current.play();
+          });
+      }
+    }
+  }, [videoRef]);
 
-  // // Intro Text scroll animation
-  // useEffect(() => {
-  //   if (!indexRef || !indexRef.current) return;
-  //   if (
-  //     typeof window !== `undefined` &&
-  //     typeof document !== `undefined` &&
-  //     !!acf &&
-  //     gsap
-  //   ) {
-  //     // eslint-disable-next-line react-hooks/exhaustive-deps
-  //     const introTextTL = gsap.timeline({
-  //       scrollTrigger: {
-  //         trigger: indexRef.current,
-  //         start: '200px 10%',
-  //         end: 'center 20%',
-  //         scrub: 2,
-  //         onUpdate: ({ progress }) => [
-  //           progress > 0.3
-  //             ? ScrollProgressToggleOut()
-  //             : ScrollProgressToggleIn(),
-  //         ],
-  //       },
-  //     });
+  // Intro Text scroll animation
+  useEffect(() => {
+    if (!indexRef || !indexRef.current) return;
+    if (
+      typeof window !== `undefined` &&
+      typeof document !== `undefined` &&
+      !!acf &&
+      gsap
+    ) {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      const introTextTL = gsap.timeline({
+        scrollTrigger: {
+          trigger: indexRef.current,
+          start: '200px 10%',
+          end: 'center 20%',
+          scrub: 2,
+          onUpdate: ({ progress }) => [
+            progress > 0.3
+              ? ScrollProgressToggleOut()
+              : ScrollProgressToggleIn(),
+          ],
+        },
+      });
 
-  //     ScrollTrigger.defaults({
-  //       immediateRender: false,
-  //       ease: Power1.inOut,
-  //     });
+      ScrollTrigger.defaults({
+        immediateRender: false,
+        ease: Power1.inOut,
+      });
 
-  //     introTextTL
-  //       .to(
-  //         introTextRef.current,
-  //         {
-  //           duration: 3,
-  //           scale: 2,
-  //         },
-  //         indexRef.current
-  //       )
-  //       .to(
-  //         introTextRef.current,
-  //         {
-  //           opacity: 1,
-  //         },
-  //         0.6
-  //       )
-  //       .to(
-  //         introTextRef.current,
-  //         {
-  //           duration: 0.5,
-  //           opacity: 0,
-  //         },
-  //         '1.4'
-  //       )
-  //       .to(
-  //         videoContainerRef.current,
-  //         {
-  //           duration: 1,
-  //           opacity: 1,
-  //         },
-  //         '1.5'
-  //       );
-  //   }
-  // }, [indexRef, videoContainerRef, acf]);
+      introTextTL
+        .to(
+          introTextRef.current,
+          {
+            duration: 3,
+            scale: 2,
+          },
+          indexRef.current
+        )
+        .to(
+          introTextRef.current,
+          {
+            opacity: 1,
+          },
+          0.6
+        )
+        .to(
+          introTextRef.current,
+          {
+            duration: 0.5,
+            opacity: 0,
+          },
+          '1.4'
+        )
+        .to(
+          videoContainerRef.current,
+          {
+            duration: 1,
+            opacity: 1,
+          },
+          '1.5'
+        );
+    }
+  }, [indexRef, videoContainerRef, acf]);
 
-  // const hideVideo = () => {
-  //   if (!videoRef) return;
-  //   if (!!videoRef && !!videoRef.current)
-  //     videoRef.current.style.display = 'none';
-  // };
-  // const showVideo = () => {
-  //   if (!videoRef) return;
-  //   if (!!videoRef && !!videoRef.current)
-  //     videoRef.current.style.display = 'flex';
-  // };
+  const hideVideo = () => {
+    if (!videoRef) return;
+    if (!!videoRef && !!videoRef.current)
+      videoRef.current.style.display = 'none';
+  };
+  const showVideo = () => {
+    if (!videoRef) return;
+    if (!!videoRef && !!videoRef.current)
+      videoRef.current.style.display = 'flex';
+  };
 
-  // useEffect(() => {
-  //   if (!visionSectionRef || !visionSectionRef.current) return;
-  //   if (typeof window !== `undefined` && typeof document !== `undefined`) {
-  //     // eslint-disable-next-line react-hooks/exhaustive-deps
-  //     const visionTL = gsap.timeline({
-  //       scrollTrigger: {
-  //         trigger: '.vision-section',
-  //         start: 'top bottom',
-  //         end: 'bottom bottom',
-  //         onUpdate: ({ progress }) => [
-  //           progress === 0 ? showVideo() : hideVideo(),
-  //         ],
-  //       },
-  //     });
+  useEffect(() => {
+    if (!visionSectionRef || !visionSectionRef.current) return;
+    if (typeof window !== `undefined` && typeof document !== `undefined`) {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      const visionTL = gsap.timeline({
+        scrollTrigger: {
+          trigger: '.vision-section',
+          start: 'top bottom',
+          end: 'bottom bottom',
+          onUpdate: ({ progress }) => [
+            progress === 0 ? showVideo() : hideVideo(),
+          ],
+        },
+      });
 
-  //     ScrollTrigger.defaults({
-  //       immediateRender: false,
-  //       ease: Power1.inOut,
-  //     });
+      ScrollTrigger.defaults({
+        immediateRender: false,
+        ease: Power1.inOut,
+      });
 
-  //     visionTL.to(videoContainerRef.current, {
-  //       display: 'hidden',
-  //     });
-  //   }
-  // }, []);
+      visionTL.to(videoContainerRef.current, {
+        display: 'hidden',
+      });
+    }
+  }, []);
 
   return (
     <Layout>

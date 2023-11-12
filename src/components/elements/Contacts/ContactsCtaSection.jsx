@@ -164,7 +164,7 @@ const ContentCtaCanvas = ({ ctaSectionRef, ...otherProps }) => {
 };
 
 // eslint-disable-next-line import/no-default-export
-export default ({ className, lang, data, ...props }) => {
+const ContactsCtaSection = ({ className, lang, data, ...props }) => {
   const ctaSectionRef = useRef(null);
   const [ctaData, setCtaData] = useState(null);
 
@@ -204,3 +204,5 @@ export default ({ className, lang, data, ...props }) => {
     </section>
   );
 };
+
+export default ContactsCtaSection;

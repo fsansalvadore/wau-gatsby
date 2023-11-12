@@ -3,7 +3,7 @@ import tw, { css } from 'twin.macro';
 import styled from 'styled-components';
 
 // eslint-disable-next-line import/no-default-export
-export default ({ value, index, counter }) => {
+const ValueCircle = ({ value, index, counter }) => {
   return (
     <StyledValueCircle
       tw="flex"
@@ -39,3 +39,5 @@ const StyledValueCircle = styled.div(() => [
     }
   `,
 ]);
+
+export default ValueCircle;

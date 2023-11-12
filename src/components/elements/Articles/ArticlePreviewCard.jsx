@@ -11,10 +11,11 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 const MotionLink = motion(Link);
 
 const ArticlePreviewCard = ({ article, ...otherProps }) => {
-  const [date, setDate] = useState(new Date(article.date));
   const [articleDate, setArticleDate] = useState(null);
 
   useEffect(() => {
+    const date = new Date(article.date);
+
     if (date) {
       if (article.language.code === 'EN') {
         setArticleDate(
@@ -30,7 +31,7 @@ const ArticlePreviewCard = ({ article, ...otherProps }) => {
         );
       }
     }
-  }, [setArticleDate, article, date]);
+  }, [setArticleDate, article]);
 
   return (
     <div tw="opacity-70 hover:opacity-100 transition-opacity duration-150 ease-in-out border-0 border-b border-solid border-gray-500 py-4 md:py-8">

@@ -13,9 +13,9 @@ module.exports = {
       resolve: 'gatsby-source-wordpress',
       options: {
         url: 'https://wp.wauarchitetti.com/graphql',
-        typeName: 'WPGraphQL',
-        fieldName: 'wpgraphql',
-        useACF: true,
+        // typeName: 'WPGraphQL',
+        // fieldName: 'wpgraphql',
+        // useACF: true,
       },
     },
     'gatsby-plugin-image',

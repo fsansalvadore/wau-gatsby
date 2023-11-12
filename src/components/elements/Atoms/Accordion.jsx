@@ -8,13 +8,12 @@ import Button from './Button';
 const { Panel } = Collapse;
 
 // eslint-disable-next-line import/no-default-export
-export default ({ list = [], ...otherProps }) => {
-  let location;
+const Accordion = ({ list = [], ...otherProps }) => {
   const [lang, setLang] = useState('it');
 
   useEffect(() => {
     if (typeof window !== `undefined`) {
-      location = window.location.href;
+      const location = window.location.href;
       if (
         location.includes('00/en') ||
         location.includes('app/en') ||
@@ -143,3 +142,5 @@ const StyledAccordion = styled.div(() => [
     }
   `,
 ]);
+
+export default Accordion;

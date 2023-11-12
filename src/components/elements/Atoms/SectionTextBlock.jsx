@@ -8,7 +8,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Button from './Button';
 
 // eslint-disable-next-line import/no-default-export
-export default ({
+const SectionTextBlock = ({
   label,
   title,
   content,
@@ -142,3 +142,5 @@ const StyledContactsTextBlock = styled(motion.div)(
       `,
   ]
 );
+
+export default SectionTextBlock;

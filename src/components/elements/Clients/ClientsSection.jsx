@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import tw, { styled, css } from 'twin.macro';
-import Img from 'gatsby-image';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
 const ClientLink = styled.a`
@@ -11,7 +10,7 @@ const ClientLink = styled.a`
 `;
 
 // eslint-disable-next-line import/no-default-export
-export default ({ lang, ...otherProps }) => {
+const ClientsSection = ({ lang, ...otherProps }) => {
   const data = useStaticQuery(graphql`
     query ClientsQuery {
       clients: allWpClient(limit: 100, filter: { status: { eq: "publish" } }) {
@@ -92,3 +91,5 @@ const StyledClientsSection = styled.section(() => [
     }
   `,
 ]);
+
+export default ClientsSection;

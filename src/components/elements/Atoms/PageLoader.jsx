@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import tw, { css } from 'twin.macro';
 import { motion } from 'framer-motion';
@@ -6,7 +6,7 @@ import Logo from '../../../assets/WAU-Logo-white.svg';
 import { transition, loaderVariants } from '../../../helpers/framer-defaults';
 
 // eslint-disable-next-line import/no-default-export
-export default ({ isLoaded }) => {
+const PageLoader = ({ isLoaded }) => {
   return (
     <StyledPageLoader
       animate={isLoaded ? 'hidden' : 'initial'}
@@ -44,3 +44,5 @@ const StyledPageLoader = styled(motion.div)(() => [
     }
   `,
 ]);
+
+export default PageLoader;
