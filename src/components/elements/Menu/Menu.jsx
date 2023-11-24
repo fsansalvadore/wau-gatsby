@@ -181,6 +181,19 @@ const Menu = ({ lang, isOpen }) => {
           }
         }
       }
+      globals: wpPage(title: { eq: "Globals" }) {
+        title
+        globalsACF {
+          telefono {
+            telefono
+            telefonoDisplay
+          }
+          indirizzo {
+            indirizzo
+            url
+          }
+        }
+      }
     }
   `);
 
@@ -198,6 +211,22 @@ const Menu = ({ lang, isOpen }) => {
       setSocialMenu(data.menus.nodes.find((node) => node.name === 'Social'));
     }
   }, [data.menus.nodes]);
+
+  const menuData = {
+    tel: {
+      telefono: data.globals.globalsACF.telefono.telefono ?? '+3901119171909',
+      display:
+        data.globals.globalsACF.telefono.telefonoDisplay ?? '011 1917 1909',
+    },
+    indirizzo: {
+      url:
+        data.globals.globalsACF.indirizzo.url ??
+        'https://www.google.com/maps/place/Via+Po,+1,+10124+Torino+TO/data=!4m2!3m1!1s0x47886d7075788f65:0xfbab35a5fc5276c2?sa=X&ved=2ahUKEwjD8czu4onuAhXJ5KQKHc0nCyUQ8gEwAHoECAYQAQ',
+      indirizzo:
+        data.globals.globalsACF.indirizzo.indirizzo ??
+        'Via Po, 1 - 10124 Torino, Italia',
+    },
+  };
 
   return (
     <MenuContainer
@@ -259,15 +288,15 @@ const Menu = ({ lang, isOpen }) => {
               <div tw="opacity-70 text-sm mb-8 pt-2">
                 <a
                   target="_blank"
-                  href="https://www.google.com/maps/place/Via+Po,+1,+10124+Torino+TO/data=!4m2!3m1!1s0x47886d7075788f65:0xfbab35a5fc5276c2?sa=X&ved=2ahUKEwjD8czu4onuAhXJ5KQKHc0nCyUQ8gEwAHoECAYQAQ"
+                  href={menuData.indirizzo.url}
                   rel="noreferrer"
                 >
-                  Via Po, 1 - 10124 Torino, Italia
+                  {menuData.indirizzo.indirizzo}
                 </a>
                 <p>
                   T{' '}
-                  <a target="_blank" href="tel:+390118127237" rel="noreferrer">
-                    +39 011 812 7237
+                  <a href={`tel:${menuData.tel.telefono}`}>
+                    {menuData.tel.display}
                   </a>
                 </p>
               </div>
