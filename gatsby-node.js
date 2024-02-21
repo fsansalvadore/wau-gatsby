@@ -399,6 +399,13 @@ exports.createPages = async ({ actions, graphql, gatsbyUtilities }) => {
     ${query}
   `);
 
+  const { createRedirect } = actions;
+
+  createRedirect({
+    fromPath: `/wau-camp/`,
+    toPath: `/`,
+  });
+
   console.log('CREATING PROJECT PAGES =========');
 
   // create ita projects pages

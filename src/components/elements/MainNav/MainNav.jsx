@@ -120,7 +120,7 @@ const NavContent = ({ lang, isOpen, toggleMenu, isMenuLight }) => {
         <Logo isMenuLight={isMenuLight} />
       </Link>
       <div tw="flex items-center" className="navbar-right">
-        {lang === 'it' && (
+        {/* {lang === 'it' && (
           <div tw="opacity-80 hover:opacity-100">
             <WCampLink
               variants={openBtnVariant}
@@ -132,7 +132,7 @@ const NavContent = ({ lang, isOpen, toggleMenu, isMenuLight }) => {
               WAU Camp
             </WCampLink>
           </div>
-        )}
+        )} */}
         <MenuBtn as="a" onClick={() => toggleMenu(!isOpen)} isOpen={isOpen}>
           <motion.span
             className="menu-icon"
