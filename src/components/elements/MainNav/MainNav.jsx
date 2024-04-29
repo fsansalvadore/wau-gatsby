@@ -36,7 +36,7 @@ const FixedNavbar = styled(motion.div)(() => [
   `,
 ]);
 
-const WCampLink = motion(Link);
+// const WCampLink = motion(Link);
 
 const MenuBtn = styled.button`
   position: relative;
