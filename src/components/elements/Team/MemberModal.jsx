@@ -38,7 +38,7 @@ const CloseButton = styled.button`
 const ModalImageContainer = tw.div`relative w-full h-1/2 min-h-[400px] md:min-h-[400px] overflow-hidden lg:w-2/5 lg:h-full xl:w-1/2`;
 const ModalImage = tw(
   GatsbyImage
-)`!absolute !w-full -top-40 lg:-top-10 right-0 left-0`;
+)`!absolute !w-full -top-10 lg:-top-10 right-0 left-0`;
 const ModalContentContainer = styled.div`
   ${tw`relative w-full h-auto lg:h-screen flex items-start justify-center overflow-y-scroll px-3 md:px-10 lg:w-3/5 xl:(w-1/2 justify-start px-24)`}
 
