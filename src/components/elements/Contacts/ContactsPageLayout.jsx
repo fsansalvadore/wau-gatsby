@@ -74,7 +74,7 @@ const ContactsPageLayout = ({ data, socials, lang }) => {
         </Heading>
         <section
           id="map"
-          tw="relative h-screen w-full flex items-center justify-center"
+          tw="relative h-[600px] w-full flex items-center justify-center overflow-hidden"
         >
           <div
             tw="absolute w-full top-0 lg:top-auto lg:w-1/4 lg:left-32 p-8 z-10"
@@ -89,7 +89,7 @@ const ContactsPageLayout = ({ data, socials, lang }) => {
             <Img
               fixed={data.contactsACF.map.mappa.imageFile.childImageSharp.fixed}
               // fluid={data.contactsACF.map.mappa.imageFile.childImageSharp.fluid}
-              tw="absolute! w-full! h-full! top-0 right-0 bottom-0 left-0 z-0"
+              tw="absolute! w-full! h-full! object-cover mt-60 lg:m-0 left-0 z-0"
               alt={
                 data.contactsACF.map.mappa.altText
                   ? data.contactsACF.map.mappa.altText
@@ -98,7 +98,7 @@ const ContactsPageLayout = ({ data, socials, lang }) => {
             />
           ) : (
             <img
-              tw="absolute w-full h-full top-0 right-0 bottom-0 left-0"
+              tw="absolute w-full h-full object-cover mt-60 lg:m-0"
               src={
                 data.contactsACF.map.mappa &&
                 data.contactsACF.map.mappa.sourceUrl

@@ -12,8 +12,8 @@ const ContattiPage = () => {
       pages: allWpPage(
         filter: {
           status: { eq: "publish" }
-          language: { slug: { eq: "en" } }
-          title: { eq: "Contacts" }
+          language: { slug: { eq: "it" } }
+          title: { eq: "Contatti" }
         }
       ) {
         nodes {
