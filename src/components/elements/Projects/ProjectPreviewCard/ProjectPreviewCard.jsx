@@ -46,7 +46,7 @@ const ProjectPreviewCard = ({
               />
             )}
           </figure>
-          <div className="w-full">
+          <div className="w-full flex flex-col">
             <div tw="overflow-hidden">
               <motion.h2
                 initial={{ y: 50 }}
@@ -56,6 +56,14 @@ const ProjectPreviewCard = ({
               >
                 {title ? title : 'Missing title project'}
               </motion.h2>
+              <motion.p
+                initial={{ y: 50 }}
+                animate={{ y: 0 }}
+                transition={{ ...transition, delay: 0.2, duration: 1 }}
+                className="font-bold text-sm leading-tight"
+              >
+                {location}
+              </motion.p>
             </div>
           </div>
         </Link>
