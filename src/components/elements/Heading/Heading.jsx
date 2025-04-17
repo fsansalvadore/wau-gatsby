@@ -3,7 +3,7 @@ import tw from 'twin.macro';
 
 const Heading = styled.div`
   width: 100%;
-  ${tw`px-4 sm:px-8 py-8 pt-28 md:p-16 md:pt-40`}
+  ${tw`py-8 pt-28 md:py-16 md:pt-40`}
 
   h1 {
     ${tw`text-3xl tracking-[-0.05rem] md:(text-5xl tracking-[-0.01rem])`}

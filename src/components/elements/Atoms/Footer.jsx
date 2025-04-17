@@ -209,7 +209,7 @@ const Footer = ({ lang }) => {
 
 const StyledFooter = styled.footer(() => [
   css`
-    ${tw`relative z-40 w-full flex items-center py-8`}
+    ${tw`relative z-40 w-full flex items-center py-8 px-4`}
     background: var(--purple);
     color: var(--white);
 

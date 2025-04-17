@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 
@@ -107,9 +111,9 @@ h1 {
 
 .cover-image-fullscreen {
   grid-column: 1 / span 12;
-  margin-left: calc(50% - 50vw);
+  /* margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
-  max-width: 1000%;
+  max-width: 1000%; */
   width: auto;
 }
 

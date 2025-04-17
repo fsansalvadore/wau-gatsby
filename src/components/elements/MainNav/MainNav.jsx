@@ -13,7 +13,7 @@ const Navbar = styled.div(({ isMenuLight }) => [
     position: fixed;
     z-index: 999;
     height: 80px;
-    ${tw`absolute w-full py-0 px-4 sm:px-8 md:px-16 flex items-center justify-between`}
+    ${tw`absolute w-full flex items-center justify-between`}
   `,
   isMenuLight &&
     css`
@@ -32,7 +32,7 @@ const FixedNavbar = styled(motion.div)(() => [
     background: ${({ isOpen }) => (isOpen ? 'transparent' : 'var(--white)')};
     box-shadow: ${({ isOpen }) =>
       isOpen ? 'none' : '1px 0 1px rgba(0, 0, 0, 0.4)'};
-    ${tw`fixed w-full py-0 px-4 sm:px-8 md:px-16 flex items-center justify-between`}
+    ${tw`fixed w-full flex items-center justify-between`}
   `,
 ]);
 
@@ -115,7 +115,7 @@ const closeBtnVariant = {
 
 const NavContent = ({ lang, isOpen, toggleMenu, isMenuLight }) => {
   return (
-    <>
+    <nav className="w-full max-w-6xl mx-auto py-0 px-4 flex items-center justify-between">
       <Link to={lang === 'en' ? '/en/' : '/'}>
         <Logo isMenuLight={isMenuLight} />
       </Link>
@@ -160,7 +160,7 @@ const NavContent = ({ lang, isOpen, toggleMenu, isMenuLight }) => {
           </motion.div>
         </MenuBtn>
       </div>
-    </>
+    </nav>
   );
 };
 

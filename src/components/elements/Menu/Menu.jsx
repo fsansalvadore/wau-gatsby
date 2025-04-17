@@ -197,6 +197,8 @@ const Menu = ({ lang, isOpen }) => {
     }
   `);
 
+  console.log('menus data', data);
+
   const [location, setLocation] = useState('');
   const [socialMenu, setSocialMenu] = useState(null);
 
