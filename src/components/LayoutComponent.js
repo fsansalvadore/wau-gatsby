@@ -1,18 +1,12 @@
 import '../styles/global.css';
 
 import React, { useEffect, useState } from 'react';
-import loadable from '@loadable/component';
-import { graphql, useStaticQuery } from 'gatsby';
 import GenericMetadata from './GenericMetadata';
 import MainNav from './elements/MainNav/MainNav';
 import Footer from './elements/Atoms/Footer';
 import { GlobalStyles } from 'twin.macro';
 
-const CtaSection = loadable(
-  () => import('./elements/Contacts/ContactsCtaSection')
-);
-
-const Layout = ({ isMenuLight, hasNoContactsCta, children }) => {
+const Layout = ({ isMenuLight, children }) => {
   const [lang, setLang] = useState('it');
 
   useEffect(() => {
@@ -28,36 +22,12 @@ const Layout = ({ isMenuLight, hasNoContactsCta, children }) => {
     }
   }, [lang]);
 
-  const data = useStaticQuery(graphql`
-    query ContactsCtaQuery {
-      pages: allWpPage(filter: { title: { eq: "Home Page" } }) {
-        nodes {
-          language {
-            name
-            code
-          }
-          homePageACF {
-            sezioneContatti {
-              paragrafo
-              tasto {
-                link
-                testo
-              }
-              titolo
-            }
-          }
-        }
-      }
-    }
-  `);
-
   return (
     <>
       <GlobalStyles />
       <GenericMetadata lang={lang} />
       <MainNav lang={lang} isMenuLight={isMenuLight} />
       <main className="max-w-6xl px-4 mx-auto">{children}</main>
-      {!hasNoContactsCta && <CtaSection lang={lang} data={data} />}
       <Footer lang={lang} />
       <script
         type="text/javascript"

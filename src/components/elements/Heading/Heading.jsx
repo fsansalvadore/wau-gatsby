@@ -3,15 +3,15 @@ import tw from 'twin.macro';
 
 const Heading = styled.div`
   width: 100%;
-  ${tw`py-8 pt-28 md:py-16 md:pt-40`}
+  ${tw`py-8 pt-28 md:py-16 md:pt-32`}
 
   h1 {
-    ${tw`text-3xl tracking-[-0.05rem] md:(text-5xl tracking-[-0.01rem])`}
+    ${tw`text-3xl md:(text-5xl)`}
   }
 
   .breadcrumbs,
   h1 {
-    ${tw`mb-3 md:mb-8`}
+    ${tw`mb-3 md:mb-4`}
   }
 
   .intro {
