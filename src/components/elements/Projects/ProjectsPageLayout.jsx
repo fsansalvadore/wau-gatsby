@@ -175,7 +175,7 @@ const ProjectsPageLayout = ({ data, lang }) => {
           content={`${page && page.seo && page.seo.metaDesc}`}
         />
       </Helmet>
-      <div className="pb-8 lg:pb-16">
+      <div className="max-container pb-8 lg:pb-16">
         <Heading>
           <HeadingIntroHalf
             // breadcrumb={page ? page.title : 'Projects'}

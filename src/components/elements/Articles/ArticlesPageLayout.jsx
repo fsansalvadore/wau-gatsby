@@ -21,7 +21,7 @@ const ArticlesPageLayout = ({ data, lang }) => {
       <Helmet>
         <title>{lang === 'it' ? 'Notizie' : 'News'} • WAU Architetti</title>
       </Helmet>
-      <div>
+      <div className="max-container">
         <Heading>
           <HeadingIntroHalf
             breadcrumb={page && page.pagesACF && page.pagesACF.titoletto}

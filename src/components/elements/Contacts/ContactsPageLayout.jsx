@@ -34,7 +34,7 @@ const ContactsPageLayout = ({ data, socials, lang }) => {
           {data.title ? `${data.title}` : 'Contacts'} · WAU Architetti
         </title>
       </Helmet>
-      <StyledContactsPageLayout>
+      <StyledContactsPageLayout className="max-container">
         <Heading tw="md:flex">
           <div tw="w-full md:w-2/3 mb-8 flex flex-col justify-between">
             <div tw="mb-16">
@@ -62,10 +62,7 @@ const ContactsPageLayout = ({ data, socials, lang }) => {
                   )}00`}
                 >
                   <p tw="text-sm opacity-60">{item[1]['etichetta']}</p>
-                  <a
-                    tw="font-bold text-lg mt-2"
-                    href={`mailto:${item[1]['email']}`}
-                  >
+                  <a tw="text-lg mt-2" href={`mailto:${item[1]['email']}`}>
                     {item[1]['email']}
                   </a>
                 </div>

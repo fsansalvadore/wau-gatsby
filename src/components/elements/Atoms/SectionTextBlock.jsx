@@ -111,7 +111,7 @@ const StyledContactsTextBlock = styled(motion.div)(
 
       .st-title {
         > * {
-          ${tw`text-3xl leading-[110%] tracking-[-0.02rem] mb-8 w-full lg:(text-5xl leading-[115%] w-3/4)`}
+          ${tw`text-3xl mb-8 w-full lg:(text-4xl w-3/4)`}
         }
       }
     `,

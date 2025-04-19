@@ -54,8 +54,8 @@ const ProjectPage = (props) => {
           {seo && seo.title
             ? `${parse(seo.title)}`
             : lang.code === 'IT'
-            ? `${title} • Progetti • WAU Architetti`
-            : `${title} • Projects • WAU Architects`}
+              ? `${title} • Progetti • WAU Architetti`
+              : `${title} • Projects • WAU Architects`}
         </title>
         <link
           rel="canonical"
@@ -138,7 +138,7 @@ const ProjectPage = (props) => {
           }`}
         />
       </Helmet>
-      <ProjectContainer>
+      <ProjectContainer className="max-container">
         <Heading tw="flex flex-col lg:flex-row">
           <div tw="w-full md:w-3/4">
             <div className="breadcrumbs mono">

@@ -28,9 +28,6 @@
     "@babel/core": "^7.26.10",
     "@babel/plugin-transform-react-jsx": "^7.22.15",
     "@loadable/component": "^5.16.4",
-    "@react-spring/three": "^9.7.5",
-    "@react-three/drei": "^9.122.0",
-    "@react-three/fiber": "^8.18.0",
     "antd": "^5.24.7",
     "autoprefixer": "^10.4.21",
     "babel-plugin-styled-components": "^2.1.4",
@@ -66,9 +63,7 @@
     "slick-carousel": "^1.8.1",
     "styled-components": "^6.1.17",
     "tailwindcss": "^3.4.17",
-    "three": "^0.166.0",
-    "twin.macro": "^3.4.1",
-    "typed.js": "^2.1.0"
+    "twin.macro": "^3.4.1"
   },
   "devDependencies": {
     "babel-plugin-macros": "^3.1.0",

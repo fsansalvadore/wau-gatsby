@@ -68,7 +68,7 @@ const ExpertisePageLayout = ({ data, lang }) => {
       <Helmet>
         <title>WAU Architetti • Expertise</title>
       </Helmet>
-      <div>
+      <div className="max-container">
         <Heading>
           <HeadingIntroHalf
             breadcrumb={page ? page.title : 'Expertise'}

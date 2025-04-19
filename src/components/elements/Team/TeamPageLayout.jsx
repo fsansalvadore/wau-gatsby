@@ -33,10 +33,10 @@ const TeamPageLayout = ({ data, lang }) => {
             a.date < b.date
               ? 1
               : a.date === b.date
-              ? a.title > b.title
-                ? 1
+                ? a.title > b.title
+                  ? 1
+                  : -1
                 : -1
-              : -1
           )
       );
       setTeamMembers(
@@ -46,10 +46,10 @@ const TeamPageLayout = ({ data, lang }) => {
             a.date < b.date
               ? 1
               : a.date === b.date
-              ? a.title > b.title
-                ? 1
+                ? a.title > b.title
+                  ? 1
+                  : -1
                 : -1
-              : -1
           )
       );
       setCollaborators(
@@ -57,10 +57,10 @@ const TeamPageLayout = ({ data, lang }) => {
           a.date < b.date
             ? 1
             : a.date === b.date
-            ? a.title > b.title
-              ? 1
+              ? a.title > b.title
+                ? 1
+                : -1
               : -1
-            : -1
         )
       );
     }
@@ -77,14 +77,14 @@ const TeamPageLayout = ({ data, lang }) => {
           isOpen={modalIsOpen}
           setModalIsOpen={setModalIsOpen}
         />
-        <Heading>
+        <Heading className="max-container">
           <HeadingIntroHalf
             breadcrumb={page && page.pagesACF && page.pagesACF.titoletto}
             heading={page && page.pagesACF && page.pagesACF.title}
             subheading={page && page.pagesACF && page.pagesACF.introduzione}
           />
         </Heading>
-        <section>
+        <section className="max-container">
           <GridMaxWidthContainer tw="my-4 lg:mb-16 lg:mt-0">
             <hr tw="col-span-12 mb-8 lg:mb-16" />
             <h2 tw="col-span-12 text-3xl md:text-5xl">
@@ -125,7 +125,7 @@ const TeamPageLayout = ({ data, lang }) => {
             </ul>
           </GridMaxWidthContainer>
         </section>
-        <section>
+        <section className="max-container">
           <GridMaxWidthContainer tw="my-4 lg:my-8">
             <hr tw="col-span-12 mb-8 lg:mb-16" />
             <h2 tw="col-span-12 text-3xl md:text-5xl">
@@ -169,7 +169,7 @@ const TeamPageLayout = ({ data, lang }) => {
           </GridMaxWidthContainer>
         </section>
         {collaborators && collaborators.length > 0 && (
-          <section tw="w-full flex justify-center">
+          <section className="w-full flex justify-center max-container">
             <GridMaxWidthContainer tw="my-4 lg:mb-8">
               <hr tw="col-span-12 mb-8 lg:mb-16" />
               <h2 tw="col-span-12 md:col-span-4 md:col-start-1 text-3xl md:text-5xl">

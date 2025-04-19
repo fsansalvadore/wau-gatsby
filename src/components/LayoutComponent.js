@@ -27,7 +27,7 @@ const Layout = ({ isMenuLight, children }) => {
       <GlobalStyles />
       <GenericMetadata lang={lang} />
       <MainNav lang={lang} isMenuLight={isMenuLight} />
-      <main className="max-w-6xl px-4 mx-auto">{children}</main>
+      <main>{children}</main>
       <Footer lang={lang} />
       <script
         type="text/javascript"

@@ -76,8 +76,8 @@ const ArticleShowPage = (props) => {
           {seo && seo.title
             ? `${seo.title}`
             : lang.code === 'IT'
-            ? `${title} • Notizie • WAU Architetti`
-            : `${title} • News • WAU Architects`}
+              ? `${title} • Notizie • WAU Architetti`
+              : `${title} • News • WAU Architects`}
         </title>
         <link
           rel="canonical"
@@ -160,10 +160,10 @@ const ArticleShowPage = (props) => {
           }`}
         />
       </Helmet>
-      <ProjectContainer>
+      <ProjectContainer className="w-full max-container">
         <div tw="w-full flex justify-center">
           <GridMaxWidthContainer
-            className="container-max-1000"
+            className="max-w-[800px]"
             tw="w-full grid grid-cols-12"
           >
             <Heading className="article-heading" tw="col-span-12">
@@ -230,7 +230,7 @@ const ArticleShowPage = (props) => {
         </div>
         <article tw="w-full flex justify-center">
           <GridMaxWidthContainer
-            className="container-max-900"
+            className="max-w-[800px]"
             tw="w-full grid grid-cols-12 pb-8 md:pb-16 mb-16 md:mb-32"
           >
             {content && parse(content)}

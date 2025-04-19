@@ -56,6 +56,32 @@ const IndexIta = () => {
           }
         }
       }
+      projects: allWpProject(
+        limit: 100
+        filter: { status: { eq: "publish" }, language: { slug: { eq: "it" } } }
+      ) {
+        nodes {
+          status
+          slug
+          title
+          featuredImage {
+            node {
+              link
+              sourceUrl
+              gatsbyImage(width: 1200)
+            }
+          }
+          ProjectAFC {
+            projectdate
+            location
+          }
+          language {
+            code
+            locale
+            slug
+          }
+        }
+      }
       expertises: allWpExpertise(
         limit: 40
         filter: { status: { eq: "publish" }, language: { slug: { eq: "it" } } }

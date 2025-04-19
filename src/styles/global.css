@@ -30,6 +30,10 @@ a:active {
   color: inherit;
 }
 
+.max-container {
+  @apply max-w-6xl mx-auto px-4;
+}
+
 .container-max-1400 {
   max-width: 1400px;
 }

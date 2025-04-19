@@ -26,7 +26,7 @@ const ProjectPreviewCard = ({
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ ...transition, duration: 0.8 }}
-        tw="relative flex items-end w-full"
+        className="group/preview-card relative flex items-end w-full"
         {...otherProps}
       >
         <Link to={link} className="w-full flex flex-col gap-2">
@@ -46,13 +46,13 @@ const ProjectPreviewCard = ({
               />
             )}
           </figure>
-          <div className="w-full flex flex-col">
+          <div className="w-full flex flex-col group-hover/preview-card:underline">
             <div tw="overflow-hidden">
               <motion.h2
                 initial={{ y: 50 }}
                 animate={{ y: 0 }}
                 transition={{ ...transition, delay: 0.1, duration: 1 }}
-                className="font-bold text-sm leading-tight"
+                className="text-sm leading-tight"
               >
                 {title ? title : 'Missing title project'}
               </motion.h2>
@@ -60,7 +60,7 @@ const ProjectPreviewCard = ({
                 initial={{ y: 50 }}
                 animate={{ y: 0 }}
                 transition={{ ...transition, delay: 0.2, duration: 1 }}
-                className="font-bold text-sm leading-tight"
+                className="text-sm leading-tight"
               >
                 {location}
               </motion.p>
