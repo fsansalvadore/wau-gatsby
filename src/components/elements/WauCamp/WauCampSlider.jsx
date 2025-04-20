@@ -17,7 +17,7 @@ const SlideText = styled.div`
       ${tw`text-2xl md:text-4xl`}
     }
     em {
-      ${tw`block font-mono mt-4`}
+      ${tw`block mt-4`}
     }
   }
 `;

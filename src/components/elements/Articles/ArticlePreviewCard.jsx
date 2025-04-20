@@ -68,7 +68,7 @@ const ArticlePreviewCard = ({ article, ...otherProps }) => {
           </div>
           <div tw="col-span-9 md:col-start-4 md:col-span-6 pl-0 md:pl-8">
             <h3 tw="text-2xl md:text-3xl">{article.title}</h3>
-            <p tw="mt-2 font-mono text-sm">
+            <p tw="mt-2 text-sm">
               <span>{articleDate && articleDate}</span>
               {article.categories.nodes.length > 0 && (
                 <ul tw="block md:inline ml-0 md:ml-4">

@@ -76,19 +76,39 @@ const Footer = ({ lang }) => {
             <Logo className="max-w-20" />
           </Link>
           <div tw="mt-6 text-sm">
-            <p tw="inline mr-4 mb-1 text-sm opacity-80">
+            <p tw="inline mr-4 text-sm opacity-80">
               WAU ARCHITETTI SRL Società di Ingegneria
             </p>
-            <p tw="opacity-80 mt-1">P.IVA 12437940013</p>
-            <p tw="block mt-1 mb-6">
-              <a href="https://www.google.com/maps/place/WAU/@45.0702929,7.6850724,17z/data=!3m1!4b1!4m5!3m4!1s0x47886d70758553ef:0x8d4b755f8f78c8db!8m2!3d45.0702929!4d7.6872611">
+            <p tw="opacity-80">P.IVA 12437940013</p>
+            <p tw="block">
+              <a
+                href="https://www.google.com/maps/place/WAU/@45.0702929,7.6850724,17z/data=!3m1!4b1!4m5!3m4!1s0x47886d70758553ef:0x8d4b755f8f78c8db!8m2!3d45.0702929!4d7.6872611"
+                className="hover:underline"
+              >
                 Via Po, 1 - Torino - 10124 Italia
               </a>
             </p>
+            <ul>
+              <li>
+                <a
+                  href={`mailto:${footerData.email.email}`}
+                  className="hover:underline"
+                >
+                  {footerData.email.display}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`tel:${footerData.tel.telefono}`}
+                  className="hover:underline"
+                >
+                  {footerData.tel.display}
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
         <div className="footer-list">
-          <h5>{lang === 'it' ? 'Naviga' : 'Explore'}</h5>
           <ul>
             {lang === 'it'
               ? data.menus.nodes
@@ -115,21 +135,15 @@ const Footer = ({ lang }) => {
           className="footer-list"
           tw="col-span-12 md:col-span-4! xl:col-span-2"
         >
-          <h5>Chat</h5>
           <ul>
             <li>
-              <a href={`mailto:${footerData.email.email}`}>
-                {footerData.email.display}
-              </a>
-            </li>
-            <li>
-              <a href={`tel:${footerData.tel.telefono}`}>
-                {footerData.tel.display}
+              <a href={`#`}>
+                {lang === 'it' ? 'Certificazioni' : 'Certifications'}
               </a>
             </li>
           </ul>
         </div>
-        <div
+        {/* <div
           className="footer-list"
           tw="col-span-12 md:col-span-4! xl:col-span-2"
         >
@@ -137,16 +151,13 @@ const Footer = ({ lang }) => {
           {!!socialMenu && (
             <SocialIcons menu={socialMenu} hasGrid spacing="false" />
           )}
-        </div>
-        <div
-          className="footer-lang-container"
-          tw="col-span-12 md:col-span-1 xl:col-span-1"
-        >
-          <ul tw="flex justify-center md:justify-end">
-            <li>
+        </div> */}
+        <div className="footer-lang-container col-span-12 md:col-span-3 xl:col-span-3 flex justify-center md:justify-end">
+          <ul tw="flex flex-col gap-2 text-sm text-right w-full items-end">
+            <li className="w-full">
               <a href="/">ITA</a>
             </li>
-            <li>
+            <li className="w-full">
               <a href="/en">ENG</a>
             </li>
           </ul>
@@ -214,7 +225,7 @@ const StyledFooter = styled.footer(() => [
     color: var(--black);
 
     h5 {
-      ${tw`opacity-40 text-xs font-mono mb-4`}
+      ${tw`opacity-40 text-xs mb-4`}
     }
 
     a {
@@ -230,12 +241,6 @@ const StyledFooter = styled.footer(() => [
 
     .footer-lang-container {
       ${tw`w-full text-center md:text-left mt-4 md:mt-0`}
-      li {
-        ${tw`text-sm mb-2 mr-4 inline-block`}
-      }
-      li:last-of-type {
-        ${tw`mr-0`}
-      }
     }
 
     .footer-inline-list {

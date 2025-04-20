@@ -74,7 +74,7 @@ const SectionTextBlock = ({
     >
       {label && (
         <div className="st-label st-anim">
-          <motion.h4 tw="font-mono text-sm mb-4">{label}</motion.h4>
+          <motion.h4 tw="text-sm mb-4">{label}</motion.h4>
         </div>
       )}
       {title && (
