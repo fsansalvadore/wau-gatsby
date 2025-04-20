@@ -2,7 +2,8 @@ import React, { useRef, useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'gatsby';
 import 'twin.macro';
-import WauLogo from '../../../assets/WAU-Logo.svg';
+import parse from 'html-react-parser';
+// import WauLogo from '../../../assets/WAU-Logo.svg';
 import WauVideoMp4 from '../../../assets/Wau-Architetti-cut.mp4';
 import WauVideoWebM from '../../../assets/Wau-Architetti-cut.webm';
 import WauVideoPoster from '../../../assets/Wau-Architetti-cut.gif';
@@ -10,7 +11,7 @@ import Layout from '../../LayoutComponent';
 import GridMaxWidthContainer from '../Atoms/GridMaxWidthContainer';
 import SectionTextBlock from '../Atoms/SectionTextBlock';
 import Accordion from '../Atoms/Accordion';
-import Button from '../Atoms/Button';
+// import Button from '../Atoms/Button';
 import ProjectPreviewCard from '../../elements/Projects/ProjectPreviewCard/ProjectPreviewCard';
 import PageLoader from '../Atoms/PageLoader';
 import { StyledIntroContainer } from './HomePageLayout.styled';
@@ -81,7 +82,7 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
   }, [videoRef]);
 
   return (
-    <Layout>
+    <Layout isMenuLight>
       <Helmet>
         <title>
           {lang === 'it'
@@ -158,43 +159,33 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
           }`}
         />
       </Helmet>
-      <div>
+      <div {...otherProps}>
         <PageLoader isLoaded={isLoaded} />
         {!!acf && (
           <>
             <StyledIntroContainer className="">
-              {!!acf.tastoIniziale.link && (
+              {/* {!!acf.tastoIniziale.link && (
                 <Link className="main-cta" to={acf.tastoIniziale.link}>
                   {acf.tastoIniziale.testo}
                 </Link>
-              )}
-              <div id="continue-cta">
-                <svg
-                  width="8"
-                  height="38"
-                  viewBox="0 0 8 38"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M3.64644 37.3536C3.84171 37.5488 4.15829 37.5488 4.35355 37.3536L7.53553 34.1716C7.73079 33.9763 7.73079 33.6597 7.53553 33.4645C7.34027 33.2692 7.02369 33.2692 6.82843 33.4645L4 36.2929L1.17157 33.4645C0.976309 33.2692 0.659727 33.2692 0.464465 33.4645C0.269202 33.6597 0.269202 33.9763 0.464465 34.1716L3.64644 37.3536ZM3.5 -2.18557e-08L3.5 37L4.5 37L4.5 2.18557e-08L3.5 -2.18557e-08Z"
-                    fill="#14181A"
-                  />
-                </svg>
+              )} */}
+              <div className="main-cta flex flex-col items-center justify-center gap-2 md:gap-4">
+                <p>{lang === 'it' ? 'Scopri di più' : 'Learn more'}</p>
+                <div id="continue-cta">
+                  <svg
+                    width="8"
+                    height="38"
+                    viewBox="0 0 8 38"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M3.64644 37.3536C3.84171 37.5488 4.15829 37.5488 4.35355 37.3536L7.53553 34.1716C7.73079 33.9763 7.73079 33.6597 7.53553 33.4645C7.34027 33.2692 7.02369 33.2692 6.82843 33.4645L4 36.2929L1.17157 33.4645C0.976309 33.2692 0.659727 33.2692 0.464465 33.4645C0.269202 33.6597 0.269202 33.9763 0.464465 34.1716L3.64644 37.3536ZM3.5 -2.18557e-08L3.5 37L4.5 37L4.5 2.18557e-08L3.5 -2.18557e-08Z"
+                      fill="var(--white)"
+                    />
+                  </svg>
+                </div>
               </div>
-              {/* <div
-                className="intro-text-container"
-                ref={introTextRef}
-                tw="fixed left-0 right-0 top-0 bottom-0 w-full h-screen flex items-center justify-center opacity-0"
-              >
-                <p>
-                  {acf.testoDentroSfera
-                    ? acf.testoDentroSfera
-                    : 'SCOPRI L’EFFETTO WAU'}
-                </p>
-              </div> */}
-
-              {/* <IntroCanvas className="canvas" indexRef={indexRef} /> */}
               <div
                 className="intro-text"
                 tw="w-screen h-screen flex flex-col md:flex-row items-center justify-center"
@@ -217,16 +208,17 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
                     Your browser does not support the video tag.
                   </video>
                 </div>
-                {/* <img className="logo" src={WauLogo} alt="WAU Architetti logo" />
-                <h1
-                  className="intro-title"
-                  tw="absolute uppercase flex flex-col md:flex-row items-center justify-center lg:justify-start"
-                >
-                  <span tw="md:mr-4">{lang === 'it' ? 'è' : 'is'}</span>
-                </h1> */}
+                {!!acf?.h1?.length && (
+                  <h1 className="absolute flex flex-col md:flex-row items-center justify-center lg:justify-start text-3xl md:text-4xl text-center max-w-lg text-white">
+                    {parse(acf.h1)}
+                  </h1>
+                )}
               </div>
             </StyledIntroContainer>
-            <section className="max-container w-full py-16 lg:py-32 flex justify-center">
+            <section
+              id={lang === 'it' ? 'progetti' : 'projects'}
+              className="max-container w-full py-16 lg:py-32 flex justify-center"
+            >
               <ul className="w-full proj_content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-y-8 m-0">
                 {!!filteredProjects && filteredProjects.length > 0 ? (
                   filteredProjects.slice(0, 9).map((proj) => (
@@ -266,18 +258,21 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
                 )}
               </ul>
             </section>
-            <section className="max-container w-full py-16 lg:py-32 flex justify-center">
+            <section
+              id="expertise"
+              className="max-container w-full py-16 lg:py-32 flex justify-center"
+            >
               <GridMaxWidthContainer>
                 {acf.sezioneExpertise && (
                   <SectionTextBlock
-                    label={acf.sezioneExpertise.titoletto || ''}
+                    label={acf.sezioneExpertise.titoletto}
                     title={
                       acf.sezioneExpertise.titolo
                         ? acf.sezioneExpertise.titolo
                         : ''
                     }
-                    link={acf.sezioneExpertise.tasto.link || '#'}
-                    cta={acf.sezioneExpertise.tasto.testo || ''}
+                    link={acf.sezioneExpertise.tasto.link}
+                    cta={acf.sezioneExpertise.tasto.testo}
                     tw="col-span-full mb-10 md:col-span-6"
                   />
                 )}

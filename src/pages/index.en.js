@@ -16,6 +16,7 @@ const IndexEng = () => {
         homePageACF {
           introWords
           testoDentroSfera
+          h1
           sezioneContatti {
             paragrafo
             tasto {

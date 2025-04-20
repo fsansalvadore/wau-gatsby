@@ -81,7 +81,7 @@ const StudioPageLayout = ({ data }) => {
       <Helmet>
         <title>WAU Architetti • {studio ? `${studio.title}` : 'Studio'}</title>
       </Helmet>
-      <StyledStudioPage>
+      <StyledStudioPage className="max-container">
         <Heading>
           <HeadingIntroHalf
             breadcrumb={studio ? studio.title : 'Studio'}

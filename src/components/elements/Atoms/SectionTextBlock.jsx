@@ -89,7 +89,7 @@ const SectionTextBlock = ({
           </motion.span>
         </div>
       )}
-      {link && (
+      {!!link?.length && (
         <div className="st-link st-anim" tw="py-8">
           <div>
             <Button to={link || '#'}>{cta ? cta : 'Scopri di più'}</Button>

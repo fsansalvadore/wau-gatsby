@@ -7,9 +7,10 @@ export const StyledIntroContainer = styled.div`
   min-height: 100vh;
   display: flex;
   justify-content: center;
+  align-items: center;
 
   #continue-cta {
-    ${tw`font-light left-0 right-0 mx-auto text-center`}
+    ${tw`font-light`}
     bottom: 6%;
     color: var(--black);
     z-index: 4;
@@ -33,16 +34,16 @@ export const StyledIntroContainer = styled.div`
   }
 
   .main-cta {
-    color: #111;
+    color: var(--white);
     text-decoration: none;
     padding: 10px 30px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     position: absolute;
     top: auto;
-    bottom: 16%;
+    bottom: 8%;
     transition: bottom 0.3s ease;
     will-change: bottom;
-    opacity: 0.8;
+
     z-index: 50;
     transition: opacity 0.3s ease !important;
     // animation: fadeIn 0.3s ease 2s both;
@@ -53,10 +54,10 @@ export const StyledIntroContainer = styled.div`
       pointer-events: none;
     }
 
-    &:hover {
+    /* &:hover {
       opacity: 1;
       border: 1px solid #111;
-    }
+    } */
   }
 
   .vision-section {

@@ -62,7 +62,7 @@ const SocialIcon = ({ social, isDark, size, spacing }) => {
       verticalAlign: 'middle',
     },
     path: {
-      fill: '#fcfcfc',
+      fill: 'black',
     },
   };
 
@@ -99,7 +99,7 @@ const SocialIcon = ({ social, isDark, size, spacing }) => {
   return (
     <CircleLink
       href={social && social.path}
-      className="social-link"
+      className="social-link border-black"
       target="_blank"
       isDark={isDark}
       spacing={spacing}
@@ -109,7 +109,7 @@ const SocialIcon = ({ social, isDark, size, spacing }) => {
         width={`${size ? size + 'px' : '15px'}`}
         height={`${size ? size + 'px' : '15px'}`}
         viewBox="0 0 1024 1024"
-        color={'#fcfcfc'}
+        color="black"
       >
         <path style={styles.path} d={current && current.icon} />
       </svg>

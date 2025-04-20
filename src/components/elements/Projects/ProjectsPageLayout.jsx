@@ -102,8 +102,6 @@ const ProjectsPageLayout = ({ data, lang }) => {
     });
   }
 
-  console.log(term, allProjects, filteredProjects);
-
   return (
     <Layout>
       <Helmet>

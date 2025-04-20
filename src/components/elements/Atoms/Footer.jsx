@@ -73,7 +73,7 @@ const Footer = ({ lang }) => {
       <GridMaxWidthContainer>
         <div tw="col-span-12 text-center xl:col-span-5 xl:text-left">
           <Link to={lang === 'it' ? '/' : '/en'}>
-            <Logo isMenuLight />
+            <Logo className="max-w-20" />
           </Link>
           <div tw="mt-6 text-sm">
             <p tw="inline mr-4 mb-1 text-sm opacity-80">
@@ -210,15 +210,15 @@ const Footer = ({ lang }) => {
 const StyledFooter = styled.footer(() => [
   css`
     ${tw`relative z-40 w-full flex items-center py-8 px-4`}
-    background: var(--purple);
-    color: var(--white);
+    background: var(--white);
+    color: var(--black);
 
     h5 {
       ${tw`opacity-40 text-xs font-mono mb-4`}
     }
 
     a {
-      ${tw`opacity-80 hover:opacity-100 visited:text-white text-white`}
+      ${tw`opacity-80 hover:opacity-100 visited:text-black text-black`}
     }
     .footer-list {
       ${tw`col-span-12 md:col-span-3 xl:col-span-2! text-center md:text-left my-2`}

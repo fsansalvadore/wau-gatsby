@@ -10,6 +10,7 @@
   --green: #00aca9;
   --purple: #403c90;
   --white: #fcfcfc;
+  --black: #14181a;
   --heading-font-size: 52px;
   --gradientBg: linear-gradient(-30deg, #00aca9 0%, #403c90 100%);
 }
@@ -163,5 +164,39 @@ h1 {
   }
   to {
     transform: translateY(10px);
+  }
+}
+
+.menu-icon,
+.close-icon {
+  position: absolute;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.close-icon {
+  @apply z-30 top-4 right-4 sm:right-8 md:right-16;
+}
+
+.close-icon {
+  border: 2px solid var(--black);
+
+  span {
+    position: absolute;
+    width: 17px;
+    height: 2px;
+    background-color: var(--black);
+
+    &:first-of-type {
+      transform: rotate(45deg);
+    }
+    &:last-of-type {
+      transform: rotate(-45deg);
+    }
   }
 }

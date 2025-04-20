@@ -7,7 +7,6 @@ const SocialIconsContainer = styled.div((isDark, hasGrid) => [
   css`
     ${tw`w-auto`}
     a {
-      margin-right: 10px;
       transition: opacity 0.25s ease;
     }
 
