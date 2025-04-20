@@ -209,7 +209,7 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
                   </video>
                 </div>
                 {!!acf?.h1?.length && (
-                  <h1 className="absolute flex flex-col md:flex-row items-center justify-center lg:justify-start text-3xl md:text-4xl text-center max-w-lg text-white">
+                  <h1 className="absolute px-4 sm:px-0 flex flex-col md:flex-row items-center justify-center lg:justify-start text-3xl md:text-4xl text-center max-w-lg text-white">
                     {parse(acf.h1)}
                   </h1>
                 )}

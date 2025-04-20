@@ -42,7 +42,7 @@ const WauCampContactFormContainer = styled.div`
   p {
     color: #000;
     font-size: 0.75rem !important;
-    font-weight: 800;
+    font-weight: 400;
     letter-spacing: 0.03rem;
   }
 
@@ -121,7 +121,7 @@ const WauCampContactFormContainer = styled.div`
 
   button {
     float: right;
-    font-weight: 800;
+    font-weight: 400;
     letter-spacing: 0.02rem;
     background: #000;
     color: #fff;
@@ -347,7 +347,7 @@ const FormErrorComponent = styled.div`
   bottom: -0.75rem;
 
   * {
-    font-weight: 800;
+    font-weight: 400;
     font-family: 'ff-real-text-pro', sans-serif !important;
     font-size: 1rem !important;
     letter-spacing: -0.01rem !important;

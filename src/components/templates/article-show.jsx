@@ -182,7 +182,7 @@ const ArticleShowPage = (props) => {
                 </div>
               )}
               <div tw="mt-3 md:mt-8 text-xs">
-                <span tw="font-bold mr-2">{articleDate && articleDate}</span>
+                <span tw="mr-2">{articleDate && articleDate}</span>
                 {categories.nodes.length > 0 && (
                   <ul tw="block md:inline ml-0 md:ml-2">
                     {categories.nodes.map((category) => (

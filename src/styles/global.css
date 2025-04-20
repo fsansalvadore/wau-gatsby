@@ -179,12 +179,17 @@ h1 {
   border-radius: 50%;
 }
 
+hr {
+  @apply bg-transparent border-0 border-b border-black;
+}
 .close-icon {
   @apply z-30 top-4 right-4 sm:right-8 md:right-16;
 }
 
 .close-icon {
   border: 2px solid var(--black);
+  width: 40px;
+  height: 40px;
 
   span {
     position: absolute;
@@ -199,4 +204,9 @@ h1 {
       transform: rotate(-45deg);
     }
   }
+}
+
+h3 strong,
+h3 b {
+  @apply font-normal;
 }

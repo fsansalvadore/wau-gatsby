@@ -155,9 +155,7 @@ const StudioPageLayout = ({ data }) => {
                         trasition={{ ...transition }}
                         exit={{ y: 40, opacity: 0 }}
                       >
-                        <h4 tw="text-3xl font-bold mb-4">
-                          {values[counter].title}
-                        </h4>
+                        <h4 tw="text-3xl mb-4">{values[counter].title}</h4>
                         <p>{values[counter].description}</p>
                       </motion.figcaption>
                     </div>

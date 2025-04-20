@@ -31,7 +31,7 @@ const ArticlesPageLayout = ({ data, lang }) => {
         </Heading>
         <section tw="w-full flex justify-center">
           <GridMaxWidthContainer>
-            <hr tw="col-span-12" />
+            <hr className="col-span-12 bg-black" />
             {data && (
               <ul tw="col-span-12 lg:col-span-9 lg:col-start-4 pb-8 md:pb-16">
                 {data.articles && data.articles.nodes.length > 0 ? (

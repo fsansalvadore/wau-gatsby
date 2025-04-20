@@ -252,7 +252,7 @@ const Menu = ({ lang, isOpen, toggleMenu }) => {
         className="flex flex-col justify-between"
       >
         <motion.button
-          className="close-icon"
+          className="close-icon transition-transform rotate-0 hover:rotate-90"
           variants={closeBtnVariant}
           animate={isOpen ? 'show' : 'hidden'}
           initial="initial"

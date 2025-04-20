@@ -35,7 +35,6 @@ const StyledSocialShare = styled.div`
       content: '–';
       position: absolute;
       left: -16px;
-      font-weight: bold;
       color: var(--black);
     }
   }
@@ -56,7 +55,7 @@ const SocialShare = ({ lang }) => {
 
   return (
     <StyledSocialShare className="social-share">
-      <p tw="inline-flex font-bold!">{lang === 'it' ? 'Condividi' : 'Share'}</p>
+      <p tw="inline-flex">{lang === 'it' ? 'Condividi' : 'Share'}</p>
       <div tw="inline-flex ml-8" className="share-icons">
         <EmailShareButton url={location}>
           <EmailIcon size={32} round={true} bgStyle={iconStyle} />
