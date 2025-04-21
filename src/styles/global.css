@@ -180,7 +180,7 @@ h1 {
 }
 
 hr {
-  @apply bg-transparent border-t-0 border-b border-black;
+  @apply bg-transparent !border-t-0 border-b border-black;
 }
 .close-icon {
   @apply z-30 top-4 right-4 sm:right-8 md:right-16;
