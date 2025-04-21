@@ -211,7 +211,7 @@ const ProjectsPageLayout = ({ data, lang }) => {
                   }}
                   className={[
                     'border-2 border-black text-black rounded-full px-3 py-1.5 transition-opacity',
-                    !!term && tag !== term ? '!opacity-40' : '',
+                    !!term && tag !== term ? 'opacity-20 hover:opacity-60' : '',
                   ].join(' ')}
                 >
                   {tag}

@@ -170,7 +170,7 @@ const TeamPageLayout = ({ data, lang }) => {
         </section>
         {collaborators && collaborators.length > 0 && (
           <section className="w-full flex justify-center max-container">
-            <GridMaxWidthContainer tw="my-4 lg:mb-8">
+            <GridMaxWidthContainer className="w-full my-4 lg:mb-8">
               <hr tw="col-span-12 mb-8 lg:mb-16" />
               <h2 tw="col-span-12 md:col-span-4 md:col-start-1 text-3xl md:text-5xl">
                 {lang === 'it' ? 'Referenti' : 'Referents'}

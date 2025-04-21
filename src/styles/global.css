@@ -101,7 +101,7 @@ h1 {
 }
 
 .mono {
-  font-family: 'Roboto Mono', monospace !important;
+  font-family: 'Inter', Helvetica, sans-serif;
 }
 
 .cover-image .gatsby-image-wrapper {
@@ -180,7 +180,7 @@ h1 {
 }
 
 hr {
-  @apply bg-transparent border-0 border-b border-black;
+  @apply bg-transparent border-t-0 border-b border-black;
 }
 .close-icon {
   @apply z-30 top-4 right-4 sm:right-8 md:right-16;

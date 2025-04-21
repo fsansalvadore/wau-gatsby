@@ -3,13 +3,9 @@ import styled from 'styled-components';
 import tw from 'twin.macro';
 import {
   FacebookShareButton,
-  FacebookIcon,
   EmailShareButton,
-  EmailIcon,
   TwitterShareButton,
-  TwitterIcon,
   LinkedinShareButton,
-  LinkedinIcon,
 } from 'react-share';
 
 const StyledSocialShare = styled.div`
@@ -30,21 +26,10 @@ const StyledSocialShare = styled.div`
     svg path {
       fill: var(--black) !important;
     }
-
-    &:before {
-      content: '–';
-      position: absolute;
-      left: -16px;
-      color: var(--black);
-    }
   }
 `;
 
-const iconStyle = {
-  fill: 'transparent',
-};
-
-const SocialShare = ({ lang }) => {
+const SocialShare = ({ lang, title }) => {
   const [location, setLocation] = useState('');
 
   useEffect(() => {
@@ -54,20 +39,26 @@ const SocialShare = ({ lang }) => {
   }, [setLocation]);
 
   return (
-    <StyledSocialShare className="social-share">
-      <p tw="inline-flex">{lang === 'it' ? 'Condividi' : 'Share'}</p>
-      <div tw="inline-flex ml-8" className="share-icons">
-        <EmailShareButton url={location}>
-          <EmailIcon size={32} round={true} bgStyle={iconStyle} />
+    <StyledSocialShare className="social-share flex flex-col items-center gap-2">
+      <p tw="inline-flex">{lang === 'it' ? 'Condividi su' : 'Share on'}</p>
+      <div className="share-icons ml-8 flex gap-4">
+        <EmailShareButton url={location} title={title}>
+          {/* <EmailIcon size={32} round={true} bgStyle={iconStyle} /> */}
+          E-Mail
         </EmailShareButton>
-        <FacebookShareButton url={location}>
-          <FacebookIcon size={32} round={true} bgStyle={iconStyle} />
+        /
+        <FacebookShareButton url={location} title={title}>
+          {/* <FacebookIcon size={32} round={true} bgStyle={iconStyle} /> */}
+          Facebook
         </FacebookShareButton>
-        <LinkedinShareButton url={location}>
-          <LinkedinIcon size={32} round={true} bgStyle={iconStyle} />
+        /
+        <LinkedinShareButton url={location} title={title}>
+          {/* <LinkedinIcon size={32} round={true} bgStyle={iconStyle} /> */}
+          LinkedIn
         </LinkedinShareButton>
-        <TwitterShareButton url={location}>
-          <TwitterIcon size={32} round={true} bgStyle={iconStyle} />
+        /
+        <TwitterShareButton url={location} title={title}>
+          {/* <TwitterIcon size={32} round={true} bgStyle={iconStyle} /> */}X
         </TwitterShareButton>
       </div>
     </StyledSocialShare>

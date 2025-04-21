@@ -221,7 +221,6 @@ const ExpertiseContainer = styled.div(() => [
 
         p {
           line-height: 1.6rem;
-          /* font-weight: 200; */
           ${tw`md:text-lg`}
         }
 

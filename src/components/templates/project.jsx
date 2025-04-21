@@ -141,7 +141,7 @@ const ProjectPage = (props) => {
       <ProjectContainer className="max-container">
         <Heading tw="flex flex-col lg:flex-row">
           <div tw="w-full md:w-3/4">
-            <div className="breadcrumbs mono">
+            <div className="breadcrumbs">
               <Link to={lang.code === 'EN' ? '/en/projects/' : '/progetti/'}>
                 {lang.code === 'EN' ? 'Projects' : 'Progetti'}
               </Link>{' '}
@@ -211,14 +211,19 @@ const ProjectPage = (props) => {
           </figure>
         )}
         <article tw="w-full flex justify-center">
-          <GridMaxWidthContainer
-            className="project-content"
-            tw="w-full grid grid-cols-12 mb-16 md:mb-32"
-          >
+          <GridMaxWidthContainer className="project-content w-full grid grid-cols-12">
             {content && parse(content)}
-            <SocialShare lang={lang.slug} />
           </GridMaxWidthContainer>
         </article>
+        <div className="flex items-center text-center gap-8 flex-col my-16 md:my-32">
+          <Link
+            className="px-4 py-2 border border-black rounded-full uppercase"
+            to={lang.code === 'EN' ? '/en/projects/' : '/progetti/'}
+          >
+            {lang.code === 'IT' ? 'Torna ai progetti' : 'All projects'}
+          </Link>
+          <SocialShare lang={lang.slug} title={title} />
+        </div>
       </ProjectContainer>
     </Layout>
   );

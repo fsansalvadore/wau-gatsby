@@ -76,7 +76,7 @@ const StyledPrivacyPage = styled.div(() => [
 
       p {
         line-height: 1.6rem;
-        font-weight: 200;
+        font-weight: 400;
         ${tw`md:text-lg`}
       }
 

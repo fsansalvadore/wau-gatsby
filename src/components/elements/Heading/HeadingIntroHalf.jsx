@@ -1,5 +1,5 @@
-import React from "react";
-import "twin.macro";
+import React from 'react';
+import 'twin.macro';
 
 const HeadingIntroHalf = ({ breadcrumb, heading, subheading }) => {
   return (

@@ -229,12 +229,9 @@ const ArticleShowPage = (props) => {
           </GridMaxWidthContainer>
         </div>
         <article tw="w-full flex justify-center">
-          <GridMaxWidthContainer
-            className="max-w-[800px]"
-            tw="w-full grid grid-cols-12 pb-8 md:pb-16 mb-16 md:mb-32"
-          >
+          <GridMaxWidthContainer className="max-w-[800px] w-full grid grid-cols-12 pb-8 md:pb-16 mb-16 md:mb-32">
             {content && parse(content)}
-            <SocialShare lang={lang.slug} />
+            <SocialShare lang={lang.slug} title={title} />
           </GridMaxWidthContainer>
         </article>
       </ProjectContainer>
@@ -273,7 +270,7 @@ const ProjectContainer = styled.div(() => [
 
       p {
         line-height: 1.6rem;
-        font-weight: 200;
+        font-weight: 400;
         ${tw`md:text-lg`}
       }
 
