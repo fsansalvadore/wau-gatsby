@@ -13,8 +13,8 @@ import ContactForm from './Form/ContactForm';
 const StyledContactsPageLayout = styled.div(() => [
   css`
     .map-info-card {
-      background: var(--purple);
-      color: var(--white);
+      background: var(--white);
+      color: var(--black);
 
       h3 {
         ${tw`mb-6 text-lg`}
