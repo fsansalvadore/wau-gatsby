@@ -1,5 +1,5 @@
 import { Link, useStaticQuery, graphql } from 'gatsby';
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import tw, { css } from 'twin.macro';
 import SocialIcons from '../SocialIcons/SocialIcons';
@@ -42,6 +42,14 @@ const Footer = ({ lang }) => {
             telefono
             telefonoDisplay
           }
+          certificazioni {
+            imgIso {
+              sourceUrl
+            }
+            imgEspertoCam {
+              sourceUrl
+            }
+          }
         }
       }
     }
@@ -54,6 +62,8 @@ const Footer = ({ lang }) => {
       setSocialMenu(data.menus.nodes.find((node) => node.name === 'Social'));
     }
   }, [data.menus.nodes]);
+
+  console.log('socialMenu', socialMenu);
 
   const footerData = {
     email: {
@@ -73,7 +83,7 @@ const Footer = ({ lang }) => {
       <GridMaxWidthContainer>
         <div tw="col-span-12 text-center xl:col-span-5 xl:text-left">
           <Link to={lang === 'it' ? '/' : '/en'}>
-            <Logo className="max-w-20" />
+            <Logo className="max-w-20" color="var(--green)" />
           </Link>
           <div tw="mt-6 text-sm">
             <p tw="inline mr-4 text-sm opacity-80">
@@ -135,11 +145,26 @@ const Footer = ({ lang }) => {
           className="footer-list"
           tw="col-span-12 md:col-span-4! xl:col-span-2"
         >
-          <ul>
-            <li>
-              <a href={`#`}>
-                {lang === 'it' ? 'Certificazioni' : 'Certifications'}
-              </a>
+          <ul className="flex flex-col gap-2">
+            <li>{lang === 'it' ? 'Certificazioni' : 'Certifications'}</li>
+            <li className="flex gap-4 justify-center md:justify-start">
+              {data.globals.globalsACF.certificazioni?.imgIso && (
+                <img
+                  className="w-auto h-8"
+                  src={data.globals.globalsACF.certificazioni?.imgIso.sourceUrl}
+                  alt="ISO"
+                />
+              )}
+              {data.globals.globalsACF.certificazioni?.imgEspertoCam && (
+                <img
+                  className="w-auto h-8"
+                  src={
+                    data.globals.globalsACF.certificazioni?.imgEspertoCam
+                      .sourceUrl
+                  }
+                  alt="Esperto Cam"
+                />
+              )}
             </li>
           </ul>
         </div>
@@ -153,7 +178,7 @@ const Footer = ({ lang }) => {
           )}
         </div> */}
         <div className="footer-lang-container col-span-12 md:col-span-3 xl:col-span-3 flex justify-center md:justify-end">
-          <ul tw="flex flex-col gap-2 text-sm text-right w-full items-end">
+          <ul tw="flex flex-col gap-2 text-sm md:text-right w-full md:items-end">
             <li className="w-full">
               <a href="/">ITA</a>
             </li>
@@ -163,55 +188,39 @@ const Footer = ({ lang }) => {
           </ul>
         </div>
         <hr tw="col-span-full my-8 opacity-50" />
-        <div
-          tw="col-span-12 text-center xl:text-left xl:col-span-6"
-          className="footer-inline-list"
-        >
-          <p tw="inline mr-4 mb-1 text-sm opacity-80">
-            © Copyright {new Date().getFullYear()}
-          </p>
-          <ul tw="inline">
-            <li>
-              <Link
-                to={lang === 'it' ? '/privacy-policy' : '/en/privacy-policy'}
-                tw="py-4"
+        <div className="footer-inline-list text-sm col-span-12 text-center xl:text-left xl:col-span-6 flex justify-center xl:justify-start sm:items-center flex-wrap">
+          <span className="mr-1.5">
+            {lang === 'it' ? 'Seguici su ' : 'Follow us on '}
+          </span>
+          {socialMenu?.menuItems?.nodes?.map((social, i) => (
+            <Fragment key={social.id}>
+              <a
+                href={social.url}
+                rel="noreferrer"
+                target="_blank"
+                className="!p-0 !m-0 hover:underline"
               >
-                Privacy Policy
-              </Link>
-            </li>
-            {/* <li>
-              <a href="#" id="csconsentlink" tw="py-4">
-                Cookie Settings
+                {social.label.charAt(0).toUpperCase() + social.label.slice(1)}
               </a>
-            </li> */}
-          </ul>
+              {socialMenu?.menuItems?.nodes?.length !== i + 1 && (
+                <span className="text-xs px-1">/</span>
+              )}
+            </Fragment>
+          ))}
         </div>
         <div
-          tw="col-span-12 text-center mt-6 xl:mt-0 xl:text-right xl:col-span-6 flex justify-center xl:justify-end"
+          tw="col-span-12 text-center mt-6 xl:mt-0 xl:text-right xl:col-span-6 flex items-center justify-center xl:justify-end"
           className="footer-inline-list"
         >
-          <ul>
-            <li>
-              <a
-                href="https://www.saglietti.it/"
-                rel="noreferrer"
-                target="_blank"
-                tw="py-4"
-              >
-                Design
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://www.fsansalvadore.com/"
-                rel="noreferrer"
-                target="_blank"
-                tw="py-4"
-              >
-                Website
-              </a>
-            </li>
-          </ul>
+          <p tw="inline mr-4 text-sm opacity-80">
+            © Copyright {new Date().getFullYear()}
+          </p>
+          <Link
+            className="text-sm hover:underline opacity-80"
+            to={lang === 'it' ? '/privacy-policy' : '/en/privacy-policy'}
+          >
+            Privacy Policy
+          </Link>
         </div>
       </GridMaxWidthContainer>
     </StyledFooter>

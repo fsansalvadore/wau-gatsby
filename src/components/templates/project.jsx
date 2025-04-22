@@ -158,7 +158,7 @@ const ProjectPage = (props) => {
               )}
             </div>
           </div>
-          <aside
+          {/* <aside
             tw="w-full md:w-1/4 mt-8 lg:mt-0"
             className="project-aside-info"
           >
@@ -191,7 +191,7 @@ const ProjectPage = (props) => {
                 <hr />
               </div>
             )}
-          </aside>
+          </aside> */}
         </Heading>
         {proj.featuredImage && (
           <figure className="project-coverImage" tw="mb-10 md:mb-16 xl:mb-24">

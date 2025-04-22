@@ -5,7 +5,7 @@ const Logo = ({ isMenuLight, className, ...otherProps }) => {
 
   useEffect(() => {
     if (!isMenuLight) {
-      setColor('#14181A');
+      setColor('var(--green)');
     } else {
       setColor('#FCFCFC');
     }

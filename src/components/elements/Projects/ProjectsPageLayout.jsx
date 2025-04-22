@@ -221,8 +221,8 @@ const ProjectsPageLayout = ({ data, lang }) => {
           </FilterForm>
         </Heading>
         <ul className="proj_content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-y-8 m-0">
-          {!!allProjects && allProjects.length > 0 ? (
-            allProjects.map((proj) => (
+          {!!filteredProjects && filteredProjects.length > 0 ? (
+            filteredProjects.map((proj) => (
               <li key={`${proj.id}-${proj.slug}`} tw="p-px">
                 <ProjectPreviewCard
                   link={proj.slug}
