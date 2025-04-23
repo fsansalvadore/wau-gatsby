@@ -2,7 +2,6 @@ import { Link, useStaticQuery, graphql } from 'gatsby';
 import React, { Fragment, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import tw, { css } from 'twin.macro';
-import SocialIcons from '../SocialIcons/SocialIcons';
 import Logo from '../Logo/Logo';
 import GridMaxWidthContainer from './GridMaxWidthContainer';
 
@@ -147,17 +146,17 @@ const Footer = ({ lang }) => {
         >
           <ul className="flex flex-col gap-2">
             <li>{lang === 'it' ? 'Certificazioni' : 'Certifications'}</li>
-            <li className="flex gap-4 justify-center md:justify-start">
+            <li className="flex gap-8 justify-center md:justify-start">
               {data.globals.globalsACF.certificazioni?.imgIso && (
                 <img
-                  className="w-auto h-8"
+                  className="w-auto h-10"
                   src={data.globals.globalsACF.certificazioni?.imgIso.sourceUrl}
                   alt="ISO"
                 />
               )}
               {data.globals.globalsACF.certificazioni?.imgEspertoCam && (
                 <img
-                  className="w-auto h-8"
+                  className="w-auto h-10"
                   src={
                     data.globals.globalsACF.certificazioni?.imgEspertoCam
                       .sourceUrl
@@ -168,15 +167,6 @@ const Footer = ({ lang }) => {
             </li>
           </ul>
         </div>
-        {/* <div
-          className="footer-list"
-          tw="col-span-12 md:col-span-4! xl:col-span-2"
-        >
-          <h5>{lang === 'it' ? 'Seguici' : 'Follow us'}</h5>
-          {!!socialMenu && (
-            <SocialIcons menu={socialMenu} hasGrid spacing="false" />
-          )}
-        </div> */}
         <div className="footer-lang-container col-span-12 md:col-span-3 xl:col-span-3 flex justify-center md:justify-end">
           <ul tw="flex flex-col gap-2 text-sm md:text-right w-full md:items-end">
             <li className="w-full">

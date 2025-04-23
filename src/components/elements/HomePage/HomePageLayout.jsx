@@ -3,8 +3,8 @@ import { Helmet } from 'react-helmet';
 import { Link } from 'gatsby';
 import 'twin.macro';
 import parse from 'html-react-parser';
-import WauVideoMp4 from '../../../assets/Wau-Architetti-cut.mp4';
-import WauVideoWebM from '../../../assets/Wau-Architetti-cut.webm';
+import WauVideoMp4 from '../../../assets/16_9_WAU_2025.mp4';
+// import WauVideoWebM from '../../../assets/Wau-Architetti-cut.webm';
 import WauVideoPoster from '../../../assets/Wau-Architetti-cut.gif';
 import Layout from '../../LayoutComponent';
 import GridMaxWidthContainer from '../Atoms/GridMaxWidthContainer';
@@ -202,7 +202,7 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
                     playsInline
                   >
                     <source src={WauVideoMp4} type="video/mp4" />
-                    <source src={WauVideoWebM} type="video/webm" />
+                    {/* <source src={WauVideoWebM} type="video/webm" /> */}
                     Your browser does not support the video tag.
                   </video>
                 </div>
