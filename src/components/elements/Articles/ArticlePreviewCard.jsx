@@ -10,7 +10,7 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
 const MotionLink = motion(Link);
 
-const ArticlePreviewCard = ({ article, ...otherProps }) => {
+const ArticlePreviewCard = ({ article, isLast, ...otherProps }) => {
   const [articleDate, setArticleDate] = useState(null);
 
   useEffect(() => {
@@ -34,7 +34,12 @@ const ArticlePreviewCard = ({ article, ...otherProps }) => {
   }, [setArticleDate, article]);
 
   return (
-    <div tw="opacity-70 hover:opacity-100 transition-opacity duration-150 ease-in-out border-0 border-b border-solid border-gray-500 py-4 md:py-8">
+    <div
+      className={[
+        'opacity-70 hover:opacity-100 transition-opacity duration-150 ease-in-out border-0 border-solid border-gray-500 py-4 md:py-8',
+        isLast ? '' : 'border-b',
+      ].join(' ')}
+    >
       <LazyLoad>
         <StyledArticlePreviewCard
           to={

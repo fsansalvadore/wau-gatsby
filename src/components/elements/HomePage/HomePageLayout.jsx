@@ -13,6 +13,7 @@ import Accordion from '../Atoms/Accordion';
 import ProjectPreviewCard from '../../elements/Projects/ProjectPreviewCard/ProjectPreviewCard';
 import PageLoader from '../Atoms/PageLoader';
 import { StyledIntroContainer } from './HomePageLayout.styled';
+import Button from '../Atoms/Button';
 
 const HomePageLayout = ({ lang, data, ...otherProps }) => {
   const videoRef = useRef(null);
@@ -215,7 +216,7 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
             </StyledIntroContainer>
             <section
               id={lang === 'it' ? 'progetti' : 'projects'}
-              className="max-container w-full py-16 flex justify-center"
+              className="max-container w-full py-16 flex flex-col gap-8 md:gap-16 items-center"
             >
               <ul className="w-full proj_content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-y-8 m-0">
                 {!!filteredProjects && filteredProjects.length > 0 ? (
@@ -255,6 +256,14 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
                   </li>
                 )}
               </ul>
+              <Button
+                as={Link}
+                to={lang === 'it' ? '/progetti' : '/en/projects'}
+              >
+                {lang === 'it'
+                  ? 'Scopri tutti i progetti'
+                  : 'Explore all projects'}
+              </Button>
             </section>
             <section
               id="expertise"

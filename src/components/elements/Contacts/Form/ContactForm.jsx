@@ -245,12 +245,15 @@ class ContactForm extends React.Component {
                     {this.props.lang === 'it' ? (
                       <p>
                         Ho letto e accettato l’
-                        <Link to="/privacy">informativa sulla privacy</Link>.*
+                        <Link to="/privacy-policy">
+                          informativa sulla privacy
+                        </Link>
+                        .*
                       </p>
                     ) : (
                       <p>
                         I read and accepted the{' '}
-                        <Link to="/privacy">Privacy Policy</Link>.*
+                        <Link to="/en/privacy-policy">Privacy Policy</Link>.*
                       </p>
                     )}
                   </Checkbox>

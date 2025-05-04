@@ -16,6 +16,10 @@ const ArticlesPageLayout = ({ data, lang }) => {
     }
   }, [data, setPage]);
 
+  const sortedArticles = data.articles?.nodes?.sort((a, b) =>
+    a.date < b.date ? 1 : -1
+  );
+
   return (
     <Layout>
       <Helmet>
@@ -35,13 +39,16 @@ const ArticlesPageLayout = ({ data, lang }) => {
             {data && (
               <ul tw="col-span-12 lg:col-span-9 lg:col-start-4 pb-8 md:pb-16">
                 {data.articles && data.articles.nodes.length > 0 ? (
-                  data.articles.nodes.map((article) => (
+                  sortedArticles?.map((article, index) => (
                     <li
                       key={`exp-${article.id}-${article.slug}-${Math.floor(
                         Math.random() * (100 - 999) + 100
                       )}`}
                     >
-                      <ArticlePreviewCard article={article} />
+                      <ArticlePreviewCard
+                        article={article}
+                        isLast={index === sortedArticles.length - 1}
+                      />
                     </li>
                   ))
                 ) : (

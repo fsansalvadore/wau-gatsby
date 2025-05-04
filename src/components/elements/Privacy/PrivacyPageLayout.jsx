@@ -22,7 +22,7 @@ const PrivacyPage = ({ data }) => {
       <Helmet>
         <title>Privacy Policy • WAU Architetti</title>
       </Helmet>
-      <StyledPrivacyPage>
+      <StyledPrivacyPage className="max-container-px">
         <GridMaxWidthContainer>
           <Heading className="article-heading" tw="col-span-12">
             <HeadingIntroHalf
