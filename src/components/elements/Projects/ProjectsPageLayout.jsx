@@ -3,7 +3,6 @@ import { Link } from 'gatsby';
 import Select from 'react-select';
 import { Helmet } from 'react-helmet';
 import Layout from '../../LayoutComponent';
-import 'twin.macro';
 import Heading from '../../elements/Heading/Heading';
 import HeadingIntroHalf from '../../elements/Heading/HeadingIntroHalf';
 import ProjectPreviewCard from '../../elements/Projects/ProjectPreviewCard/ProjectPreviewCard';
@@ -53,8 +52,6 @@ const ProjectsPageLayout = ({ data, lang }) => {
                   .join()
                   .toLowerCase()
                   .includes(term?.toLowerCase())) ||
-              // || item.custom_post_type_Project.ambiti.join().toLowerCase().includes(term?.toLowerCase())
-              // || item.custom_post_type_Project.anno.toString().includes(term)
               !term
           )
           .sort((a, b) =>
@@ -69,10 +66,6 @@ const ProjectsPageLayout = ({ data, lang }) => {
       );
     }
   }, [term, data]);
-
-  const allProjects = data.projects.nodes.sort((a, b) =>
-    a.date < b.date ? 1 : a.date === b.date ? (a.title > b.title ? 1 : -1) : -1
-  );
 
   const handleChange = (value) => {
     setTerm(value.value);
@@ -175,11 +168,7 @@ const ProjectsPageLayout = ({ data, lang }) => {
       </Helmet>
       <div className="max-container pb-8 lg:pb-16">
         <Heading>
-          <HeadingIntroHalf
-            // breadcrumb={page ? page.title : 'Projects'}
-            // heading={page ? page.pagesACF.title : ''}
-            heading={page ? page.title : 'Projects'}
-          />
+          <HeadingIntroHalf heading={page ? page.title : 'Projects'} />
           <FilterForm>
             {!!tags.length && (
               <Select
@@ -223,7 +212,7 @@ const ProjectsPageLayout = ({ data, lang }) => {
         <ul className="proj_content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-y-8 m-0">
           {!!filteredProjects && filteredProjects.length > 0 ? (
             filteredProjects.map((proj) => (
-              <li key={`${proj.id}-${proj.slug}`} tw="p-px">
+              <li key={`${proj.id}-${proj.slug}`} className="p-px">
                 <ProjectPreviewCard
                   link={proj.slug}
                   title={proj.title}

@@ -207,7 +207,7 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
                   </video>
                 </div>
                 {!!acf?.h1?.length && (
-                  <h1 className="absolute px-4 sm:px-0 flex flex-col md:flex-row items-center justify-center lg:justify-start text-3xl md:text-4xl text-center max-w-lg text-white">
+                  <h1 className="absolute max-container-px sm:px-0 flex flex-col md:flex-row items-center justify-center lg:justify-start text-3xl md:text-4xl text-center max-w-lg text-white">
                     {parse(acf.h1)}
                   </h1>
                 )}
@@ -215,7 +215,7 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
             </StyledIntroContainer>
             <section
               id={lang === 'it' ? 'progetti' : 'projects'}
-              className="max-container w-full py-16 lg:py-32 flex justify-center"
+              className="max-container w-full py-16 flex justify-center"
             >
               <ul className="w-full proj_content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-y-8 m-0">
                 {!!filteredProjects && filteredProjects.length > 0 ? (
@@ -258,7 +258,7 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
             </section>
             <section
               id="expertise"
-              className="max-container w-full py-16 lg:py-32 flex justify-center"
+              className="max-container w-full py-16 flex justify-center"
             >
               <GridMaxWidthContainer>
                 {acf.sezioneExpertise && (

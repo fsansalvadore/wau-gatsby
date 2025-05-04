@@ -85,9 +85,9 @@ const closeBtnVariant = {
 
 const NavContent = ({ lang, isOpen, toggleMenu, isMenuLight }) => {
   return (
-    <nav className="w-full max-w-6xl mx-auto py-0 px-4 flex items-center justify-between">
+    <nav className="w-full max-w-8xl mx-auto py-0 max-container-px flex items-center justify-between">
       <Link to={lang === 'en' ? '/en/' : '/'}>
-        <Logo isMenuLight={isMenuLight} className="max-w-20" />
+        <Logo isMenuLight={isMenuLight} className="max-w-[6rem]" />
       </Link>
       <div tw="flex items-center" className="navbar-right">
         {/* {lang === 'it' && (

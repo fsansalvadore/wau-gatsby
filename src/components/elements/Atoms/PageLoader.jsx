@@ -6,7 +6,7 @@ import { transition, loaderVariants } from '../../../helpers/framer-defaults';
 
 // eslint-disable-next-line import/no-default-export
 const PageLoader = ({ isLoaded }) => {
-  const color = 'var(--black)';
+  const color = 'var(--green)';
   return (
     <StyledPageLoader
       animate={isLoaded ? 'hidden' : 'initial'}
@@ -21,7 +21,7 @@ const PageLoader = ({ isLoaded }) => {
         viewBox="0 0 184 80"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-24"
+        className="w-32"
       >
         <g clip-path="url(#clip0_1_247)">
           <path

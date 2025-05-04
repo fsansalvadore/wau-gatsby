@@ -5,7 +5,7 @@ const GridMaxWidthContainer = ({ children, className, ...props }) => {
   return (
     <div
       className={[
-        'relative w-full max-w-6xl mx-auto grid grid-cols-12',
+        'relative w-full max-w-8xl mx-auto grid grid-cols-12',
         className,
       ].join(' ')}
       {...props}

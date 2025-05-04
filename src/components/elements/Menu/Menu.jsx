@@ -21,7 +21,7 @@ const MenuSlider = styled(motion.div)`
   ); */
   will-change: width, transform;
   transition: width 0.3s ease;
-  ${tw`absolute bg-white w-full overflow-y-scroll h-full right-0 top-0 bottom-0 flex flex-col justify-between px-4 pt-12 pb-20 sm:p-8 md:p-16`}
+  ${tw`absolute bg-white w-full overflow-y-scroll h-full right-0 top-0 bottom-0 flex flex-col justify-between pt-12 pb-20 sm:p-8 md:p-16`}
 
   * {
     color: var(--black);
@@ -249,7 +249,7 @@ const Menu = ({ lang, isOpen, toggleMenu }) => {
         animate={isOpen ? 'show' : 'hidden'}
         initial="initial"
         transition={{ ...transition, duration: 0.4 }}
-        className="flex flex-col justify-between"
+        className="flex flex-col justify-between max-container-px"
       >
         <motion.button
           className="close-icon transition-transform rotate-0 hover:rotate-90"
@@ -305,7 +305,7 @@ const Menu = ({ lang, isOpen, toggleMenu }) => {
         <div className="flex flex-col md:items-end">
           <div className="flex flex-col gap-2">
             <div className="md:text-right">
-              <h3>WAU ARCHITETTI</h3>
+              <h3>WAU ARCHITETTI SRL</h3>
               <div tw="text-sm">
                 <a
                   target="_blank"

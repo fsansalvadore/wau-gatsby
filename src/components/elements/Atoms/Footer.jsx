@@ -62,8 +62,6 @@ const Footer = ({ lang }) => {
     }
   }, [data.menus.nodes]);
 
-  console.log('socialMenu', socialMenu);
-
   const footerData = {
     email: {
       email: data.globals.globalsACF.email.email ?? 'info@wauarchitetti.com',
@@ -78,11 +76,11 @@ const Footer = ({ lang }) => {
   };
 
   return (
-    <StyledFooter>
+    <StyledFooter className="max-container-px">
       <GridMaxWidthContainer>
-        <div tw="col-span-12 text-center xl:col-span-5 xl:text-left">
+        <div tw="col-span-12 xl:col-span-5 py-2">
           <Link to={lang === 'it' ? '/' : '/en'}>
-            <Logo className="max-w-20" color="var(--green)" />
+            <Logo className="max-w-20 h-10" color="var(--green)" />
           </Link>
           <div tw="mt-6 text-sm">
             <p tw="inline mr-4 text-sm opacity-80">
@@ -92,7 +90,7 @@ const Footer = ({ lang }) => {
             <p tw="block">
               <a
                 href="https://www.google.com/maps/place/WAU/@45.0702929,7.6850724,17z/data=!3m1!4b1!4m5!3m4!1s0x47886d70758553ef:0x8d4b755f8f78c8db!8m2!3d45.0702929!4d7.6872611"
-                className="hover:underline"
+                className="hover:!opacity-50 transition-opacity"
               >
                 Via Po, 1 - Torino - 10124 Italia
               </a>
@@ -101,7 +99,7 @@ const Footer = ({ lang }) => {
               <li>
                 <a
                   href={`mailto:${footerData.email.email}`}
-                  className="hover:underline"
+                  className="hover:!opacity-50 transition-opacity"
                 >
                   {footerData.email.display}
                 </a>
@@ -109,7 +107,7 @@ const Footer = ({ lang }) => {
               <li>
                 <a
                   href={`tel:${footerData.tel.telefono}`}
-                  className="hover:underline"
+                  className="hover:!opacity-50 transition-opacity"
                 >
                   {footerData.tel.display}
                 </a>
@@ -124,7 +122,10 @@ const Footer = ({ lang }) => {
                   .find((node) => node.name === 'Menu ita')
                   .menuItems.nodes.map((item) => (
                     <li key={item.id}>
-                      <Link to={item.path.replace('/dev/wau/wp', '')}>
+                      <Link
+                        className="hover:!opacity-50 transition-opacity"
+                        to={item.path.replace('/dev/wau/wp', '')}
+                      >
                         {item.label}
                       </Link>
                     </li>
@@ -133,7 +134,10 @@ const Footer = ({ lang }) => {
                   .find((node) => node.name === 'Menu eng')
                   .menuItems.nodes.map((item) => (
                     <li key={item.id}>
-                      <Link to={item.path.replace('/dev/wau/wp', '')}>
+                      <Link
+                        className="hover:!opacity-50 transition-opacity"
+                        to={item.path.replace('/dev/wau/wp', '')}
+                      >
                         {item.label}
                       </Link>
                     </li>
@@ -146,17 +150,17 @@ const Footer = ({ lang }) => {
         >
           <ul className="flex flex-col gap-2">
             <li>{lang === 'it' ? 'Certificazioni' : 'Certifications'}</li>
-            <li className="flex gap-8 justify-center md:justify-start">
+            <li className="flex gap-8 justify-start">
               {data.globals.globalsACF.certificazioni?.imgIso && (
                 <img
-                  className="w-auto h-10"
+                  className="w-auto h-12"
                   src={data.globals.globalsACF.certificazioni?.imgIso.sourceUrl}
                   alt="ISO"
                 />
               )}
               {data.globals.globalsACF.certificazioni?.imgEspertoCam && (
                 <img
-                  className="w-auto h-10"
+                  className="w-auto h-12"
                   src={
                     data.globals.globalsACF.certificazioni?.imgEspertoCam
                       .sourceUrl
@@ -167,18 +171,23 @@ const Footer = ({ lang }) => {
             </li>
           </ul>
         </div>
-        <div className="footer-lang-container col-span-12 md:col-span-3 xl:col-span-3 flex justify-center md:justify-end">
-          <ul tw="flex flex-col gap-2 text-sm md:text-right w-full md:items-end">
-            <li className="w-full">
-              <a href="/">ITA</a>
+        <div className="footer-lang-container col-span-12 md:col-span-3 xl:col-span-3 flex justify-start md:justify-end">
+          <ul tw="flex gap-2 text-sm md:text-right w-full md:justify-end">
+            <li className="">
+              <a className="hover:!opacity-50 transition-opacity" href="/">
+                ITA
+              </a>
             </li>
-            <li className="w-full">
-              <a href="/en">ENG</a>
+            <span>|</span>
+            <li className="">
+              <a className="hover:!opacity-50 transition-opacity" href="/en">
+                ENG
+              </a>
             </li>
           </ul>
         </div>
         <hr tw="col-span-full my-8 opacity-50" />
-        <div className="footer-inline-list text-sm col-span-12 text-center xl:text-left xl:col-span-6 flex justify-center xl:justify-start sm:items-center flex-wrap">
+        <div className="footer-inline-list text-sm col-span-12 text-left xl:col-span-6 flex justify-start sm:items-center flex-wrap">
           <span className="mr-1.5">
             {lang === 'it' ? 'Seguici su ' : 'Follow us on '}
           </span>
@@ -188,9 +197,9 @@ const Footer = ({ lang }) => {
                 href={social.url}
                 rel="noreferrer"
                 target="_blank"
-                className="!p-0 !m-0 hover:underline"
+                className="!p-0 !m-0 hover:!opacity-50 transition-opacity"
               >
-                {social.label.charAt(0).toUpperCase() + social.label.slice(1)}
+                {getSocialLabel(social)}
               </a>
               {socialMenu?.menuItems?.nodes?.length !== i + 1 && (
                 <span className="text-xs px-1">/</span>
@@ -199,14 +208,14 @@ const Footer = ({ lang }) => {
           ))}
         </div>
         <div
-          tw="col-span-12 text-center mt-6 xl:mt-0 xl:text-right xl:col-span-6 flex items-center justify-center xl:justify-end"
+          tw="col-span-12 mt-6 xl:mt-0 xl:text-right xl:col-span-6 flex items-center justify-start xl:justify-end"
           className="footer-inline-list"
         >
           <p tw="inline mr-4 text-sm opacity-80">
             © Copyright {new Date().getFullYear()}
           </p>
           <Link
-            className="text-sm hover:underline opacity-80"
+            className="text-sm hover:!opacity-50 transition-opacity opacity-80"
             to={lang === 'it' ? '/privacy-policy' : '/en/privacy-policy'}
           >
             Privacy Policy
@@ -217,9 +226,19 @@ const Footer = ({ lang }) => {
   );
 };
 
+export function getSocialLabel(social) {
+  let label = social.label.charAt(0).toUpperCase() + social.label.slice(1);
+
+  if (label === 'Linkedin') {
+    label = 'LinkedIn';
+  }
+
+  return label;
+}
+
 const StyledFooter = styled.footer(() => [
   css`
-    ${tw`relative z-40 w-full flex items-center py-8 px-4`}
+    ${tw`relative z-40 w-full flex items-center py-8 border-t border-t-black`}
     background: var(--white);
     color: var(--black);
 
@@ -231,7 +250,7 @@ const StyledFooter = styled.footer(() => [
       ${tw`opacity-80 hover:opacity-100 visited:text-black text-black`}
     }
     .footer-list {
-      ${tw`col-span-12 md:col-span-3 xl:col-span-2! text-center md:text-left my-2`}
+      ${tw`col-span-12 md:col-span-3 xl:col-span-2! my-2`}
 
       li {
         ${tw`text-sm mb-2`}
@@ -239,7 +258,7 @@ const StyledFooter = styled.footer(() => [
     }
 
     .footer-lang-container {
-      ${tw`w-full text-center md:text-left mt-4 md:mt-0`}
+      ${tw`w-full mt-4 md:my-2`}
     }
 
     .footer-inline-list {
