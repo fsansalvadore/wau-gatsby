@@ -45,6 +45,7 @@ const ContattiPage = () => {
             }
             map {
               box
+              embedurl
               mappa {
                 altText
                 sourceUrl

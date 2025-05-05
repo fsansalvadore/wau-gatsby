@@ -45,6 +45,7 @@ const ContactsPage = () => {
             }
             map {
               box
+              embedurl
               mappa {
                 altText
                 sourceUrl

@@ -3,11 +3,9 @@ import tw, { css } from 'twin.macro';
 import { Helmet } from 'react-helmet';
 import parse from 'html-react-parser';
 import styled from 'styled-components';
-import Img from 'gatsby-image';
 import Layout from '../../LayoutComponent';
 import Heading from '../../elements/Heading/Heading';
 import SocialIcons from '../SocialIcons/SocialIcons';
-import map from '../../../assets/wau-map.jpg';
 import ContactForm from './Form/ContactForm';
 
 const StyledContactsPageLayout = styled.div(() => [
@@ -73,42 +71,19 @@ const ContactsPageLayout = ({ data, socials, lang }) => {
           id="map"
           tw="relative h-[600px] w-full flex items-center justify-center overflow-hidden"
         >
-          <div
-            tw="absolute w-full top-0 lg:top-auto lg:w-1/4 lg:left-32 p-8 z-10"
-            className="map-info-card"
-          >
-            {data.contactsACF.map &&
-              data.contactsACF.map.box &&
-              parse(data.contactsACF.map.box)}
-          </div>
-          {data.contactsACF.map.mappa &&
-          data.contactsACF.map.mappa.imageFile ? (
-            <Img
-              fixed={data.contactsACF.map.mappa.imageFile.childImageSharp.fixed}
-              // fluid={data.contactsACF.map.mappa.imageFile.childImageSharp.fluid}
-              tw="absolute! w-full! h-full! object-cover mt-60 lg:m-0 left-0 z-0"
-              alt={
-                data.contactsACF.map.mappa.altText
-                  ? data.contactsACF.map.mappa.altText
-                  : 'WAU location'
-              }
-            />
-          ) : (
-            <img
-              tw="absolute w-full h-full object-cover mt-60 lg:m-0"
-              src={
-                data.contactsACF.map.mappa &&
-                data.contactsACF.map.mappa.sourceUrl
-                  ? data.contactsACF.map.mappa.sourceUrl
-                  : map
-              }
-              alt={
-                data.contactsACF.map.mappa && data.contactsACF.map.mappa.altText
-                  ? data.contactsACF.map.mappa.altText
-                  : 'WAU location'
-              }
-            />
-          )}
+          <iframe
+            src={
+              data.contactsACF?.map?.embedurl ??
+              'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2817.7642671039725!2d7.684680812116458!3d45.070292870949636!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47886d70758553ef%3A0x8d4b755f8f78c8db!2sWau%20Architetti!5e0!3m2!1sen!2ses!4v1746477585067!5m2!1sen!2ses'
+            }
+            tw="absolute w-full h-full border-0 z-0"
+            allowFullScreen=""
+            width="600"
+            height="450"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="WAU Architetti location"
+          />
         </section>
         <section id="contact-form" tw="py-8 py-16 md:py-16 lg:py-40 lg:flex">
           {data.contactsACF.form && (
