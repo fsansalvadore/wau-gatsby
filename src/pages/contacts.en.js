@@ -62,6 +62,7 @@ const ContactsPage = () => {
               titolo
               sottotitolo
             }
+            successEmail
           }
         }
       }

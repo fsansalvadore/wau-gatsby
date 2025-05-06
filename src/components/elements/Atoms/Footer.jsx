@@ -78,7 +78,7 @@ const Footer = ({ lang }) => {
   return (
     <StyledFooter className="max-container-px">
       <GridMaxWidthContainer>
-        <div tw="col-span-12 xl:col-span-5 py-2">
+        <div tw="col-span-12 lg:col-span-5 py-2">
           <Link to={lang === 'it' ? '/' : '/en'}>
             <Logo className="max-w-20 h-10" color="var(--green)" />
           </Link>
@@ -146,7 +146,7 @@ const Footer = ({ lang }) => {
         </div>
         <div
           className="footer-list"
-          tw="col-span-12 md:col-span-4! xl:col-span-2"
+          tw="col-span-12 md:col-span-4! lg:col-span-2"
         >
           <ul className="flex flex-col gap-2">
             <li>{lang === 'it' ? 'Certificazioni' : 'Certifications'}</li>
@@ -171,7 +171,7 @@ const Footer = ({ lang }) => {
             </li>
           </ul>
         </div>
-        <div className="footer-lang-container col-span-12 md:col-span-3 xl:col-span-3 flex justify-start md:justify-end">
+        <div className="footer-lang-container col-span-12 md:col-span-3 lg:col-span-3 flex justify-start md:justify-end">
           <ul tw="flex gap-2 text-sm md:text-right w-full md:justify-end">
             <li className="">
               <a className="hover:!opacity-50 transition-opacity" href="/">
@@ -187,7 +187,7 @@ const Footer = ({ lang }) => {
           </ul>
         </div>
         <hr tw="col-span-full my-8 opacity-50" />
-        <div className="footer-inline-list text-sm col-span-12 text-left xl:col-span-6 flex justify-start sm:items-center flex-wrap">
+        <div className="footer-inline-list text-sm col-span-12 text-left lg:col-span-6 flex justify-start sm:items-center flex-wrap">
           <span className="mr-1.5">
             {lang === 'it' ? 'Seguici su ' : 'Follow us on '}
           </span>
@@ -208,7 +208,7 @@ const Footer = ({ lang }) => {
           ))}
         </div>
         <div
-          tw="col-span-12 mt-6 xl:mt-0 xl:text-right xl:col-span-6 flex items-center justify-start xl:justify-end"
+          tw="col-span-12 mt-6 lg:mt-0 lg:text-right lg:col-span-6 flex items-center justify-start lg:justify-end"
           className="footer-inline-list"
         >
           <p tw="inline mr-4 text-sm opacity-80">
@@ -250,7 +250,7 @@ const StyledFooter = styled.footer(() => [
       ${tw`opacity-80 hover:opacity-100 visited:text-black text-black`}
     }
     .footer-list {
-      ${tw`col-span-12 md:col-span-3 xl:col-span-2! my-2`}
+      ${tw`col-span-12 md:col-span-3 lg:col-span-2! my-2`}
 
       li {
         ${tw`text-sm mb-2`}

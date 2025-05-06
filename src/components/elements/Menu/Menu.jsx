@@ -6,7 +6,6 @@ import tw from 'twin.macro';
 import { transition } from '../../../helpers/framer-defaults';
 
 import LanguageSelector from '../LanguageSelector';
-import SocialIcons from '../SocialIcons/SocialIcons';
 
 const MenuContainer = styled(motion.div)`
   ${tw`fixed w-screen h-screen z-[101]`}
@@ -206,7 +205,7 @@ const Menu = ({ lang, isOpen, toggleMenu }) => {
   `);
 
   const [location, setLocation] = useState('');
-  const [socialMenu, setSocialMenu] = useState(null);
+  const [_socialMenu, setSocialMenu] = useState(null);
 
   useEffect(() => {
     if (typeof window !== `undefined`) {

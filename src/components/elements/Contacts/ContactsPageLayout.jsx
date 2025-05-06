@@ -100,8 +100,8 @@ const ContactsPageLayout = ({ data, socials, lang }) => {
               )}
             </div>
           )}
-          <div tw="w-full lg:w-1/2 xl:w-1/3">
-            <ContactForm lang={lang} />
+          <div tw="w-full lg:w-1/2">
+            <ContactForm lang={lang} data={data} />
             <form
               name="contatti"
               method="POST"

@@ -3,7 +3,6 @@ import { Link } from 'gatsby';
 import { Input, Checkbox } from 'antd';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-// import FormErrorComponent from '../../atoms/form-error.component'
 import tw from 'twin.macro';
 
 const { TextArea } = Input;
@@ -90,7 +89,7 @@ const ContactFormContainer = styled.div`
         ${tw`flex items-center`}
 
         .ant-checkbox {
-          ${tw`flex items-center mr-2`}
+          ${tw`flex items-center mr-1`}
           width: 16px;
           height: 16px;
         }
@@ -123,7 +122,7 @@ const ContactFormContainer = styled.div`
     box-shadow: none;
     border-radius: 0;
     display: flex;
-    pointer-event: auto;
+    pointer-events: auto;
     justify-content: center;
   }
 `;
@@ -150,7 +149,37 @@ class ContactForm extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleConfirmEmail = this.handleConfirmEmail.bind(this);
   }
+
+  handleConfirmEmail = async ({ email, lang, html }) => {
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email,
+          lang: lang,
+          html: html,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        console.log('Email sent successfully', data, response);
+        // You can add success state handling here
+      } else {
+        console.error('Failed to send email:', data.error);
+        // You can add error state handling here
+      }
+    } catch (error) {
+      console.error('Error sending email:', error);
+      // You can add error state handling here
+    }
+  };
 
   handleSubmit = (e) => {
     this.setState({ loading: true });
@@ -159,9 +188,20 @@ class ContactForm extends React.Component {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: encode({ 'form-name': 'contatti', ...this.state }),
     })
-      .then(() => {
+      .then(async () => {
+        await this.handleConfirmEmail({
+          email: this.state.email,
+          lang: this.props.lang,
+          html: this.props.data.contactsACF?.successEmail,
+        });
         this.setState({
-          feedback: 'Messaggio inviato',
+          feedback: (
+            <>
+              Il tuo messaggio è stato inviato e a breve verrai ricontattato.{' '}
+              <br />
+              Grazie per averci scritto!
+            </>
+          ),
           loading: false,
           nome: '',
           messaggio: '',
@@ -171,7 +211,7 @@ class ContactForm extends React.Component {
           this.setState({
             feedback: '',
           });
-        }, 3000);
+        }, 10000);
       })
       .catch((error) => {
         this.setState({ error: error, loading: false });
@@ -185,6 +225,8 @@ class ContactForm extends React.Component {
   render() {
     const { nome, email, messaggio, btn, feedback, error, loading } =
       this.state;
+
+    console.log('this.props', this.props);
 
     return (
       <ContactFormContainer>
@@ -233,7 +275,7 @@ class ContactForm extends React.Component {
             <div tw="flex flex-col md:flex-row">
               <div
                 className="form-disclaimer"
-                tw="mb-4 w-full md:w-3/4 flex flex-col items-start justify-start"
+                tw="mb-4 w-full flex flex-col items-start justify-start"
               >
                 <div className="privacy-check" tw="mb-4">
                   <Checkbox
@@ -244,7 +286,7 @@ class ContactForm extends React.Component {
                   >
                     {this.props.lang === 'it' ? (
                       <p>
-                        Ho letto e accettato l’
+                        Ho letto e accettato l'
                         <Link to="/privacy-policy">
                           informativa sulla privacy
                         </Link>
