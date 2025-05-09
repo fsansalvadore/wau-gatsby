@@ -21,6 +21,7 @@ module.exports = {
     'gatsby-plugin-postcss',
     'gatsby-plugin-sass',
     'gatsby-plugin-styled-components',
+    'gatsby-plugin-meta-redirect',
     {
       resolve: 'gatsby-source-filesystem',
       options: {

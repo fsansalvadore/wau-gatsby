@@ -76,8 +76,8 @@ const Footer = ({ lang }) => {
   };
 
   return (
-    <StyledFooter className="max-container-px">
-      <GridMaxWidthContainer>
+    <StyledFooter className="max-container">
+      <GridMaxWidthContainer className="py-8 border-t border-t-black">
         <div tw="col-span-12 lg:col-span-5 py-2">
           <Link to={lang === 'it' ? '/' : '/en'}>
             <Logo className="max-w-20 h-10" color="var(--green)" />
@@ -238,7 +238,7 @@ export function getSocialLabel(social) {
 
 const StyledFooter = styled.footer(() => [
   css`
-    ${tw`relative z-40 w-full flex items-center py-8 border-t border-t-black`}
+    ${tw`relative z-40 w-full flex items-center`}
     background: var(--white);
     color: var(--black);
 
