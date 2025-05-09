@@ -432,6 +432,7 @@ exports.createPages = async ({ actions, graphql, gatsbyUtilities }) => {
     redirectInBrowser: true,
     force: true,
   });
+
   createRedirect({
     fromPath: `/wau-camp`,
     toPath: `/`,

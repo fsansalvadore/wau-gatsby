@@ -17,6 +17,30 @@ const IndexIta = () => {
           introWords
           testoDentroSfera
           h1
+          progetti {
+            ... on WpProject {
+              id
+              status
+              slug
+              title
+              featuredImage {
+                node {
+                  link
+                  sourceUrl
+                  gatsbyImage(width: 1200)
+                }
+              }
+              ProjectAFC {
+                projectdate
+                location
+              }
+              language {
+                code
+                locale
+                slug
+              }
+            }
+          }
           sezioneContatti {
             paragrafo
             tasto {
@@ -57,32 +81,6 @@ const IndexIta = () => {
           }
         }
       }
-      projects: allWpProject(
-        limit: 100
-        filter: { status: { eq: "publish" }, language: { slug: { eq: "it" } } }
-      ) {
-        nodes {
-          status
-          slug
-          title
-          featuredImage {
-            node {
-              link
-              sourceUrl
-              gatsbyImage(width: 1200)
-            }
-          }
-          ProjectAFC {
-            projectdate
-            location
-          }
-          language {
-            code
-            locale
-            slug
-          }
-        }
-      }
       expertises: allWpExpertise(
         limit: 40
         filter: { status: { eq: "publish" }, language: { slug: { eq: "it" } } }
@@ -100,32 +98,6 @@ const IndexIta = () => {
             code
             locale
             slug
-          }
-        }
-      }
-      articles: allWpArticle(
-        limit: 3
-        filter: { status: { eq: "publish" }, language: { slug: { eq: "it" } } }
-      ) {
-        nodes {
-          date
-          content
-          slug
-          id
-          title
-          language {
-            code
-            locale
-            slug
-          }
-          categories {
-            nodes {
-              name
-              id
-            }
-          }
-          ArticleACF {
-            anteprima
           }
         }
       }

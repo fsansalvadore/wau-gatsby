@@ -4,7 +4,6 @@ import { Link } from 'gatsby';
 import 'twin.macro';
 import parse from 'html-react-parser';
 import WauVideoMp4 from '../../../assets/16_9_WAU_2025.mp4';
-// import WauVideoWebM from '../../../assets/Wau-Architetti-cut.webm';
 import WauVideoPoster from '../../../assets/Wau-Architetti-cut.gif';
 import Layout from '../../LayoutComponent';
 import GridMaxWidthContainer from '../Atoms/GridMaxWidthContainer';
@@ -18,9 +17,9 @@ import Button from '../Atoms/Button';
 const HomePageLayout = ({ lang, data, ...otherProps }) => {
   const videoRef = useRef(null);
   const [acf, setAcf] = useState(null);
-  const [filteredProjects, setFilteredProjects] = useState(null);
   const [expertises, setExpertises] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const featuredProjects = data.page.homePageACF.progetti;
 
   useEffect(() => {
     if (typeof window !== `undefined`) {
@@ -39,19 +38,6 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
     }
     if (data && data.page && data.page.homePageACF) {
       setAcf(data.page.homePageACF);
-    }
-    if (!!data && !!data.projects) {
-      setFilteredProjects(
-        data.projects.nodes.sort((a, b) =>
-          a.date < b.date
-            ? 1
-            : a.date === b.date
-              ? a.title > b.title
-                ? 1
-                : -1
-              : -1
-        )
-      );
     }
   }, [setAcf, setExpertises, data]);
 
@@ -219,8 +205,8 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
               className="max-container w-full py-16 flex flex-col gap-8 md:gap-16 items-center"
             >
               <ul className="w-full proj_content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-y-8 m-0">
-                {!!filteredProjects && filteredProjects.length > 0 ? (
-                  filteredProjects.slice(0, 9).map((proj) => (
+                {!!featuredProjects && featuredProjects.length > 0 ? (
+                  featuredProjects.slice(0, 9).map((proj) => (
                     <li key={`${proj.id}-${proj.slug}`} tw="p-px">
                       <ProjectPreviewCard
                         link={`/${lang === 'it' ? '' : 'en/'}${lang === 'it' ? 'progetti' : 'projects'}/${proj.slug}`}
@@ -246,13 +232,12 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
                     </li>
                   ))
                 ) : (
-                  <li className="pseudo content">
-                    <span className="divider" />
-                    <Link to="/progetti" className="block__link no_link">
-                      <div className="proj_item-left prog_list-item">
-                        <p className="not-found">Nessun progetto trovato</p>
-                      </div>
-                    </Link>
+                  <li className="col-span-full w-full flex justify-center">
+                    <p className="not-found w-full text-center">
+                      {lang === 'it'
+                        ? 'Nessun progetto trovato'
+                        : 'No project found'}
+                    </p>
                   </li>
                 )}
               </ul>
