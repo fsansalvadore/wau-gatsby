@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 import { Link } from 'gatsby';
 import 'twin.macro';
 import parse from 'html-react-parser';
-import WauVideoMp4 from '../../../assets/16_9_WAU_2025.mp4';
+import WauVideoMp4 from '../../../assets/WAU_HOME.mp4';
 import WauVideoPoster from '../../../assets/Wau-Architetti-cut.gif';
 import Layout from '../../LayoutComponent';
 import GridMaxWidthContainer from '../Atoms/GridMaxWidthContainer';
