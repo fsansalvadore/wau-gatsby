@@ -178,14 +178,16 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
                 <div className="video-container absolute inset-0 w-full h-full">
                   {!!acf?.video ? (
                     <video
-                      autoPlay
-                      muted
+                      className="video"
                       width="1920"
                       height="1080"
-                      controls
+                      muted={true}
+                      controls={false}
+                      poster={WauVideoPoster}
                       loop
-                      className="video"
-                      id="video"
+                      ref={videoRef}
+                      autoPlay
+                      playsInline
                     >
                       <source src={acf.video.mediaItemUrl} type="video/mp4" />
                       Your browser does not support the video tag.
