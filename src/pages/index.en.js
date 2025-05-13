@@ -17,6 +17,12 @@ const IndexEng = () => {
           introWords
           testoDentroSfera
           h1
+          video {
+            sourceUrl
+            uri
+            altText
+            mediaItemUrl
+          }
           progetti {
             ... on WpProject {
               id

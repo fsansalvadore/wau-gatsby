@@ -176,22 +176,38 @@ const HomePageLayout = ({ lang, data, ...otherProps }) => {
                 tw="w-screen h-screen flex flex-col md:flex-row items-center justify-center"
               >
                 <div className="video-container absolute inset-0 w-full h-full">
-                  <video
-                    className="video"
-                    width="1920"
-                    height="1080"
-                    muted={true}
-                    controls={false}
-                    poster={WauVideoPoster}
-                    loop
-                    ref={videoRef}
-                    autoPlay
-                    playsInline
-                  >
-                    <source src={WauVideoMp4} type="video/mp4" />
-                    {/* <source src={WauVideoWebM} type="video/webm" /> */}
-                    Your browser does not support the video tag.
-                  </video>
+                  {!!acf?.video ? (
+                    <video
+                      autoPlay
+                      muted
+                      width="1920"
+                      height="1080"
+                      controls
+                      loop
+                      className="video"
+                      id="video"
+                    >
+                      <source src={acf.video.mediaItemUrl} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  ) : (
+                    <video
+                      className="video"
+                      width="1920"
+                      height="1080"
+                      muted={true}
+                      controls={false}
+                      poster={WauVideoPoster}
+                      loop
+                      ref={videoRef}
+                      autoPlay
+                      playsInline
+                    >
+                      <source src={WauVideoMp4} type="video/mp4" />
+                      {/* <source src={WauVideoWebM} type="video/webm" /> */}
+                      Your browser does not support the video tag.
+                    </video>
+                  )}
                 </div>
                 {!!acf?.h1?.length && (
                   <h1 className="absolute max-container-px sm:px-0 flex flex-col md:flex-row items-center justify-center lg:justify-start text-3xl md:text-4xl text-center max-w-lg text-white">

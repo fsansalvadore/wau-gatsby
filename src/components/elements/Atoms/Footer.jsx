@@ -41,6 +41,10 @@ const Footer = ({ lang }) => {
             telefono
             telefonoDisplay
           }
+          indirizzo {
+            indirizzo
+            url
+          }
           certificazioni {
             imgIso {
               sourceUrl
@@ -49,6 +53,9 @@ const Footer = ({ lang }) => {
               sourceUrl
             }
           }
+          societa
+          societaEsteso
+          partitaIva
         }
       }
     }
@@ -73,6 +80,18 @@ const Footer = ({ lang }) => {
       display:
         data.globals.globalsACF.telefono.telefonoDisplay ?? '011 1917 1909',
     },
+    indirizzo: {
+      indirizzo:
+        data.globals.globalsACF.indirizzo.indirizzo ??
+        'Via Po, 1 - Torino - 10124 Italia',
+      url:
+        data.globals.globalsACF.indirizzo.url ??
+        'https://www.google.com/maps/place/WAU/@45.0702929,7.6850724,17z/data=!3m1!4b1!4m5!3m4!1s0x47886d70758553ef:0x8d4b755f8f78c8db!8m2!3d45.0702929!4d7.6872611',
+    },
+    partitaIva: data.globals.globalsACF.partitaIva ?? '12437940013',
+    societa:
+      data.globals.globalsACF.societaEsteso ??
+      'WAU ARCHITETTI SRL Società di Ingegneria',
   };
 
   return (
@@ -83,16 +102,14 @@ const Footer = ({ lang }) => {
             <Logo className="max-w-20 h-10" color="var(--green)" />
           </Link>
           <div tw="mt-6 text-sm">
-            <p tw="inline mr-4 text-sm opacity-80">
-              WAU ARCHITETTI SRL Società di Ingegneria
-            </p>
-            <p tw="opacity-80">P.IVA 12437940013</p>
+            <p tw="inline mr-4 text-sm opacity-80">{footerData.societa}</p>
+            <p tw="opacity-80">P.IVA {footerData.partitaIva}</p>
             <p tw="block">
               <a
                 href="https://www.google.com/maps/place/WAU/@45.0702929,7.6850724,17z/data=!3m1!4b1!4m5!3m4!1s0x47886d70758553ef:0x8d4b755f8f78c8db!8m2!3d45.0702929!4d7.6872611"
                 className="hover:!opacity-50 transition-opacity"
               >
-                Via Po, 1 - Torino - 10124 Italia
+                {footerData.indirizzo.indirizzo}
               </a>
             </p>
             <ul>

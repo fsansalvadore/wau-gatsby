@@ -16,6 +16,12 @@ const IndexIta = () => {
         homePageACF {
           introWords
           testoDentroSfera
+          video {
+            sourceUrl
+            uri
+            altText
+            mediaItemUrl
+          }
           h1
           progetti {
             ... on WpProject {
