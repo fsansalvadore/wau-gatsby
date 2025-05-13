@@ -74,7 +74,7 @@ const SectionTextBlock = ({
     >
       {label && (
         <div className="st-label st-anim">
-          <motion.h4 tw="font-mono text-sm mb-4">{label}</motion.h4>
+          <motion.h4 tw="text-sm mb-4">{label}</motion.h4>
         </div>
       )}
       {title && (
@@ -89,7 +89,7 @@ const SectionTextBlock = ({
           </motion.span>
         </div>
       )}
-      {link && (
+      {!!link?.length && (
         <div className="st-link st-anim" tw="py-8">
           <div>
             <Button to={link || '#'}>{cta ? cta : 'Scopri di più'}</Button>
@@ -111,7 +111,7 @@ const StyledContactsTextBlock = styled(motion.div)(
 
       .st-title {
         > * {
-          ${tw`text-3xl leading-[110%] tracking-[-0.02rem] mb-8 w-full lg:(text-5xl leading-[115%] w-3/4)`}
+          ${tw`text-3xl mb-8 w-full lg:(text-4xl w-3/4)`}
         }
       }
     `,

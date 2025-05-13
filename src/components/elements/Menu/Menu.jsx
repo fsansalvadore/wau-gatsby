@@ -6,7 +6,6 @@ import tw from 'twin.macro';
 import { transition } from '../../../helpers/framer-defaults';
 
 import LanguageSelector from '../LanguageSelector';
-import SocialIcons from '../SocialIcons/SocialIcons';
 
 const MenuContainer = styled(motion.div)`
   ${tw`fixed w-screen h-screen z-[101]`}
@@ -14,17 +13,17 @@ const MenuContainer = styled(motion.div)`
 const MenuSlider = styled(motion.div)`
   min-height: 550px;
   z-index: 99;
-  background: linear-gradient(
+  /* background: linear-gradient(
     317.03deg,
     var(--green) -33.22%,
     var(--purple) 78.8%
-  );
+  ); */
   will-change: width, transform;
   transition: width 0.3s ease;
-  ${tw`absolute w-full overflow-y-scroll h-full right-0 top-0 bottom-0 flex flex-col justify-between px-4 pt-12 pb-20 sm:p-8 md:p-16`}
+  ${tw`absolute bg-white w-full overflow-y-scroll h-full right-0 top-0 bottom-0 flex flex-col justify-between pt-12 pb-20 sm:p-8 md:p-16`}
 
   * {
-    color: var(--white);
+    color: var(--black);
   }
 
   .menu-top {
@@ -37,7 +36,7 @@ const MenuSlider = styled(motion.div)`
     a {
       ${tw`text-2xl p-[2px 0] sm:p-[5px 0] lg:text-3xl block`}
       line-height: 2rem;
-      opacity: 0.3;
+      opacity: 0.4;
       transition:
         opacity 0.15s ease,
         padding 0.2s ease;
@@ -48,21 +47,7 @@ const MenuSlider = styled(motion.div)`
       }
 
       &.active-menuLink {
-        padding-left: 20px;
-        display: flex;
-        align-items: center;
-        position: relative;
         opacity: 0.9;
-
-        &:before {
-          content: '';
-          width: 6px;
-          height: 6px;
-          position: absolute;
-          background-color: var(--white);
-          left: 0;
-          border-radius: 50%;
-        }
       }
     }
   }
@@ -80,7 +65,7 @@ const MenuSlider = styled(motion.div)`
 
   @media screen and (min-width: 768px) {
     & {
-      ${tw`w-[60%]`}
+      ${tw`w-full max-w-[416px]`}
     }
 
     .menu-top {
@@ -107,7 +92,7 @@ export const DimOverlay = styled(motion.div)`
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.25);
+  background: rgba(0, 0, 0, 0.15);
   display: none;
 `;
 
@@ -120,6 +105,25 @@ const sliderVariants = {
   },
   hidden: {
     x: '100%',
+    transition: {
+      duration: 0.1,
+    },
+  },
+};
+
+const closeBtnVariant = {
+  initial: {
+    opacity: 1,
+  },
+  show: {
+    opacity: 1,
+    display: 'flex',
+  },
+  hidden: {
+    opacity: 0,
+    transitionEnd: {
+      display: 'none',
+    },
   },
 };
 
@@ -147,6 +151,9 @@ export const menuDim = {
   hidden: {
     opacity: 0,
     display: 'block',
+    transition: {
+      duration: 0.1,
+    },
     transitionEnd: {
       display: 'none',
     },
@@ -157,7 +164,7 @@ export const menuDim = {
   },
 };
 
-const Menu = ({ lang, isOpen }) => {
+const Menu = ({ lang, isOpen, toggleMenu }) => {
   const data = useStaticQuery(graphql`
     query GET_MENU_BY_NAME {
       menus: allWpMenu {
@@ -198,7 +205,7 @@ const Menu = ({ lang, isOpen }) => {
   `);
 
   const [location, setLocation] = useState('');
-  const [socialMenu, setSocialMenu] = useState(null);
+  const [_socialMenu, setSocialMenu] = useState(null);
 
   useEffect(() => {
     if (typeof window !== `undefined`) {
@@ -241,9 +248,22 @@ const Menu = ({ lang, isOpen }) => {
         animate={isOpen ? 'show' : 'hidden'}
         initial="initial"
         transition={{ ...transition, duration: 0.4 }}
+        className="flex flex-col justify-between max-container-px"
       >
-        <div className="menu-top">
-          <ul>
+        <motion.button
+          className="close-icon transition-transform rotate-0 hover:rotate-90"
+          variants={closeBtnVariant}
+          animate={isOpen ? 'show' : 'hidden'}
+          initial="initial"
+          exit={{ opacity: 0, ...transition }}
+          transition={{ ...transition, duration: 0.4 }}
+          onClick={() => toggleMenu(!isOpen)}
+        >
+          <motion.span />
+          <motion.span />
+        </motion.button>
+        <div className="menu-top w-full md:text-right">
+          <ul className="w-full">
             {lang === 'it'
               ? data.menus.nodes
                   .find((node) => node.name === 'Menu ita')
@@ -281,32 +301,36 @@ const Menu = ({ lang, isOpen }) => {
                   ))}
           </ul>
         </div>
-        <div className="menu-bottom">
-          <div className="menu-bottom-info">
-            <div className="menu-footer-info">
-              <h3>WAU ARCHITETTI</h3>
-              <div tw="opacity-70 text-sm mb-8 pt-2">
+        <div className="flex flex-col md:items-end">
+          <div className="flex flex-col gap-2">
+            <div className="md:text-right">
+              <h3>WAU ARCHITETTI SRL</h3>
+              <div tw="text-sm">
                 <a
                   target="_blank"
                   href={menuData.indirizzo.url}
                   rel="noreferrer"
+                  className="hover:underline"
                 >
                   {menuData.indirizzo.indirizzo}
                 </a>
                 <p>
                   T{' '}
-                  <a href={`tel:${menuData.tel.telefono}`}>
+                  <a
+                    href={`tel:${menuData.tel.telefono}`}
+                    className="hover:underline"
+                  >
                     {menuData.tel.display}
                   </a>
                 </p>
               </div>
             </div>
-            <div className="social-icons">
+            {/* <div className="social-icons flex md:justify-end">
               <SocialIcons menu={socialMenu} />
-            </div>
+            </div> */}
           </div>
           <div className="lang-container" tw="mt-4 lg:mt-0">
-            <LanguageSelector />
+            <LanguageSelector className="hover:underline" />
           </div>
         </div>
       </MenuSlider>
@@ -315,7 +339,7 @@ const Menu = ({ lang, isOpen }) => {
         variants={menuDim}
         initial="initial"
         animate={isOpen ? 'show' : 'hidden'}
-        transition={{ ...transition, duration: 0.4 }}
+        transition={{ ...transition, duration: 0.2 }}
       />
     </MenuContainer>
   );

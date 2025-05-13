@@ -5,9 +5,8 @@ import SocialIcon from './SocialIcon';
 
 const SocialIconsContainer = styled.div((isDark, hasGrid) => [
   css`
-    ${tw`w-auto`}
+    ${tw`w-auto flex flex-wrap gap-2`}
     a {
-      margin-right: 10px;
       transition: opacity 0.25s ease;
     }
 

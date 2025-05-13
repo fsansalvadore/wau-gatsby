@@ -77,7 +77,7 @@ const ClientsSection = ({ lang, ...otherProps }) => {
 
 const StyledClientsSection = styled.section(() => [
   css`
-    ${tw`p-8 py-16 md:py-32 text-center`}
+    ${tw`p-8 py-16 text-center`}
     background-image: linear-gradient(#FCFCFC 0%, #fff 20%);
 
     .gatsby-image-wrapper,

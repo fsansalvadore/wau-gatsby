@@ -1,8 +1,7 @@
 import { Link, useStaticQuery, graphql } from 'gatsby';
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import tw, { css } from 'twin.macro';
-import SocialIcons from '../SocialIcons/SocialIcons';
 import Logo from '../Logo/Logo';
 import GridMaxWidthContainer from './GridMaxWidthContainer';
 
@@ -42,6 +41,14 @@ const Footer = ({ lang }) => {
             telefono
             telefonoDisplay
           }
+          certificazioni {
+            imgIso {
+              sourceUrl
+            }
+            imgEspertoCam {
+              sourceUrl
+            }
+          }
         }
       }
     }
@@ -69,33 +76,56 @@ const Footer = ({ lang }) => {
   };
 
   return (
-    <StyledFooter>
-      <GridMaxWidthContainer>
-        <div tw="col-span-12 text-center xl:col-span-5 xl:text-left">
+    <StyledFooter className="max-container">
+      <GridMaxWidthContainer className="py-8 border-t border-t-black">
+        <div tw="col-span-12 lg:col-span-5 py-2">
           <Link to={lang === 'it' ? '/' : '/en'}>
-            <Logo isMenuLight />
+            <Logo className="max-w-20 h-10" color="var(--green)" />
           </Link>
           <div tw="mt-6 text-sm">
-            <p tw="inline mr-4 mb-1 text-sm opacity-80">
+            <p tw="inline mr-4 text-sm opacity-80">
               WAU ARCHITETTI SRL Società di Ingegneria
             </p>
-            <p tw="opacity-80 mt-1">P.IVA 12437940013</p>
-            <p tw="block mt-1 mb-6">
-              <a href="https://www.google.com/maps/place/WAU/@45.0702929,7.6850724,17z/data=!3m1!4b1!4m5!3m4!1s0x47886d70758553ef:0x8d4b755f8f78c8db!8m2!3d45.0702929!4d7.6872611">
+            <p tw="opacity-80">P.IVA 12437940013</p>
+            <p tw="block">
+              <a
+                href="https://www.google.com/maps/place/WAU/@45.0702929,7.6850724,17z/data=!3m1!4b1!4m5!3m4!1s0x47886d70758553ef:0x8d4b755f8f78c8db!8m2!3d45.0702929!4d7.6872611"
+                className="hover:!opacity-50 transition-opacity"
+              >
                 Via Po, 1 - Torino - 10124 Italia
               </a>
             </p>
+            <ul>
+              <li>
+                <a
+                  href={`mailto:${footerData.email.email}`}
+                  className="hover:!opacity-50 transition-opacity"
+                >
+                  {footerData.email.display}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`tel:${footerData.tel.telefono}`}
+                  className="hover:!opacity-50 transition-opacity"
+                >
+                  {footerData.tel.display}
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
         <div className="footer-list">
-          <h5>{lang === 'it' ? 'Naviga' : 'Explore'}</h5>
           <ul>
             {lang === 'it'
               ? data.menus.nodes
                   .find((node) => node.name === 'Menu ita')
                   .menuItems.nodes.map((item) => (
                     <li key={item.id}>
-                      <Link to={item.path.replace('/dev/wau/wp', '')}>
+                      <Link
+                        className="hover:!opacity-50 transition-opacity"
+                        to={item.path.replace('/dev/wau/wp', '')}
+                      >
                         {item.label}
                       </Link>
                     </li>
@@ -104,7 +134,10 @@ const Footer = ({ lang }) => {
                   .find((node) => node.name === 'Menu eng')
                   .menuItems.nodes.map((item) => (
                     <li key={item.id}>
-                      <Link to={item.path.replace('/dev/wau/wp', '')}>
+                      <Link
+                        className="hover:!opacity-50 transition-opacity"
+                        to={item.path.replace('/dev/wau/wp', '')}
+                      >
                         {item.label}
                       </Link>
                     </li>
@@ -113,115 +146,111 @@ const Footer = ({ lang }) => {
         </div>
         <div
           className="footer-list"
-          tw="col-span-12 md:col-span-4! xl:col-span-2"
+          tw="col-span-12 md:col-span-4! lg:col-span-2"
         >
-          <h5>Chat</h5>
-          <ul>
-            <li>
-              <a href={`mailto:${footerData.email.email}`}>
-                {footerData.email.display}
-              </a>
-            </li>
-            <li>
-              <a href={`tel:${footerData.tel.telefono}`}>
-                {footerData.tel.display}
-              </a>
+          <ul className="flex flex-col gap-2">
+            <li>{lang === 'it' ? 'Certificazioni' : 'Certifications'}</li>
+            <li className="flex gap-8 justify-start">
+              {data.globals.globalsACF.certificazioni?.imgIso && (
+                <img
+                  className="w-auto h-12"
+                  src={data.globals.globalsACF.certificazioni?.imgIso.sourceUrl}
+                  alt="ISO"
+                />
+              )}
+              {data.globals.globalsACF.certificazioni?.imgEspertoCam && (
+                <img
+                  className="w-auto h-12"
+                  src={
+                    data.globals.globalsACF.certificazioni?.imgEspertoCam
+                      .sourceUrl
+                  }
+                  alt="Esperto Cam"
+                />
+              )}
             </li>
           </ul>
         </div>
-        <div
-          className="footer-list"
-          tw="col-span-12 md:col-span-4! xl:col-span-2"
-        >
-          <h5>{lang === 'it' ? 'Seguici' : 'Follow us'}</h5>
-          {!!socialMenu && (
-            <SocialIcons menu={socialMenu} hasGrid spacing="false" />
-          )}
-        </div>
-        <div
-          className="footer-lang-container"
-          tw="col-span-12 md:col-span-1 xl:col-span-1"
-        >
-          <ul tw="flex justify-center md:justify-end">
-            <li>
-              <a href="/">ITA</a>
+        <div className="footer-lang-container col-span-12 md:col-span-3 lg:col-span-3 flex justify-start md:justify-end">
+          <ul tw="flex gap-2 text-sm md:text-right w-full md:justify-end">
+            <li className="">
+              <a className="hover:!opacity-50 transition-opacity" href="/">
+                ITA
+              </a>
             </li>
-            <li>
-              <a href="/en">ENG</a>
+            <span>|</span>
+            <li className="">
+              <a className="hover:!opacity-50 transition-opacity" href="/en">
+                ENG
+              </a>
             </li>
           </ul>
         </div>
         <hr tw="col-span-full my-8 opacity-50" />
-        <div
-          tw="col-span-12 text-center xl:text-left xl:col-span-6"
-          className="footer-inline-list"
-        >
-          <p tw="inline mr-4 mb-1 text-sm opacity-80">
-            © Copyright {new Date().getFullYear()}
-          </p>
-          <ul tw="inline">
-            <li>
-              <Link
-                to={lang === 'it' ? '/privacy-policy' : '/en/privacy-policy'}
-                tw="py-4"
+        <div className="footer-inline-list text-sm col-span-12 text-left lg:col-span-6 flex justify-start sm:items-center flex-wrap">
+          <span className="mr-1.5">
+            {lang === 'it' ? 'Seguici su ' : 'Follow us on '}
+          </span>
+          {socialMenu?.menuItems?.nodes?.map((social, i) => (
+            <Fragment key={social.id}>
+              <a
+                href={social.url}
+                rel="noreferrer"
+                target="_blank"
+                className="!p-0 !m-0 hover:!opacity-50 transition-opacity"
               >
-                Privacy Policy
-              </Link>
-            </li>
-            {/* <li>
-              <a href="#" id="csconsentlink" tw="py-4">
-                Cookie Settings
+                {getSocialLabel(social)}
               </a>
-            </li> */}
-          </ul>
+              {socialMenu?.menuItems?.nodes?.length !== i + 1 && (
+                <span className="text-xs px-1">/</span>
+              )}
+            </Fragment>
+          ))}
         </div>
         <div
-          tw="col-span-12 text-center mt-6 xl:mt-0 xl:text-right xl:col-span-6 flex justify-center xl:justify-end"
+          tw="col-span-12 mt-6 lg:mt-0 lg:text-right lg:col-span-6 flex items-center justify-start lg:justify-end"
           className="footer-inline-list"
         >
-          <ul>
-            <li>
-              <a
-                href="https://www.saglietti.it/"
-                rel="noreferrer"
-                target="_blank"
-                tw="py-4"
-              >
-                Design
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://www.fsansalvadore.com/"
-                rel="noreferrer"
-                target="_blank"
-                tw="py-4"
-              >
-                Website
-              </a>
-            </li>
-          </ul>
+          <p tw="inline mr-4 text-sm opacity-80">
+            © Copyright {new Date().getFullYear()}
+          </p>
+          <Link
+            className="text-sm hover:!opacity-50 transition-opacity opacity-80"
+            to={lang === 'it' ? '/privacy-policy' : '/en/privacy-policy'}
+          >
+            Privacy Policy
+          </Link>
         </div>
       </GridMaxWidthContainer>
     </StyledFooter>
   );
 };
 
+export function getSocialLabel(social) {
+  let label = social.label.charAt(0).toUpperCase() + social.label.slice(1);
+
+  if (label === 'Linkedin') {
+    label = 'LinkedIn';
+  }
+
+  return label;
+}
+
 const StyledFooter = styled.footer(() => [
   css`
-    ${tw`relative z-40 w-full flex items-center py-8`}
-    background: var(--purple);
-    color: var(--white);
+    ${tw`relative z-40 w-full flex items-center`}
+    background: var(--white);
+    color: var(--black);
 
     h5 {
-      ${tw`opacity-40 text-xs font-mono mb-4`}
+      ${tw`opacity-40 text-xs mb-4`}
     }
 
     a {
-      ${tw`opacity-80 hover:opacity-100 visited:text-white text-white`}
+      ${tw`opacity-80 hover:opacity-100 visited:text-black text-black`}
     }
     .footer-list {
-      ${tw`col-span-12 md:col-span-3 xl:col-span-2! text-center md:text-left my-2`}
+      ${tw`col-span-12 md:col-span-3 lg:col-span-2! my-2`}
 
       li {
         ${tw`text-sm mb-2`}
@@ -229,13 +258,7 @@ const StyledFooter = styled.footer(() => [
     }
 
     .footer-lang-container {
-      ${tw`w-full text-center md:text-left mt-4 md:mt-0`}
-      li {
-        ${tw`text-sm mb-2 mr-4 inline-block`}
-      }
-      li:last-of-type {
-        ${tw`mr-0`}
-      }
+      ${tw`w-full mt-4 md:my-2`}
     }
 
     .footer-inline-list {

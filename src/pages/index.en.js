@@ -16,6 +16,31 @@ const IndexEng = () => {
         homePageACF {
           introWords
           testoDentroSfera
+          h1
+          progetti {
+            ... on WpProject {
+              id
+              status
+              slug
+              title
+              featuredImage {
+                node {
+                  link
+                  sourceUrl
+                  gatsbyImage(width: 1200)
+                }
+              }
+              ProjectAFC {
+                projectdate
+                location
+              }
+              language {
+                code
+                locale
+                slug
+              }
+            }
+          }
           sezioneContatti {
             paragrafo
             tasto {
@@ -73,32 +98,6 @@ const IndexEng = () => {
             code
             locale
             slug
-          }
-        }
-      }
-      articles: allWpArticle(
-        limit: 3
-        filter: { status: { eq: "publish" }, language: { slug: { eq: "en" } } }
-      ) {
-        nodes {
-          date
-          content
-          slug
-          id
-          title
-          language {
-            code
-            locale
-            slug
-          }
-          categories {
-            nodes {
-              name
-              id
-            }
-          }
-          ArticleACF {
-            anteprima
           }
         }
       }

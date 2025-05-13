@@ -33,10 +33,10 @@ const Accordion = ({ list = [], ...otherProps }) => {
               header={item.title}
               key={index}
               // showArrow={false}
-              tw="!border-0 !border-t !rounded-none last:!border-b !border-solid !border-white !border-opacity-20 !py-4 !text-2xl md:!text-3xl !font-bold !cursor-pointer !opacity-60 hover:!opacity-100"
+              tw="!border-0 !border-t !rounded-none last:!border-b !border-black !py-2 !text-xl md:!text-2xl !cursor-pointer !opacity-90 hover:!opacity-100"
             >
-              <div tw="!py-4 !text-lg">
-                <p tw="mb-8">{item.expertiseACF.anteprima}</p>
+              <div className="!pb-4 pt-2 !text-base">
+                <p className="mb-4">{item.expertiseACF.anteprima}</p>
                 <Button
                   as={Link}
                   to={
@@ -66,18 +66,18 @@ const StyledAccordion = styled.div(() => [
 
     .ant-collapse {
       font-family: 'Montserrat', Helvetica, sans-serif;
-      ${tw`border-none bg-transparent text-white`}
+      ${tw`border-none bg-transparent text-black`}
     }
     .ant-collapse-content {
-      ${tw`!bg-transparent text-white !border-none`}
+      ${tw`!bg-transparent text-black !border-none`}
     }
 
     .ant-collapse-header {
       position: relative !important;
-      ${tw`!p-0 flex-row-reverse !items-center !text-white`}
+      ${tw`!p-0 flex-row-reverse !items-center !text-black`}
     }
     .ant-collapse-header-text {
-      ${tw`text-white`}
+      ${tw`text-black`}
     }
 
     .ant-collapse-content-box {

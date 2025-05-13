@@ -402,6 +402,38 @@ exports.createPages = async ({ actions, graphql, gatsbyUtilities }) => {
   const { createRedirect } = actions;
 
   createRedirect({
+    fromPath: `/cookie-policy`,
+    toPath: `/privacy-policy#cookies`,
+    isPermanent: true,
+    redirectInBrowser: true,
+    force: true,
+  });
+
+  createRedirect({
+    fromPath: `/cookie-policy.html`,
+    toPath: `/privacy-policy#cookies`,
+    isPermanent: true,
+    redirectInBrowser: true,
+    force: true,
+  });
+
+  createRedirect({
+    fromPath: `/en/cookie-policy`,
+    toPath: `/en/privacy-policy#cookies`,
+    isPermanent: true,
+    redirectInBrowser: true,
+    force: true,
+  });
+
+  createRedirect({
+    fromPath: `/en/cookie-policy.html`,
+    toPath: `/en/privacy-policy#cookies`,
+    isPermanent: true,
+    redirectInBrowser: true,
+    force: true,
+  });
+
+  createRedirect({
     fromPath: `/wau-camp`,
     toPath: `/`,
   });

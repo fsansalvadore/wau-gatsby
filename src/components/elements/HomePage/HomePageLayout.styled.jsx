@@ -1,45 +1,16 @@
 // import styled from 'styled-components';
 import tw, { styled } from 'twin.macro';
-import { Canvas } from '@react-three/fiber';
-import { animated } from '@react-spring/three';
-
-export const AnimatedCanvas = animated(Canvas);
-
-export const StyledIntroCanvas = styled(AnimatedCanvas)`
-  z-index: -3;
-  width: 100% !important;
-  height: 100vh !important;
-  min-height: 650px !important;
-  position: fixed !important;
-`;
-export const StyledVisionSectionCanvas = styled(AnimatedCanvas)`
-  height: 100% !important;
-  position: absolute !important;
-  left: 0 !important;
-  top: 0 !important;
-  width: 100%;
-
-  @media (min-width: 768px) {
-    width: 57% !important;
-  }
-`;
 
 export const StyledIntroContainer = styled.div`
   width: 100%;
   position: relative !important;
-  height: 600vh !important;
-  min-height: 2800px;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
-
-  .after-sphere {
-    position: realtive;
-    z-index: 50 !important;
-    background: var(--white);
-  }
+  align-items: center;
 
   #continue-cta {
-    ${tw`fixed font-light left-0 right-0 mx-auto text-center`}
+    ${tw`font-light`}
     bottom: 6%;
     color: var(--black);
     z-index: 4;
@@ -63,16 +34,16 @@ export const StyledIntroContainer = styled.div`
   }
 
   .main-cta {
-    color: #111;
+    color: var(--white);
     text-decoration: none;
     padding: 10px 30px;
-    border: 1px solid black;
-    position: fixed;
+    /* border: 1px solid black; */
+    position: absolute;
     top: auto;
-    bottom: 16%;
+    bottom: 8%;
     transition: bottom 0.3s ease;
     will-change: bottom;
-    opacity: 0.8;
+
     z-index: 50;
     transition: opacity 0.3s ease !important;
     // animation: fadeIn 0.3s ease 2s both;
@@ -83,10 +54,10 @@ export const StyledIntroContainer = styled.div`
       pointer-events: none;
     }
 
-    &:hover {
+    /* &:hover {
       opacity: 1;
       border: 1px solid #111;
-    }
+    } */
   }
 
   .vision-section {
@@ -125,7 +96,7 @@ export const StyledIntroContainer = styled.div`
   }
 
   .video-container {
-    position: fixed;
+    position: absolute;
     // left: 0;
     right: 0;
     width: 100vw;
@@ -138,13 +109,11 @@ export const StyledIntroContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0;
 
     video.video {
       object-fit: cover;
       width: 100vw;
       height: 100vh;
-      position: fixed;
       top: 0;
       left: 0;
     }
@@ -161,7 +130,6 @@ export const StyledIntroContainer = styled.div`
       ${tw`text-2xl font-light leading-[110%]! max-w-[200px] md:(text-3xl max-w-[300px] leading-[100%]!)`}
       text-align: center;
       color: white;
-      letter-spacing: -0.02rem;
       text-transform: uppercase;
     }
   }

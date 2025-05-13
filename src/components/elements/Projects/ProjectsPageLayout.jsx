@@ -3,7 +3,6 @@ import { Link } from 'gatsby';
 import Select from 'react-select';
 import { Helmet } from 'react-helmet';
 import Layout from '../../LayoutComponent';
-import 'twin.macro';
 import Heading from '../../elements/Heading/Heading';
 import HeadingIntroHalf from '../../elements/Heading/HeadingIntroHalf';
 import ProjectPreviewCard from '../../elements/Projects/ProjectPreviewCard/ProjectPreviewCard';
@@ -31,40 +30,38 @@ const SelectStyles = {
 };
 
 const ProjectsPageLayout = ({ data, lang }) => {
-  const [projects, setProjects] = useState(null);
+  const [filteredProjects, setFilteredProjects] = useState(null);
   const [term, setTerm] = useState('');
   const [page, setPage] = useState(null);
 
   useEffect(() => {
     if (!!data && !!data.projects) {
-      setProjects(
+      setFilteredProjects(
         data.projects.nodes
           .filter(
             (item) =>
-              item.title.toLowerCase().includes(term.toLowerCase()) ||
+              item.title.toLowerCase().includes(term?.toLowerCase()) ||
               (item.ProjectAFC.location &&
                 item.ProjectAFC.location
                   .toLowerCase()
-                  .includes(term.toLowerCase())) ||
+                  .includes(term?.toLowerCase())) ||
               (item.ProjectAFC.projectdate &&
                 item.ProjectAFC.projectdate.toString().includes(term)) ||
               (item.tags.nodes &&
                 Array.from(item.tags.nodes.map((node) => node.name))
                   .join()
                   .toLowerCase()
-                  .includes(term.toLowerCase())) ||
-              // || item.custom_post_type_Project.ambiti.join().toLowerCase().includes(term.toLowerCase())
-              // || item.custom_post_type_Project.anno.toString().includes(term)
+                  .includes(term?.toLowerCase())) ||
               !term
           )
           .sort((a, b) =>
             a.date < b.date
               ? 1
               : a.date === b.date
-              ? a.title > b.title
-                ? 1
+                ? a.title > b.title
+                  ? 1
+                  : -1
                 : -1
-              : -1
           )
       );
     }
@@ -169,18 +166,16 @@ const ProjectsPageLayout = ({ data, lang }) => {
           content={`${page && page.seo && page.seo.metaDesc}`}
         />
       </Helmet>
-      <div>
+      <div className="max-container pb-8 lg:pb-16">
         <Heading>
-          <HeadingIntroHalf
-            breadcrumb={page ? page.title : 'Projects'}
-            heading={page ? page.pagesACF.title : ''}
-          />
+          <HeadingIntroHalf heading={page ? page.title : 'Projects'} />
           <FilterForm>
             {!!tags.length && (
               <Select
+                className="md:hidden"
                 value={{
                   value: term,
-                  label: !!term.length ? term : AllProjects.label,
+                  label: !!term?.length ? term : AllProjects.label,
                 }}
                 defaultValue={AllProjects}
                 placeholder={
@@ -195,12 +190,29 @@ const ProjectsPageLayout = ({ data, lang }) => {
                 ]}
               />
             )}
+            <div className="hidden md:flex flex-wrap gap-2">
+              {[AllProjects.label, ...tags].map((tag, i) => (
+                <button
+                  key={`tag-${tag}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setTerm(tag === AllProjects.label ? '' : tag);
+                  }}
+                  className={[
+                    'border-2 border-black text-black rounded-full px-3 py-1.5 transition-opacity',
+                    !!term && tag !== term ? 'opacity-20 hover:opacity-60' : '',
+                  ].join(' ')}
+                >
+                  {tag}
+                </button>
+              ))}
+            </div>
           </FilterForm>
         </Heading>
-        <ul className="proj_content" tw="grid grid-cols-1 md:grid-cols-2 m-0">
-          {!!projects && projects.length > 0 ? (
-            projects.map((proj) => (
-              <li key={`${proj.id}-${proj.slug}`} tw="p-px">
+        <ul className="proj_content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-y-8 m-0">
+          {!!filteredProjects && filteredProjects.length > 0 ? (
+            filteredProjects.map((proj) => (
+              <li key={`${proj.id}-${proj.slug}`} className="p-px">
                 <ProjectPreviewCard
                   link={proj.slug}
                   title={proj.title}
@@ -219,6 +231,13 @@ const ProjectsPageLayout = ({ data, lang }) => {
                   location={
                     proj.ProjectAFC.location && proj.ProjectAFC.location
                   }
+                  className={[
+                    'transition-opacity',
+                    term !== '' &&
+                      (filteredProjects?.map((p) => p.id)?.includes(proj.id)
+                        ? ''
+                        : '!opacity-50'),
+                  ].join(' ')}
                 />
               </li>
             ))

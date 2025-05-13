@@ -45,6 +45,7 @@ const ContattiPage = () => {
             }
             map {
               box
+              embedurl
               mappa {
                 altText
                 sourceUrl
@@ -61,6 +62,7 @@ const ContattiPage = () => {
               titolo
               sottotitolo
             }
+            successEmail
           }
         }
       }

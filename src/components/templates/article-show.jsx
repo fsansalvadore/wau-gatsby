@@ -76,8 +76,8 @@ const ArticleShowPage = (props) => {
           {seo && seo.title
             ? `${seo.title}`
             : lang.code === 'IT'
-            ? `${title} • Notizie • WAU Architetti`
-            : `${title} • News • WAU Architects`}
+              ? `${title} • Notizie • WAU Architetti`
+              : `${title} • News • WAU Architects`}
         </title>
         <link
           rel="canonical"
@@ -160,10 +160,10 @@ const ArticleShowPage = (props) => {
           }`}
         />
       </Helmet>
-      <ProjectContainer>
+      <ProjectContainer className="w-full max-container">
         <div tw="w-full flex justify-center">
           <GridMaxWidthContainer
-            className="container-max-1000"
+            className="max-w-[800px]"
             tw="w-full grid grid-cols-12"
           >
             <Heading className="article-heading" tw="col-span-12">
@@ -182,7 +182,7 @@ const ArticleShowPage = (props) => {
                 </div>
               )}
               <div tw="mt-3 md:mt-8 text-xs">
-                <span tw="font-bold mr-2">{articleDate && articleDate}</span>
+                <span tw="mr-2">{articleDate && articleDate}</span>
                 {categories.nodes.length > 0 && (
                   <ul tw="block md:inline ml-0 md:ml-2">
                     {categories.nodes.map((category) => (
@@ -229,12 +229,9 @@ const ArticleShowPage = (props) => {
           </GridMaxWidthContainer>
         </div>
         <article tw="w-full flex justify-center">
-          <GridMaxWidthContainer
-            className="container-max-900"
-            tw="w-full grid grid-cols-12 pb-8 md:pb-16 mb-16 md:mb-32"
-          >
+          <GridMaxWidthContainer className="max-w-[800px] w-full grid grid-cols-12 pb-8 md:pb-16 mb-16 md:mb-32">
             {content && parse(content)}
-            <SocialShare lang={lang.slug} />
+            <SocialShare lang={lang.slug} title={title} />
           </GridMaxWidthContainer>
         </article>
       </ProjectContainer>
@@ -273,7 +270,7 @@ const ProjectContainer = styled.div(() => [
 
       p {
         line-height: 1.6rem;
-        font-weight: 200;
+        font-weight: 400;
         ${tw`md:text-lg`}
       }
 

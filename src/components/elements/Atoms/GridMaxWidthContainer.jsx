@@ -1,14 +1,17 @@
 import React from 'react';
-import tw from 'twin.macro';
-
-const StyledGridMaxWidthContainer = tw.div`relative w-full grid grid-cols-12 px-4 sm:px-8 md:px-16`;
 
 // eslint-disable-next-line import/no-default-export
-const GridMaxWidthContainer = ({ children, ...props }) => {
+const GridMaxWidthContainer = ({ children, className, ...props }) => {
   return (
-    <StyledGridMaxWidthContainer {...props}>
+    <div
+      className={[
+        'relative w-full max-w-8xl mx-auto grid grid-cols-12',
+        className,
+      ].join(' ')}
+      {...props}
+    >
       {children}
-    </StyledGridMaxWidthContainer>
+    </div>
   );
 };
 

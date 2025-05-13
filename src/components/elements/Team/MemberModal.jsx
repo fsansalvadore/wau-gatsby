@@ -80,7 +80,7 @@ const ModalScrollContainer = styled.div`
   }
 `;
 const ModalHeading = tw.div`pb-8 border-0 border-b border-solid border-gray-300 mb-8`;
-const ModalName = tw.div`text-3xl font-bold md:text-4xl lg:text-5xl mb-2`;
+const ModalName = tw.div`text-3xl md:text-4xl lg:text-5xl mb-2`;
 const ModalRole = tw.div``;
 const ModalParagraph = styled.div`
   ${tw`mb-8 text-base lg:text-lg`}

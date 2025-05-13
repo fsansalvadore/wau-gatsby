@@ -13,7 +13,7 @@ const Navbar = styled.div(({ isMenuLight }) => [
     position: fixed;
     z-index: 999;
     height: 80px;
-    ${tw`absolute w-full py-0 px-4 sm:px-8 md:px-16 flex items-center justify-between`}
+    ${tw`absolute w-full flex items-center justify-between`}
   `,
   isMenuLight &&
     css`
@@ -32,7 +32,7 @@ const FixedNavbar = styled(motion.div)(() => [
     background: ${({ isOpen }) => (isOpen ? 'transparent' : 'var(--white)')};
     box-shadow: ${({ isOpen }) =>
       isOpen ? 'none' : '1px 0 1px rgba(0, 0, 0, 0.4)'};
-    ${tw`fixed w-full py-0 px-4 sm:px-8 md:px-16 flex items-center justify-between`}
+    ${tw`fixed w-full flex items-center justify-between`}
   `,
 ]);
 
@@ -49,36 +49,6 @@ const MenuBtn = styled.button`
   &:hover {
     cursor: pointer !important;
     opacity: 1;
-  }
-
-  .menu-icon,
-  .close-icon {
-    position: absolute;
-    right: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-  }
-
-  .close-icon {
-    border: 2px solid var(--white);
-
-    span {
-      position: absolute;
-      width: 17px;
-      height: 2px;
-      background-color: var(--white);
-
-      &:first-of-type {
-        transform: rotate(45deg);
-      }
-      &:last-of-type {
-        transform: rotate(-45deg);
-      }
-    }
   }
 `;
 
@@ -115,9 +85,9 @@ const closeBtnVariant = {
 
 const NavContent = ({ lang, isOpen, toggleMenu, isMenuLight }) => {
   return (
-    <>
+    <nav className="w-full max-w-8xl mx-auto py-0 max-container-px flex items-center justify-between">
       <Link to={lang === 'en' ? '/en/' : '/'}>
-        <Logo isMenuLight={isMenuLight} />
+        <Logo isMenuLight={isMenuLight} className="max-w-[6rem]" />
       </Link>
       <div tw="flex items-center" className="navbar-right">
         {/* {lang === 'it' && (
@@ -147,7 +117,7 @@ const NavContent = ({ lang, isOpen, toggleMenu, isMenuLight }) => {
           <span tw="opacity-0" aria-hidden="true">
             Menu
           </span>
-          <motion.div
+          {/* <motion.div
             className="close-icon"
             variants={closeBtnVariant}
             animate={isOpen ? 'show' : 'hidden'}
@@ -157,10 +127,10 @@ const NavContent = ({ lang, isOpen, toggleMenu, isMenuLight }) => {
           >
             <motion.span />
             <motion.span />
-          </motion.div>
+          </motion.div> */}
         </MenuBtn>
       </div>
-    </>
+    </nav>
   );
 };
 
@@ -235,7 +205,10 @@ const MainNav = ({ lang, isMenuLight }) => {
 
   return (
     <>
-      <Navbar isMenuLight={isMenuLight}>
+      <Navbar
+        className={isOpen ? 'pointer-events-none' : ''}
+        isMenuLight={isMenuLight}
+      >
         <NavContent
           lang={lang}
           toggleMenu={toggleMenu}
@@ -244,6 +217,7 @@ const MainNav = ({ lang, isMenuLight }) => {
         />
       </Navbar>
       <FixedNavbar
+        className={isOpen ? 'pointer-events-none' : ''}
         variants={fixedNavbarAnim}
         initial={{ y: -80 }}
         animate={!isScrollUp && showFixed ? 'show' : 'hidden'}
@@ -257,7 +231,7 @@ const MainNav = ({ lang, isMenuLight }) => {
           isMenuLight={isOpen && isMobileViewport}
         />
       </FixedNavbar>
-      <Menu lang={lang} isOpen={isOpen} />
+      <Menu lang={lang} isOpen={isOpen} toggleMenu={toggleMenu} />
     </>
   );
 };

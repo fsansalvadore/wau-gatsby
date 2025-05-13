@@ -1,5 +1,5 @@
-import tw, { css } from "twin.macro";
-import styled from "styled-components";
+import tw, { css } from 'twin.macro';
+import styled from 'styled-components';
 
 const StyledWAUCampPage = styled.div(() => [
   css`
@@ -68,7 +68,7 @@ const StyledWAUCampPage = styled.div(() => [
 
       p {
         line-height: 1.6rem;
-        font-weight: 200;
+        font-weight: 400;
         ${tw`md:text-lg mb-4 md:mb-8`}
       }
 

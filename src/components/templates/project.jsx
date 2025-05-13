@@ -54,8 +54,8 @@ const ProjectPage = (props) => {
           {seo && seo.title
             ? `${parse(seo.title)}`
             : lang.code === 'IT'
-            ? `${title} • Progetti • WAU Architetti`
-            : `${title} • Projects • WAU Architects`}
+              ? `${title} • Progetti • WAU Architetti`
+              : `${title} • Projects • WAU Architects`}
         </title>
         <link
           rel="canonical"
@@ -138,10 +138,10 @@ const ProjectPage = (props) => {
           }`}
         />
       </Helmet>
-      <ProjectContainer>
+      <ProjectContainer className="max-container">
         <Heading tw="flex flex-col lg:flex-row">
           <div tw="w-full md:w-3/4">
-            <div className="breadcrumbs mono">
+            <div className="breadcrumbs">
               <Link to={lang.code === 'EN' ? '/en/projects/' : '/progetti/'}>
                 {lang.code === 'EN' ? 'Projects' : 'Progetti'}
               </Link>{' '}
@@ -158,7 +158,7 @@ const ProjectPage = (props) => {
               )}
             </div>
           </div>
-          <aside
+          {/* <aside
             tw="w-full md:w-1/4 mt-8 lg:mt-0"
             className="project-aside-info"
           >
@@ -191,7 +191,7 @@ const ProjectPage = (props) => {
                 <hr />
               </div>
             )}
-          </aside>
+          </aside> */}
         </Heading>
         {proj.featuredImage && (
           <figure className="project-coverImage" tw="mb-10 md:mb-16 xl:mb-24">
@@ -211,14 +211,19 @@ const ProjectPage = (props) => {
           </figure>
         )}
         <article tw="w-full flex justify-center">
-          <GridMaxWidthContainer
-            className="project-content"
-            tw="w-full grid grid-cols-12 mb-16 md:mb-32"
-          >
+          <GridMaxWidthContainer className="project-content w-full grid grid-cols-12">
             {content && parse(content)}
-            <SocialShare lang={lang.slug} />
           </GridMaxWidthContainer>
         </article>
+        <div className="flex items-center text-center gap-8 flex-col my-16 md:my-32">
+          <Link
+            className="px-4 py-2 border border-black rounded-full uppercase"
+            to={lang.code === 'EN' ? '/en/projects/' : '/progetti/'}
+          >
+            {lang.code === 'IT' ? 'Torna ai progetti' : 'All projects'}
+          </Link>
+          <SocialShare lang={lang.slug} title={title} />
+        </div>
       </ProjectContainer>
     </Layout>
   );

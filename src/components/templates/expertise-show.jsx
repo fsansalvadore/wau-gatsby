@@ -21,8 +21,8 @@ const ExpertisePage = (props) => {
           {seo && seo.title
             ? `${parse(seo.title)}`
             : lang.code === 'IT'
-            ? `${title} • Expertise • WAU Architetti`
-            : `${title} • Expertise • WAU Architects`}
+              ? `${title} • Expertise • WAU Architetti`
+              : `${title} • Expertise • WAU Architects`}
         </title>
         <link
           rel="canonical"
@@ -110,7 +110,7 @@ const ExpertisePage = (props) => {
           }`}
         />
       </Helmet>
-      <ExpertiseContainer>
+      <ExpertiseContainer className="max-container pb-8 md:pb-20">
         <Heading>
           <p className="breadcrumbs mono">
             <Link to={lang.code === 'EN' ? '/en/expertise/' : '/expertise/'}>
@@ -221,7 +221,6 @@ const ExpertiseContainer = styled.div(() => [
 
         p {
           line-height: 1.6rem;
-          /* font-weight: 200; */
           ${tw`md:text-lg`}
         }
 

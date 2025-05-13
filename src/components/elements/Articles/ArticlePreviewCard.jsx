@@ -10,7 +10,7 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
 const MotionLink = motion(Link);
 
-const ArticlePreviewCard = ({ article, ...otherProps }) => {
+const ArticlePreviewCard = ({ article, isLast, ...otherProps }) => {
   const [articleDate, setArticleDate] = useState(null);
 
   useEffect(() => {
@@ -34,7 +34,12 @@ const ArticlePreviewCard = ({ article, ...otherProps }) => {
   }, [setArticleDate, article]);
 
   return (
-    <div tw="opacity-70 hover:opacity-100 transition-opacity duration-150 ease-in-out border-0 border-b border-solid border-gray-500 py-4 md:py-8">
+    <div
+      className={[
+        'opacity-70 hover:opacity-100 transition-opacity duration-150 ease-in-out border-0 border-solid border-gray-500 py-4 md:py-8',
+        isLast ? '' : 'border-b',
+      ].join(' ')}
+    >
       <LazyLoad>
         <StyledArticlePreviewCard
           to={
@@ -68,8 +73,8 @@ const ArticlePreviewCard = ({ article, ...otherProps }) => {
           </div>
           <div tw="col-span-9 md:col-start-4 md:col-span-6 pl-0 md:pl-8">
             <h3 tw="text-2xl md:text-3xl">{article.title}</h3>
-            <p tw="mt-2 font-mono text-sm">
-              <span tw="font-bold">{articleDate && articleDate}</span>
+            <p tw="mt-2 text-sm">
+              <span>{articleDate && articleDate}</span>
               {article.categories.nodes.length > 0 && (
                 <ul tw="block md:inline ml-0 md:ml-4">
                   {article.categories.nodes.map((category) => (
@@ -90,7 +95,7 @@ const ArticlePreviewCard = ({ article, ...otherProps }) => {
                 <p>{article.ArticleACF.anteprima}</p>
               )}
             </div>
-            <p tw="font-bold mt-4">
+            <p tw="mt-4">
               {article.language.code === 'EN'
                 ? 'Read the article'
                 : "Leggi l'articolo"}
