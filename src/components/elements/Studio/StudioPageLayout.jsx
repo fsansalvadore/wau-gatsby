@@ -96,7 +96,7 @@ const StudioPageLayout = ({ data }) => {
                 className="cover-image cover-image-fullscreen video-container"
                 tw="mb-8 md:mb-0"
               >
-                <video autoPlay muted controls loop id="myVideo">
+                <video autoPlay muted controls playsInline loop id="myVideo">
                   <source
                     src={studio.studioACF.videonative.mediaItemUrl}
                     type="video/mp4"

@@ -226,8 +226,6 @@ class ContactForm extends React.Component {
     const { nome, email, messaggio, btn, feedback, error, loading } =
       this.state;
 
-    console.log('this.props', this.props);
-
     return (
       <ContactFormContainer>
         {!!feedback ? (
