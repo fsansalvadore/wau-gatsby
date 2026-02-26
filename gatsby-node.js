@@ -1,6 +1,21 @@
 const path = require(`path`);
 const { createRemoteFileNode } = require(`gatsby-source-filesystem`);
 
+// Alias GSAP to SSR mocks during HTML build so GSAP (CSSPlugin) never runs in Node
+exports.onCreateWebpackConfig = ({ stage, actions }) => {
+  if (stage === `build-html` || stage === `develop-html`) {
+    actions.setWebpackConfig({
+      resolve: {
+        alias: {
+          gsap: path.resolve(__dirname, `src/ssr-mocks/gsap.js`),
+          'gsap/ScrollTrigger': path.resolve(__dirname, `src/ssr-mocks/gsap-scroll-trigger.js`),
+          'gsap/CSSPlugin': path.resolve(__dirname, `src/ssr-mocks/gsap-css-plugin.js`),
+        },
+      },
+    });
+  }
+};
+
 // Query language fields
 const language = `
 language {
