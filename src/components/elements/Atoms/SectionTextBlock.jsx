@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import tw, { css } from 'twin.macro';
 import parse from 'html-react-parser';
 import { motion } from 'framer-motion';
-import { gsap, Power1 } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Button from './Button';
 
 // eslint-disable-next-line import/no-default-export
@@ -21,48 +19,45 @@ const SectionTextBlock = ({
   const sectionRef = useRef(null);
 
   useEffect(() => {
-    if (
-      typeof window !== `undefined` &&
-      typeof document !== `undefined` &&
-      sectionRef.current
-    ) {
+    if (!sectionRef.current) return;
+    let ctx;
+    Promise.all([
+      import('gsap').then((mod) => mod.gsap || mod.default || mod),
+      import('gsap/ScrollTrigger').then((mod) => mod.ScrollTrigger).catch(() => null),
+    ]).then(([gsap, ScrollTrigger]) => {
+      if (!gsap || !ScrollTrigger) return;
       gsap.registerPlugin(ScrollTrigger);
-      // const label     = sectionRef.current.querySelector(".st-label h4")
-      // const title     = sectionRef.current.querySelector(".st-title h5")
-      // const content   = sectionRef.current.querySelector(".st-content p")
-      // const link      = sectionRef.current.querySelector(".st-link > div")
-      const items = sectionRef.current.querySelectorAll('.st-anim > *');
-
-      const sectionTextTL = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 80%',
-        },
-      });
-
-      ScrollTrigger.defaults({
-        immediateRender: false,
-        ease: Power1.inOut,
-      });
-
-      sectionTextTL.fromTo(
-        [items],
-        {
-          y: '170%',
-          // skewY: 4,
-          opacity: 0,
-        },
-        {
-          duration: 0.8,
-          skewY: 0,
-          opacity: 1,
-          ease: Power1.easeOut,
-          y: '0',
-          stagger: 0.1,
-        },
-        sectionRef.current
-      );
-    }
+      const Power1 = gsap.Power1 ?? {};
+      ctx = gsap.context(() => {
+        const items = sectionRef.current.querySelectorAll('.st-anim > *');
+        const sectionTextTL = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 80%',
+          },
+        });
+        ScrollTrigger.defaults({
+          immediateRender: false,
+          ease: Power1?.inOut ?? 'power1.inOut',
+        });
+        sectionTextTL.fromTo(
+          [items],
+          { y: '170%', opacity: 0 },
+          {
+            duration: 0.8,
+            skewY: 0,
+            opacity: 1,
+            ease: Power1?.easeOut ?? 'power1.easeOut',
+            y: '0',
+            stagger: 0.1,
+          },
+          sectionRef.current
+        );
+      }, sectionRef);
+    });
+    return () => {
+      ctx?.revert?.();
+    };
   }, []);
 
   return (
