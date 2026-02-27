@@ -77,7 +77,7 @@ const ProjectPage = (props) => {
         <meta
           itemprop="image"
           content={`${
-            featuredImage ? featuredImage.node.sourceUrl : fallbackImg
+            featuredImage?.node?.sourceUrl ?? fallbackImg
           }`}
         />
         <meta
@@ -108,7 +108,7 @@ const ProjectPage = (props) => {
         <meta
           property="og:image"
           content={`${
-            featuredImage ? featuredImage.node.sourceUrl : fallbackImg
+            featuredImage?.node?.sourceUrl ?? fallbackImg
           }`}
         />
         <meta property="og:description" content={`${seo && seo.metaDesc}`} />
@@ -134,7 +134,7 @@ const ProjectPage = (props) => {
         <meta
           name="twitter:image"
           content={`${
-            featuredImage ? featuredImage.node.sourceUrl : fallbackImg
+            featuredImage?.node?.sourceUrl ?? fallbackImg
           }`}
         />
       </Helmet>
@@ -193,18 +193,18 @@ const ProjectPage = (props) => {
             )}
           </aside> */}
         </Heading>
-        {proj.featuredImage && (
+        {proj?.featuredImage?.node && (
           <figure className="project-coverImage" tw="mb-10 md:mb-16 xl:mb-24">
-            {proj?.featuredImage.node.gatsbyImage ? (
+            {proj.featuredImage.node.gatsbyImage ? (
               <GatsbyImage
                 tw="relative w-full h-64 top-0 right-0 bottom-0 left-0"
                 alt={title}
-                image={getImage(proj?.featuredImage.node.gatsbyImage)}
+                image={getImage(proj.featuredImage.node.gatsbyImage)}
               />
             ) : (
               <img
-                src={proj.featuredImage.node.sourceUrl}
-                alt={proj.featuredImage.node.altText}
+                src={proj.featuredImage.node.sourceUrl || '#'}
+                alt={proj.featuredImage.node.altText ?? title}
                 tw="relative w-full h-64 top-0 right-0 bottom-0 left-0"
               />
             )}
