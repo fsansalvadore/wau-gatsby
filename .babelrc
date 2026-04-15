@@ -3,6 +3,6 @@
     "@loadable/babel-plugin",
     "babel-plugin-macros",
     "@babel/plugin-transform-react-jsx",
-    "@babel/plugin-proposal-class-properties"
+    "@babel/plugin-transform-class-properties"
   ]
 }
