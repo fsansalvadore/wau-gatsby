@@ -1,19 +1,43 @@
 const path = require(`path`);
 const { createRemoteFileNode } = require(`gatsby-source-filesystem`);
+const webpack = require(`webpack`);
 
-// Alias GSAP to SSR mocks during HTML build so GSAP (CSSPlugin) never runs in Node
+// GSAP 3.x uses glob patterns in its package.json "exports" field which
+// Gatsby's version of webpack/enhanced-resolve cannot handle. We use
+// NormalModuleReplacementPlugin (runs before any resolver) to redirect
+// gsap sub-path imports to the real files. For SSR stages, redirect to
+// lightweight mocks so GSAP never executes in Node.
 exports.onCreateWebpackConfig = ({ stage, actions }) => {
-  if (stage === `build-html` || stage === `develop-html`) {
-    actions.setWebpackConfig({
-      resolve: {
-        alias: {
-          gsap: path.resolve(__dirname, `src/ssr-mocks/gsap.js`),
-          'gsap/ScrollTrigger': path.resolve(__dirname, `src/ssr-mocks/gsap-scroll-trigger.js`),
-          'gsap/CSSPlugin': path.resolve(__dirname, `src/ssr-mocks/gsap-css-plugin.js`),
-        },
-      },
-    });
+  const isSSR = stage === `build-html` || stage === `develop-html`;
+
+  const gsapDir = path.resolve(process.cwd(), `node_modules/gsap`);
+  const mockDir = path.resolve(process.cwd(), `src/ssr-mocks`);
+
+  const plugins = [
+    new webpack.NormalModuleReplacementPlugin(/^gsap\/ScrollTrigger$/, (resource) => {
+      resource.request = isSSR
+        ? path.join(mockDir, `gsap-scroll-trigger.js`)
+        : path.join(gsapDir, `ScrollTrigger.js`);
+    }),
+    new webpack.NormalModuleReplacementPlugin(/^gsap\/CSSPlugin$/, (resource) => {
+      resource.request = isSSR
+        ? path.join(mockDir, `gsap-css-plugin.js`)
+        : path.join(gsapDir, `CSSPlugin.js`);
+    }),
+    new webpack.NormalModuleReplacementPlugin(/^gsap\/ScrollToPlugin$/, (resource) => {
+      resource.request = path.join(gsapDir, `ScrollToPlugin.js`);
+    }),
+  ];
+
+  if (isSSR) {
+    plugins.push(
+      new webpack.NormalModuleReplacementPlugin(/^gsap$/, (resource) => {
+        resource.request = path.join(mockDir, `gsap.js`);
+      })
+    );
   }
+
+  actions.setWebpackConfig({ plugins });
 };
 
 // Query language fields
