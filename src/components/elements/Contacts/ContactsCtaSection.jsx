@@ -1,4 +1,5 @@
 import React, { useRef, useState, Suspense, useEffect } from 'react';
+import loadable from '@loadable/component';
 import * as THREE from 'three';
 import { Canvas, useLoader } from '@react-three/fiber';
 import { MeshDistortMaterial } from '@react-three/drei';
@@ -8,6 +9,10 @@ import 'twin.macro';
 import WauGradient from '../../../assets/wau-sphere-texture-sp1.svg';
 import GridMaxWidthContainer from '../../../components/elements/Atoms/GridMaxWidthContainer';
 import ContactsTextBlock from '../../../components/elements/Atoms/ContactsTextBlock';
+
+const SphereScrollGsap = loadable(() => import('./SphereScrollGsap'), {
+  ssr: false,
+});
 
 const { TextureLoader } = THREE;
 
@@ -25,45 +30,17 @@ const StyledContactsCtaCanvas = styled(AnimatedCanvas)`
     width: 45% !important;
   }
 `;
-const Sphere = ({ ctaSectionRef, position }) => {
+const Sphere = ({ ctaSectionRef, position, sphereMeshRef }) => {
   const contactsCtaSphereRef = useRef(null);
+  const setMeshRef = (el) => {
+    contactsCtaSphereRef.current = el;
+    if (sphereMeshRef) {
+      sphereMeshRef.current = el;
+    }
+  };
   const meshRef = useRef(null);
   const [hovered, setHover] = useState(false);
   const materialMap = useLoader(TextureLoader, WauGradient);
-
-  useEffect(() => {
-    if (!ctaSectionRef?.current || !contactsCtaSphereRef.current) return;
-    let ctx;
-    Promise.all([
-      import('gsap').then((mod) => mod.gsap || mod.default || mod),
-      import('gsap/ScrollTrigger').then((mod) => mod.ScrollTrigger).catch(() => null),
-    ]).then(([gsap, ScrollTrigger]) => {
-      if (!gsap || !ScrollTrigger) return;
-      gsap.registerPlugin(ScrollTrigger);
-      const Power1 = gsap.Power1 ?? {};
-      ctx = gsap.context(() => {
-        const sphereTL = gsap.timeline({
-          scrollTrigger: {
-            trigger: ctaSectionRef.current,
-            start: 'top 85%',
-            end: 'top 15%',
-          },
-        });
-        ScrollTrigger.defaults({
-          immediateRender: false,
-          ease: Power1.inOut ?? 'power1.inOut',
-        });
-        sphereTL.from(
-          contactsCtaSphereRef.current.position,
-          { duration: 2, y: 10 },
-          ctaSectionRef.current
-        );
-      }, ctaSectionRef);
-    });
-    return () => {
-      ctx?.revert?.();
-    };
-  }, [ctaSectionRef]);
 
   const introSpring = useSpring({
     scale: [1, 1, 1],
@@ -83,7 +60,7 @@ const Sphere = ({ ctaSectionRef, position }) => {
       onPointerOver={() => setHover(true)}
       onPointerOut={() => setHover(false)}
       position={position}
-      ref={contactsCtaSphereRef}
+      ref={setMeshRef}
     >
       {/* geomtery */}
       <sphereGeometry args={[1, 150, 150]} />
@@ -103,8 +80,10 @@ const Sphere = ({ ctaSectionRef, position }) => {
 
 const ContentCtaCanvas = ({ ctaSectionRef, ...otherProps }) => {
   const contactsCtaCanvasRef = useRef();
+  const sphereMeshRef = useRef(null);
 
   return (
+    <>
     <StyledContactsCtaCanvas
       id="canvas-contacts-cta"
       // enable shadows
@@ -135,6 +114,7 @@ const ContentCtaCanvas = ({ ctaSectionRef, ...otherProps }) => {
           position={[0, 1, 0]}
           url={WauGradient}
           ctaSectionRef={ctaSectionRef}
+          sphereMeshRef={sphereMeshRef}
         />
       </Suspense>
 
@@ -152,6 +132,8 @@ const ContentCtaCanvas = ({ ctaSectionRef, ...otherProps }) => {
         </animated.mesh>
       </group>
     </StyledContactsCtaCanvas>
+    <SphereScrollGsap ctaSectionRef={ctaSectionRef} sphereRef={sphereMeshRef} />
+    </>
   );
 };
 
