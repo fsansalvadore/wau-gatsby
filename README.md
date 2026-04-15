@@ -7,6 +7,8 @@
   Gatsby Minimal Starter
 </h1>
 
+This repository uses [pnpm](https://pnpm.io/) (`corepack enable`, then `pnpm install`). Deploys on Netlify run `pnpm run build` as defined in `netlify.toml`.
+
 ## 🚀 Quick start
 
 1.  **Create a Gatsby site.**
@@ -15,7 +17,7 @@
 
     ```shell
     # create a new Gatsby site using the minimal starter
-    npm init gatsby
+    pnpm create gatsby
     ```
 
 2.  **Start developing.**
@@ -24,7 +26,7 @@
 
     ```shell
     cd my-gatsby-site/
-    npm run develop
+    pnpm run develop
     ```
 
 3.  **Open the code and start customizing!**

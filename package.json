@@ -2,6 +2,7 @@
   "name": "wau-gatsby",
   "version": "1.0.0",
   "private": true,
+  "packageManager": "pnpm@9.15.9",
   "description": "wau-gatsby",
   "author": "Francesco Sansalvadore",
   "keywords": [
@@ -68,6 +69,7 @@
     "twin.macro": "^3.4.1"
   },
   "devDependencies": {
+    "@loadable/babel-plugin": "^5.16.1",
     "babel-plugin-macros": "^3.1.0",
     "babel-plugin-twin": "^1.1.0",
     "eslint": "^7.32.0",
